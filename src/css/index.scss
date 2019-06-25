@@ -1,0 +1,12 @@
+@import '~normalize.css';
+@import '~nprogress/nprogress.css';
+@import '@/css/default_theme.scss';
+
+
+* {
+  color: $c-font;
+}
+
+#nprogress .spinner {
+  display: none;
+}

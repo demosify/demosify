@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway|Righteous&display=swap');
+
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+'Segoe UI Emoji', 'Segoe UI Symbol';
+$logo-font-family: 'Righteous', $font-family, !default;
+$link-font-family: 'Raleway', $font-family, !default;
+
+$c-gap: black !default;
+$c-bg: #201e1e !default;
+$c-font: #F6F4F2 !default;
+$c-font-dark: rbga($c-font, 0.6) !default;
+$c-highlight: #FFC730 !default;
+$c-console-bg: #23241f !default;
