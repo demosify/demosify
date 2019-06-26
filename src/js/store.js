@@ -33,6 +33,7 @@ const state = {
   links: demoList,
   iframeStatus: null,
   transforming: false,
+  isSidebarShown: true,
   autoRun: true,
   logs: [],
   dependencies: {
@@ -85,6 +86,9 @@ const mutations = {
   },
   UPDATE_DEPENDENCIES(state, dependencies = {js: [], css: []}) {
     state.dependencies = dependencies;
+  },
+  TOGGLE_SIDEBAR(state) {
+    state.isSidebarShown = !state.isSidebarShown;
   }
 };
 

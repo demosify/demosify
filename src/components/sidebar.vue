@@ -34,15 +34,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from "vuex";
 export default {
-  name: 'sidebar',
+  name: "sidebar",
   data() {
     return {
       isShowingMore: false,
       showingMoreTimer: null,
       isShowingMoreFolded: false,
-      isShowingMoreCrossed: false,
+      isShowingMoreCrossed: false
     };
   },
   watch: {
@@ -59,25 +59,26 @@ export default {
           this.isShowingMoreFolded = false;
         }, 300);
       }
-    },
+    }
   },
   computed: {
-    ...mapState(["links"]),
+    ...mapState(['links']),
     currentDemo() {
       this.isShowingMore = false;
       return this.$route.name;
     },
-  }
+  },
 };
 </script>
 
 <style lang="scss">
-@import '@/css/index.scss';
+@import "@/css/index.scss";
 $foldedDealy: 100ms;
 .sidebar {
   font-family: $link-font-family;
   height: 100%;
   overflow: scroll;
+  position: relative;
   &-menu {
     list-style: none;
     margin: 0;
@@ -101,7 +102,7 @@ $foldedDealy: 100ms;
         color: $c-highlight;
         position: relative;
         &::before {
-          content: '';
+          content: "";
           width: 2px;
           height: 60%;
           background: $c-highlight;

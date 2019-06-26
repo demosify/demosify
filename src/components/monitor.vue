@@ -151,6 +151,7 @@
   flex-direction: column;
   & #monitor-iframe {
     width: 100%;
+    height: 100px;
     flex-grow: 1;
     background: white;
   }
