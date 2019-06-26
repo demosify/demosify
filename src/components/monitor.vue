@@ -51,6 +51,7 @@
       ...mapState([
         'boxes',
         'autoRun',
+        'dependencies',
       ])
     },
     mounted() {
@@ -83,8 +84,9 @@
           const html = await this.transformHTML();
           const jsScript = await this.transformJS();
           const runtimeScript = await this.runtimeScript();
+          const runtimeStyle = await this.runtimeStyle();
           this.iframe.setContent({
-            head: headStyle + runtimeScript + jsScript,
+            head: headStyle + runtimeStyle + runtimeScript + jsScript,
             body: html,
           })
           progress.done();
@@ -92,7 +94,16 @@
       },
       async runtimeScript() {
         const console = createElement('script')(proxyConsole);
-        return console;
+        const dependencies = this.dependencies.js
+          .map(dependence => `<script src="${dependence}"><\/script>`)
+          .join('\n');
+        return console + '\n' + dependencies;
+      },
+      async runtimeStyle() {
+        const dependencies = this.dependencies.css
+          .map(dependence => `<link src="${dependence}"><\/link>`)
+          .join('\n');
+        return dependencies;
       },
       async transformCSS() {
         let code = '';

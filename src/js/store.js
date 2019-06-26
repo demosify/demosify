@@ -35,6 +35,10 @@ const state = {
   transforming: false,
   autoRun: true,
   logs: [],
+  dependencies: {
+    js: [],
+    css: [],
+  },
 };
 
 const mutations = {
@@ -78,6 +82,9 @@ const mutations = {
   },
   ADD_LOG(state, log) {
     state.logs.push(log);
+  },
+  UPDATE_DEPENDENCIES(state, dependencies = {js: [], css: []}) {
+    state.dependencies = dependencies;
   }
 };
 
@@ -103,6 +110,9 @@ const actions =  {
   toogleAutoRun({commit}) {
     commit('TOGGLE_AUTO_RUN');
   },
+  updateDependencies({commit}, pl) {
+    commit('UPDATE_DEPENDENCIES', pl);
+  },
   async setBoxes({dispatch}, demo) {
     progress.start();
 
@@ -116,7 +126,7 @@ const actions =  {
     }
     
 
-    const{foldBoxes, visibleBoxes, ...boxes} = demo;
+    const{foldBoxes, visibleBoxes, packages, ...boxes} = demo;
 
     const ac = [];
 
@@ -128,10 +138,22 @@ const actions =  {
         dispatch('updateTransformer', { type, transformer }),
       );
     })
+  
+
+    const dependencies = {
+      js: [
+        ...(config.globalPackages.js || []) ,
+        ...(packages.js || []),
+      ],
+      css: [
+        ...(config.globalPackages.css || []) ,
+        ...(packages.css || []),
+      ],
+    };
 
     ac.push(dispatch('updateFoldBoxes', foldBoxes || []));
     ac.push(dispatch('updateVisibleBoxes', visibleBoxes || Object.keys(boxes)));
-
+    ac.push(dispatch('updateDependencies', dependencies));
     await Promise.all(ac);
     progress.done();
   },

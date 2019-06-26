@@ -18,7 +18,14 @@
     </div>
     <transition name="slide">
       <div v-show="!isConsoleFolded" class="console-content">
-        <p class="console-message" v-for="(log, index) in logs" :key="index">
+        <p 
+          class="console-message"
+          :class="{
+            'console-message--error': log.type
+          }"
+          v-for="(log, index) in logs"
+          :key="index"
+        >
           <span 
             class="console-messageType"
             :class="`console-messageType--${getFlag(log.type)}`"
@@ -132,11 +139,15 @@
     background: $c-console-bg;
     margin-bottom: 20px;
     transition: all .5s;
+    overflow: scroll;
   }
   &-message {
     font-size: 14px;
     margin: 0;
     line-height: 1.5;
+    &--error{
+      background: rgba($c-console-error, 0.2);
+    }
     &:nth-of-type(2n + 1) {
       background: $c-console-bg-odd;
     }

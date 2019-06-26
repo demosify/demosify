@@ -13,4 +13,8 @@ export default {
   // twilight, vibrantInk, zenburnesque, iplastic, idlefingers, krtheme,
   // monoindustrial,
   boxTheme: 'monokai',
+  globalPackages: {
+    js: ['https://unpkg.com/spritejs/dist/spritejs.min.js'],
+    css: ['https://lib.baomitu.com/normalize/4.2.0/normalize.css'],
+  }
 }
