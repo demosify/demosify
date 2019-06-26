@@ -2,6 +2,7 @@
   <div class="editor">
     <sandbox
       class="editor-sandbox"
+      v-if="isSanboxVisibile(type)"
       v-for="(content, type) in boxes"
       :key="type"
       :name="type"
@@ -24,6 +25,7 @@ export default {
   computed: {
     ...mapState([
       'foldBoxes',
+      'visibleBoxes',
       'boxes',
     ]),
   },
@@ -35,6 +37,9 @@ export default {
     ]),
     isSandboxFolded(type) {
       return this.foldBoxes.indexOf(type) > -1;
+    },
+    isSanboxVisibile(type) {
+      return this.visibleBoxes.indexOf(type) > -1;
     },
     codeUpdate(type, [code]) {
       this.updateCode({type, code});

@@ -18,6 +18,7 @@ export default async () => {
       code: cssCode,
       transformer: 'css'
     },
-    foldBoxes: ['javascript'],
+    foldBoxes: [],
+    visibleBoxes: ['javascript'],
   }
 }

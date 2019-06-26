@@ -29,6 +29,7 @@ const state = {
   config,
   boxes: {},
   foldBoxes: [],
+  visibleboxes: [],
   links: demoList,
   iframeStatus: null,
   transforming: false,
@@ -49,8 +50,11 @@ const mutations = {
     if(!state.boxes[type]) state.boxes[type] = {};
     state.boxes[type].transformer = transformer;
   },
-  UPDATE_FOLD_BOX(state, foldBoxes) {
+  UPDATE_FOLD_BOXES(state, foldBoxes) {
     state.foldBoxes = foldBoxes;
+  },
+  UPDATE_VISIBLE_BOXES(state, visibleBoxes) {
+    state.visibleBoxes = visibleBoxes;
   },
   TOGGLE_BOX_FOLD(state, boxName) {
     const boxIndex = state.foldBoxes.indexOf(boxName);
@@ -87,8 +91,11 @@ const actions =  {
   updateTransformer({commit}, pl) {
     commit('UPDATE_TRANSFORMER', pl);
   },
-  updateFoldBox({commit}, pl) {
-    commit('UPDATE_FOLD_BOX', pl);
+  updateFoldBoxes({commit}, pl) {
+    commit('UPDATE_FOLD_BOXES', pl);
+  },
+  updateVisibleBoxes({commit}, pl) {
+    commit('UPDATE_VISIBLE_BOXES', pl)
   },
   toggleBoxFold({commit}, pl) {
     commit('TOGGLE_BOX_FOLD', pl);
@@ -109,7 +116,7 @@ const actions =  {
     }
     
 
-    const{foldBoxes, ...boxes} = demo;
+    const{foldBoxes, visibleBoxes, ...boxes} = demo;
 
     const ac = [];
 
@@ -122,10 +129,10 @@ const actions =  {
       );
     })
 
-    ac.push(dispatch('updateFoldBox', foldBoxes));
+    ac.push(dispatch('updateFoldBoxes', foldBoxes || []));
+    ac.push(dispatch('updateVisibleBoxes', visibleBoxes || Object.keys(boxes)));
 
     await Promise.all(ac);
-    // bus.$emit('run');
     progress.done();
   },
   setIframeStatus({ commit }, status) {
