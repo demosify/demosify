@@ -53,6 +53,11 @@ export default {
       default: '',
     },
   },
+  watch: {
+    value(val) {
+      if(val) this.monacoEditor.setValue(val);
+    }
+  },
   computed: {
     ...mapState([
       'config',

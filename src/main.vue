@@ -39,7 +39,7 @@ export default {
 @import '~@/css/index.scss';
 #fakeBody {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   background-color: $c-gap;
   display: grid;
   grid-gap: 1px;
