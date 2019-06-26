@@ -167,6 +167,9 @@
       &--error{
         background: $c-console-error;
       }
+      &--warn {
+        background: $c-console-warn;
+      }
     }
   }
   

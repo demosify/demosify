@@ -19,9 +19,9 @@ export default async () => {
       transformer: 'css'
     },
     foldBoxes: [],
-    visibleBoxes: ['javascript'],
+    visibleBoxes: ['javascript', 'css'],
     packages: {
-      js: ['https://lib.baomitu.com/jquery/3.4.1/core.js'],
+      js: [],
       css: ['https://lib.baomitu.com/animate.css/3.7.2/animate.min.css'],
     }
   }

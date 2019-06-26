@@ -86,8 +86,8 @@
           const runtimeScript = await this.runtimeScript();
           const runtimeStyle = await this.runtimeStyle();
           this.iframe.setContent({
-            head: headStyle + runtimeStyle + runtimeScript + jsScript,
-            body: html,
+            head: headStyle + runtimeStyle,
+            body: html + runtimeScript + jsScript,
           })
           progress.done();
         }, 1000);

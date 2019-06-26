@@ -1,3 +1,4 @@
+import bus from '@/js/eventbus.js';
 class Iframe {
   constructor({el, sandboxAttrs = []}) {
     if(!el) throw new Error('Expect "el" to mount iframe to!');
@@ -21,11 +22,12 @@ class Iframe {
     this.$el.parentNode.replaceChild(iframe, this.$el);
     iframe.onload = function() {
       this.contentWindow.document.open();
-      this.contentWindow.document.close();
       this.contentWindow.document.write(content);
+      this.contentWindow.document.close();
     }
     this.$el = iframe;
   }
+
 }
 
 export default (...args) => new Iframe(...args);

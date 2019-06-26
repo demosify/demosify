@@ -21,6 +21,7 @@
     <div
       ref="monaco"
       class="sandbox-monaco"
+      :style="{height: editorHeight}"
       :class="{
         'sandbox-monaco--folded': isFolded,
       }"
@@ -56,11 +57,15 @@ export default {
     ...mapState([
       'config',
     ]),
+    editorHeight() {
+      return this.isFolded ? 0 : `${this.editorLineCount * 18}px`
+    }
   },
   data() {
     return {
       showPartial: true,
       monacoEditor: null,
+      editorLineCount: 1,
     };
   },
   mounted() {
@@ -77,8 +82,15 @@ export default {
         minimap: {
           enabled: false,
         },
+        smoothScrolling: true,
+        scrollBeyondLastLine: false
       });
+      this.monacoEditor.onDidChangeModelContent(() => {
+        this.editorLineCount = this.monacoEditor.getModel().getLineCount();
+      });
+      
       this.monacoEditor.setValue(this.value);
+      
       this.bindContentChangeListener();
     },
     toogleFold() {
@@ -154,6 +166,7 @@ export default {
     color: $c-highlight;
   }
   &-monaco {
+    height: 100%;
     min-height: 200px;
     transition: 300ms all ease-out;
     &--folded {
