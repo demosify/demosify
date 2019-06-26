@@ -3,7 +3,10 @@
     <div class="console-header">
       <h3 
         @dblclick="isConsoleFolded = !isConsoleFolded" 
-        class="console-title">console <span class="console-new"></span>
+        class="console-title">console 
+        <transition name="fade">
+          <span class="console-new" v-show="hasLog"></span>
+        </transition>
       </h3>
       <p class="console-ctrl">
         <svg @click="run" t="1561513991991" class="icon console-runBtn" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2187" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -13,8 +16,17 @@
         <input type="checkbox" :checked="autoRun" @change="toogleAutoRun">autoRun
       </p>
     </div>
-    <div class="console-content" :class="{'console-content--fold': isConsoleFolded}">
-    </div>
+    <transition name="slide">
+      <div v-show="!isConsoleFolded" class="console-content">
+        <p class="console-message" v-for="(log, index) in logs" :key="index">
+          <span 
+            class="console-messageType"
+            :class="`console-messageType--${getFlag(log.type)}`"
+          >{{getFlag(log.type)}}</span>
+          {{log.message}}
+        </p>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -31,14 +43,32 @@
     },
     computed: {
       ...mapState([
-        'autoRun'
+        'autoRun',
+        'logs',
       ]),
+      hasLog() {
+        return this.logs.length;
+      }
     },
     methods: {
       ...mapActions(['toogleAutoRun']),
       run() {
         bus.$emit('run');
-      }
+      },
+      getFlag(method) {
+        switch (method) {
+          case 'log':
+          case 'info':
+          case 'debug':
+            return 'info';
+          case 'error':
+            return 'error';
+          case 'warn':
+            return 'warn';
+          default:
+            return 'nothing';
+        }
+      },
     }
   };
 </script>
@@ -101,10 +131,45 @@
     transition: 0.3s all ease-out;
     background: $c-console-bg;
     margin-bottom: 20px;
-    &--fold {
-      height: 0;
-      margin: 0;
+    transition: all .5s;
+  }
+  &-message {
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.5;
+    &:nth-of-type(2n + 1) {
+      background: $c-console-bg-odd;
+    }
+    &Type {
+      font-size: 10px;
+      color: white;
+      vertical-align: middle;
+      display: inline-block;
+      width: 3em;
+      line-height: 14px;
+      text-align: center;
+      margin: 0 4px;
+      border-radius: 2px;
+      &--info {
+        background: $c-console-info;
+      }
+      &--error{
+        background: $c-console-error;
+      }
     }
   }
+  
+}
+
+.slide-enter-active, .slide-leave-active, .fade-enter-active, .fade-leave-active {
+  transition: all .5s;
+}
+.slide-enter, .slide-leave-to {
+  height: 0;
+  margin-bottom: 0;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -14,6 +14,7 @@
   import createIframe from '@/js/iframe.js';
   import * as transform from '@/js/transform.js';
   import getScripts from '@/js/get_script.js';
+  import proxyConsole from '!raw-loader!babel-loader!@/js/proxy-console';
   import Console from './console.vue';
 
   const sandboxAttributes = [
@@ -69,22 +70,30 @@
       ...mapActions([
         'setIframeStatus',
         'transform',
+        'clearLogs',
+        'addLog',
       ]),
       run() {
         progress.start();
         clearTimeout(this.runTimer);
         this.runTimer = setTimeout(async () => {
+          this.clearLogs();
           this.setIframeStatus('loading');
           await this.transform(true);
           const headStyle = await this.transformCSS();
           const html = await this.transformHTML();
           const jsScript = await this.transformJS();
+          const runtimeScript = await this.runtimeScript();
           this.iframe.setContent({
-            head: headStyle + jsScript,
+            head: headStyle + runtimeScript + jsScript,
             body: html,
           })
           progress.done();
         }, 1000);
+      },
+      async runtimeScript() {
+        const console = createElement('script')(proxyConsole);
+        return console;
       },
       async transformCSS() {
         let code = '';
@@ -108,6 +117,15 @@
           code = await transform.javascript(this.boxes.javascript);
         }
         return createElement('script')(code);
+      },
+      listenIframe({ data = {} }) {
+        if(data.type === 'demoground-console') {
+          if(data.method === 'clear') {
+            this.clearLogs();
+          } else {
+            this.addLog({type: data.method, message: data.args.join('\\n')});
+          }
+        }
       }
     }
   };

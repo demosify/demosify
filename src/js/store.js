@@ -33,6 +33,7 @@ const state = {
   iframeStatus: null,
   transforming: false,
   autoRun: true,
+  logs: [],
 };
 
 const mutations = {
@@ -67,6 +68,12 @@ const mutations = {
   },
   TOGGLE_AUTO_RUN(state) {
     state.autoRun = !state.autoRun;
+  },
+  CLEAR_LOGS(state) {
+    state.logs = [];
+  },
+  ADD_LOG(state, log) {
+    state.logs.push(log);
   }
 };
 
@@ -126,6 +133,12 @@ const actions =  {
   },
   transform({ commit }, status) {
     commit('SET_TRANSFORM', status)
+  },
+  clearLogs({commit}) {
+    commit('CLEAR_LOGS');
+  },
+  addLog({commit}, pl) {
+    commit('ADD_LOG', pl)
   },
 }
 
