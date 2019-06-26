@@ -61,7 +61,6 @@
       window.addEventListener('message', this.listenIframe);
       bus.$on('run', this.run);
       window.monitor = this;
-      progress.configure({ parent: '#monitor-iframe' });
     },
     beforeDestroy() {
       window.removeEventListener('message', this.listenIframe);
