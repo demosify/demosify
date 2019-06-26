@@ -1,5 +1,5 @@
 export default {
-  name: 'Demo Ground',
+  name: 'SPRITEJS DEMO',
   version: '0.0.1',
   homePage: 'https://spritejs.org',
   logo: '',

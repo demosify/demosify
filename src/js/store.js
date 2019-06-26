@@ -6,7 +6,11 @@ import demoList from '@/.demoList.json';
 import router from '@/js/router.js';
 import bus from '@/js/eventbus.js';
 
-import progress from 'nprogress'
+import progress from 'nprogress';
+progress.configure({
+  showSpinner: false,
+});
+
 const path = require('path');
 
 Vue.use(Vuex);
@@ -38,7 +42,7 @@ const mutations = {
   UPDATE_CODE(state, {type, code}) {
     if(!state.boxes[type]) state.boxes[type] = {};
     state.boxes[type].code = code;
-    bus.$emit('run');
+    if(state.autoRun) bus.$emit('run');
   },
   UPDATE_TRANSFORMER(state, {type, transformer}) {
     if(!state.boxes[type]) state.boxes[type] = {};
@@ -61,7 +65,7 @@ const mutations = {
   SET_TRANSFORM(state, status) {
     state.transforming = status
   },
-  TOOGLE_AUTO_UPDATE(state) {
+  TOGGLE_AUTO_RUN(state) {
     state.autoRun = !state.autoRun;
   }
 };

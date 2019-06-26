@@ -154,7 +154,6 @@ export default {
     color: $c-highlight;
   }
   &-monaco {
-    width: 100%;
     min-height: 200px;
     transition: 300ms all ease-out;
     &--folded {

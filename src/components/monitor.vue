@@ -9,11 +9,12 @@
 
 <script>
   import {mapActions, mapState} from 'vuex';
-  import Console from './console.vue';
-  import createIframe from '@/js/iframe.js';
+  import progress from 'nprogress';
   import bus from '@/js/eventbus.js';
+  import createIframe from '@/js/iframe.js';
   import * as transform from '@/js/transform.js';
   import getScripts from '@/js/get_script.js';
+  import Console from './console.vue';
 
   const sandboxAttributes = [
     'allow-modals',
@@ -48,6 +49,7 @@
     computed: {
       ...mapState([
         'boxes',
+        'autoRun',
       ])
     },
     mounted() {
@@ -58,6 +60,7 @@
       window.addEventListener('message', this.listenIframe);
       bus.$on('run', this.run);
       window.monitor = this;
+      progress.configure({ parent: '#monitor-iframe' });
     },
     beforeDestroy() {
       window.removeEventListener('message', this.listenIframe);
@@ -68,6 +71,7 @@
         'transform',
       ]),
       run() {
+        progress.start();
         clearTimeout(this.runTimer);
         this.runTimer = setTimeout(async () => {
           this.setIframeStatus('loading');
@@ -79,12 +83,12 @@
             head: headStyle + jsScript,
             body: html,
           })
+          progress.done();
         }, 1000);
       },
       async transformCSS() {
         let code = '';
         if(this.boxes.css) {
-          console.log(transform.css);
           code = await transform.css(this.boxes.css).then(code => {
             return code;
           });

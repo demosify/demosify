@@ -64,6 +64,7 @@ export default {
   computed: {
     ...mapState(["links"]),
     currentDemo() {
+      this.isShowingMore = false;
       return this.$route.name;
     },
   }
