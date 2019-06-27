@@ -1,30 +1,9 @@
 <template>
   <section class="sandbox">
-    <header
-      class="sandbox-name"
-      :class="{
-        'sandbox-name--folded': isFolded,
-      }"
-    >
-      <span class="sandbox-type" @dblclick="toogleFold">{{ name.toUpperCase() }}</span>
-      <span class="sandbox-transformer">{{ language }}</span>
-      
-      <!-- <i
-        class="sandbox-nameBtn"
-        :class="{
-          'sandbox-nameBtn--partial': showPartial,
-        }"
-        @click="showPartial = !showPartial"
-        @dblclick.stop
-      ></i> -->
-    </header>
     <div
       ref="monaco"
       class="sandbox-monaco"
-      :style="{height: editorHeight}"
-      :class="{
-        'sandbox-monaco--folded': isFolded,
-      }"
+      :style="monacoStyle"
     ></div>
   </section>
 </template>
@@ -36,14 +15,6 @@ import loadTheme from './sandboxTheme.js';
 import {mapState} from 'vuex';
 export default {
   props: {
-    name: {
-      require: true,
-      type: String,
-    },
-    isFolded: {
-      type: Boolean,
-      default: true,
-    },
     language: {
       require: true,
       type: String,
@@ -52,6 +23,10 @@ export default {
       type: String,
       default: '',
     },
+    isFolded: {
+      type: Boolean,
+      default: false,
+    }
   },
   watch: {
     value(val) {
@@ -62,8 +37,13 @@ export default {
     ...mapState([
       'config',
     ]),
-    editorHeight() {
-      return this.isFolded ? 0 : `${this.editorLineCount * 18}px`
+    monacoStyle() {
+      if(this.config.editorViewMode === 'waterfall') {
+        return {
+          height: this.isFolded ? 0 : `${this.editorLineCount * 18}px`
+        }
+      }
+      return {}
     }
   },
   data() {
@@ -98,12 +78,6 @@ export default {
       
       this.bindContentChangeListener();
     },
-    toogleFold() {
-      this.$emit('toogleFold', this.type);
-    },
-    tooglePartial() {
-      this.$emit('toogleFold', this.type);
-    },
     bindContentChangeListener() {
       if (!this.monacoEditor) throw new Error('editor is not mounted');
       this.monacoEditor.onDidChangeModelContent(() => {
@@ -118,67 +92,10 @@ export default {
 <style lang="scss">
 @import '@/css/index.scss';
 .sandbox {
-  font-family: $link-font-family;
-  margin: 0 20px 20px 20px;
-  &-name {
-    line-height: 60px;
-    border-bottom: 1px solid rgba($c-highlight, 0.2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    &Btn {
-      width: 15px;
-      height: 15px;
-      background: $c-highlight;
-      border-radius: 50%;
-      overflow: hidden;
-      position: relative;
-      &::after {
-        content: '';
-        width: 100%;
-        height: 100%;
-        background: $c-bg;
-        position: absolute;
-        top: 0;
-        left: 0;
-        border-radius: 50%;
-        transform: translate(-25%, -25%);
-        transition: 0.5s all ease-out;
-      }
-      &--partial {
-        &::after {
-          transform: translate(-100%, -100%);
-        }
-      }
-    }
-    &--folded {
-      & h2 {
-        color: $c-font;
-      }
-      border-bottom-color: rgba($c-font, 0.2);
-      opacity: 0.4;
-    }
-  }
-  &-transformer {
-    user-select: none;
-    color: rgba($c-font, 0.4);
-  }
-  &-type {
-    font-size: 18px;
-    margin: 0;
-    padding: 0;
-    user-select: none;
-    color: $c-highlight;
-  }
   &-monaco {
     height: 100%;
-    min-height: 200px;
+    overflow: hidden;
     transition: 300ms all ease-out;
-    &--folded {
-      min-height: 0;
-      height: 0px;
-      opacity: 0;
-    }
   }
 }
 </style>

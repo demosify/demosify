@@ -29,13 +29,13 @@ const state = {
   config,
   boxes: {},
   foldBoxes: [],
-  visibleboxes: [],
   links: demoList,
   iframeStatus: null,
   transforming: false,
   isSidebarShown: true,
   autoRun: true,
   logs: [],
+  currentBox: undefined,
   dependencies: {
     js: [],
     css: [],
@@ -58,8 +58,9 @@ const mutations = {
   UPDATE_FOLD_BOXES(state, foldBoxes) {
     state.foldBoxes = foldBoxes;
   },
-  UPDATE_VISIBLE_BOXES(state, visibleBoxes) {
-    state.visibleBoxes = visibleBoxes;
+  UPDATE_VISIBLE(state, {type, visible}) {
+    if(!state.boxes[type]) state.boxes[type] = {};
+    state.boxes[type].visible = visible;
   },
   TOGGLE_BOX_FOLD(state, boxName) {
     const boxIndex = state.foldBoxes.indexOf(boxName);
@@ -89,7 +90,10 @@ const mutations = {
   },
   TOGGLE_SIDEBAR(state) {
     state.isSidebarShown = !state.isSidebarShown;
-  }
+  },
+  UPDATE_CURRENT_BOX(state, box) {
+    state.currentBox = box;
+  },
 };
 
 const actions =  {
@@ -105,8 +109,8 @@ const actions =  {
   updateFoldBoxes({commit}, pl) {
     commit('UPDATE_FOLD_BOXES', pl);
   },
-  updateVisibleBoxes({commit}, pl) {
-    commit('UPDATE_VISIBLE_BOXES', pl)
+  updateVisible({commit}, pl) {
+    commit('UPDATE_VISIBLE', pl)
   },
   toggleBoxFold({commit}, pl) {
     commit('TOGGLE_BOX_FOLD', pl);
@@ -116,6 +120,9 @@ const actions =  {
   },
   updateDependencies({commit}, pl) {
     commit('UPDATE_DEPENDENCIES', pl);
+  },
+  updateCurrentBox({commit}, pl) {
+    commit('UPDATE_CURRENT_BOX', pl);
   },
   async setBoxes({dispatch}, demo) {
     progress.start();
@@ -136,10 +143,11 @@ const actions =  {
 
     dispatch('clearBoxes');
 
-    Object.entries(boxes).forEach(([type, {code, transformer}]) => {
+    Object.entries(boxes).forEach(([type, {code, transformer, visible}]) => {
       ac.push(
         dispatch('updateCode', { type, code: code.default }),
         dispatch('updateTransformer', { type, transformer }),
+        dispatch('updateVisible', {type, visible: Boolean(visible)}),
       );
     })
   
@@ -156,8 +164,8 @@ const actions =  {
     };
 
     ac.push(dispatch('updateFoldBoxes', foldBoxes || []));
-    ac.push(dispatch('updateVisibleBoxes', visibleBoxes || Object.keys(boxes)));
     ac.push(dispatch('updateDependencies', dependencies));
+    ac.push(dispatch('updateCurrentBox', Object.entries(boxes).find(([key, value]) => value.visible)[0]|| undefined));
     await Promise.all(ac);
     progress.done();
   },

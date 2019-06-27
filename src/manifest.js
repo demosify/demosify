@@ -1,6 +1,6 @@
 export default {
-  name: 'SPRITEJS DEMO',
-  version: '0.0.1',
+  name: 'SPRITEJS',
+  version: 'v2',
   homePage: 'https://spritejs.org',
   logo: '',
   // 可选主题: active4d, allHallowsEve, amy, blackboard, brillianceBlack,
@@ -15,6 +15,8 @@ export default {
   boxTheme: 'monokai',
   globalPackages: {
     js: ['https://unpkg.com/spritejs/dist/spritejs.min.js'],
-    css: ['https://lib.baomitu.com/normalize/4.2.0/normalize.css'],
-  }
+    css: [],
+  },
+  // tab waterfall
+  editorViewMode: 'tab',
 }
