@@ -1,4 +1,9 @@
-export default {
+module.exports = {
+  devServer: {
+    port: 3000,
+  },
+  source: 'demos',
+  output: 'docs',
   name: 'SPRITEJS',
   version: 'v2',
   homePage: 'https://spritejs.org',

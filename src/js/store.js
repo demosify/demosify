@@ -1,10 +1,33 @@
 import Vue from 'vue/dist/vue.esm';
 import Vuex from 'vuex';
-import config from '@/manifest';
+import userConfig from 'manifest';
 import clonedeep from 'lodash.clonedeep';
-import demoList from '@/.demoList.json';
+import demoList from '.demoList.json';
 import router from '@/js/router.js';
 import bus from '@/js/eventbus.js';
+
+const config = Object.assign({
+  name: 'DEMOSIFY',
+  version: 'v1',
+  homePage: 'https://github.com/betseyliu/demo-ground',
+  logo: '',
+  // 可选主题: active4d, allHallowsEve, amy, blackboard, brillianceBlack,
+  // brillianceDull, chromeDevtools, cloudsMidnight, clouds, cobalt,
+  // dawn, dreamweaver, eiffel, espressoLibre, github, idle, katzenmilch,
+  // kuroirTheme, lazy, magicwbAmiga, merbivoreSoft, merbivore, monokai,
+  // pastelsOnDark, slushAndPoppies, solarizedDark, solarizedLight,
+  // spacecadet, sunburst, textmateMacClassic, tomorrowNightBlue,
+  // tomorrowNightBright, tomorrowNightEighties, tomorrowNight, tomorrow,
+  // twilight, vibrantInk, zenburnesque, iplastic, idlefingers, krtheme,
+  // monoindustrial,
+  boxTheme: 'monokai',
+  globalPackages: {
+    js: [],
+    css: [],
+  },
+  // tab waterfall
+  editorViewMode: 'tab',
+}, userConfig);
 
 import progress from 'nprogress';
 progress.configure({
@@ -23,7 +46,7 @@ function importAllDemo(r) {
     demoBoxes[name] = r(key).default;
   })
 }
-importAllDemo(require.context('@/demos', true, /config.js$/));
+importAllDemo(require.context('demos', true, /config.js$/));
 
 const state = {
   config,

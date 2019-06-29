@@ -4,6 +4,9 @@
   "description": "A demo playground, supporting js, css, html, glsl",
   "main": "index.html",
   "author": "betseyliu",
+  "bin": {
+    "demosify": "./bin/cli"
+  },
   "license": "MIT",
   "private": false,
   "scripts": {
