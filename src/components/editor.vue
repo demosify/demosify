@@ -96,7 +96,7 @@ export default {
 @import '@/css/index.scss';
 .editor {
   max-height: 100vh;
-  overflow: scroll;
+  overflow-y: auto;
   &-box {
     font-family: $link-font-family;
     margin: 0 20px 20px 20px;

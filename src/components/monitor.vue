@@ -153,7 +153,7 @@
     width: 100%;
     height: 100px;
     flex-grow: 1;
-    background: white;
+    background: $c-bg;
   }
 }
 </style>
