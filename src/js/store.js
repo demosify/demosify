@@ -74,6 +74,10 @@ const mutations = {
     state.boxes[type].code = code;
     if(state.autoRun) bus.$emit('run');
   },
+  UPDATE_TRANSFORM(state, {type, transform}) {
+    if(!state.boxes[type]) state.boxes[type] = {};
+    state.boxes[type].transform = transform;    
+  },
   UPDATE_TRANSFORMER(state, {type, transformer}) {
     if(!state.boxes[type]) state.boxes[type] = {};
     state.boxes[type].transformer = transformer;
@@ -129,6 +133,9 @@ const actions =  {
   updateTransformer({commit}, pl) {
     commit('UPDATE_TRANSFORMER', pl);
   },
+  updateTransform({commit}, pl) {
+    commit('UPDATE_TRANSFORM', pl);
+  },
   updateFoldBoxes({commit}, pl) {
     commit('UPDATE_FOLD_BOXES', pl);
   },
@@ -166,10 +173,12 @@ const actions =  {
 
     dispatch('clearBoxes');
 
-    Object.entries(boxes).forEach(([type, {code, transformer, visible}]) => {
+    Object.entries(boxes).forEach(([type, {code, transformer, visible, transform}]) => {
+      transform = transform || function(code) {return code};
       ac.push(
         dispatch('updateCode', { type, code: code.default }),
         dispatch('updateTransformer', { type, transformer }),
+        dispatch('updateTransform', { type, transform }),
         dispatch('updateVisible', {type, visible: Boolean(visible)}),
       );
     })
