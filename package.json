@@ -1,11 +1,11 @@
 {
-  "name": "demosify",
-  "version": "0.0.1",
+  "name": "@spritejs/demosify-test",
+  "version": "0.0.4",
   "description": "A demo playground, supporting js, css, html, glsl",
-  "main": "index.html",
+  "main": "bin/cli.js",
   "author": "betseyliu",
   "bin": {
-    "demosify": "./bin/cli"
+    "demosify": "./bin/cli.js"
   },
   "license": "MIT",
   "private": false,
@@ -15,6 +15,9 @@
     "start": "concurrently \"node --experimental-modules fileWatcher.mjs\" \"poi --serve\""
   },
   "devDependencies": {
+
+  },
+  "dependencies": {
     "@vue/eslint-config-prettier": "^4.0.1",
     "babel-eslint": "^10.0.2",
     "babel-preset-babili": "^0.1.4",
@@ -35,9 +38,7 @@
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "vue-template-compiler": "^2.6.10",
-    "vuex": "^3.1.1"
-  },
-  "dependencies": {
+    "vuex": "^3.1.1",
     "lodash.clonedeep": "^4.5.0",
     "nprogress": "^0.2.0"
   }

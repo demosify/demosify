@@ -1,8 +1,14 @@
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const path = require('path');
+const fs = require('fs');
 const rootPath = process.cwd();
 
-const config = require(path.join(rootPath, '.demosrc'));
+const configFile = path.join(rootPath, '.demosrc.js');
+if(!fs.existsSync(configFile)) {
+  throw new Error('No .demosrc.js file found in project.');
+}
+
+const config = require(configFile);
 let port = 10086;
 if(config.devServer && config.devServer.port) {
   port = config.devServer.port;
@@ -10,7 +16,11 @@ if(config.devServer && config.devServer.port) {
 let source = config.source || 'demos';
 let output = config.output || 'dist';
 
+console.warn(`Source directory: ${source}.`)
+console.warn(`Output directory: ${output}.`)
+
 module.exports = {
+  entry: path.join(__dirname, 'index.js'),
   output: {
     dir: output,
   },
@@ -26,6 +36,7 @@ module.exports = {
       },
       resolve: {
         alias: {
+          '@': path.join(__dirname, 'src'),
           'demos': path.join(rootPath, source),
           '.demoList.json': path.join(rootPath, source, '.demoList.json'),
           'manifest': path.join(rootPath, '.demosrc'),

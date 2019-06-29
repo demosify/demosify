@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const path = require('path');
 
 // eslint-disable-next-line import/no-unassigned-import
 require('v8-compile-cache')
@@ -11,7 +12,9 @@ process.on('unhandledRejection', error => {
 
 async function main() {
   try {
-    const poi = new Poi()
+    const poi = new Poi(process.argv, {
+      defaultConfigFiles: [path.join(__dirname, '../poi.config.js')]
+    })
     await poi.run()
   } catch (error) {
     require('poi/lib/utils/spinner').stop()
