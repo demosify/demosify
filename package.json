@@ -1,5 +1,5 @@
 {
-  "name": "demo-ground",
+  "name": "demosify",
   "version": "0.0.1",
   "description": "A demo playground, supporting js, css, html, glsl",
   "main": "index.html",
