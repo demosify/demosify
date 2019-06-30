@@ -1,6 +1,6 @@
 {
   "name": "@spritejs/demosify-test",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A demo playground, supporting js, css, html, glsl",
   "main": "bin/cli.js",
   "author": "betseyliu",
