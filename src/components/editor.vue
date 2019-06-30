@@ -2,31 +2,35 @@
   <div class="editor">
     <!-- 瀑布流模式 -->
     <template v-if="config.editorViewMode === 'waterfall'">
-      <div class="editor-box"
+      <div
+        class="editor-box"
         v-for="(content, type) in boxes"
         :key="type+content.key"
-        v-if="content.visible">
-        <header class="editor-boxName"
+        v-if="content.visible"
+      >
+        <header
+          class="editor-boxName"
           :class="{
             'editor-boxName--folded': isSandboxFolded(type),
           }"
-          @dblclick="toggleFold(type)">
+          @dblclick="toggleFold(type)"
+        >
           <span class="editor-boxType">{{ type.toUpperCase() }}</span>
           <span class="editor-boxTransformer">{{ content.transformer}}</span>
         </header>
-        <sandbox 
+        <sandbox
           class="editor-sandbox"
           :is-folded="isSandboxFolded(type)"
           :value="content.code"
           :language="content.transformer"
           :editorHook="content.editorHook"
-          @input="codeUpdate(type, arguments)">
-        </sandbox>
+          @input="codeUpdate(type, arguments)"
+        ></sandbox>
       </div>
     </template>
     <template v-if="config.editorViewMode === 'tab'">
       <ul class="editor-tabs">
-        <li 
+        <li
           class="editor-tab"
           :class="{
             'editor-tab--active': currentBox === type
@@ -48,36 +52,31 @@
         :value="content.code"
         :language="content.transformer"
         :editorHook="content.editorHook"
-        @input="codeUpdate(type, arguments)">
-      >
-      </sandbox>
+        @input="codeUpdate(type, arguments)"
+      >></sandbox>
     </template>
   </div>
 </template>
 
 <script>
-import Sandbox from './sandbox.vue';
-import { mapState, mapActions } from 'vuex';
+import PerfectScrollbar from "perfect-scrollbar";
+import Sandbox from "./sandbox.vue";
+import { mapState, mapActions } from "vuex";
 export default {
-  mounted() {
-  },
+  mounted() {},
   computed: {
     ...mapState([
-      'foldBoxes',
-      'visibleBoxes',
-      'foldBoxes',
-      'boxes',
-      'config',
-      'currentBox',
-    ]),
+      "foldBoxes",
+      "visibleBoxes",
+      "foldBoxes",
+      "boxes",
+      "config",
+      "currentBox"
+    ])
   },
   components: { Sandbox },
   methods: {
-    ...mapActions([
-      'toggleBoxFold',
-      'updateCode',
-      'updateCurrentBox',
-    ]),
+    ...mapActions(["toggleBoxFold", "updateCode", "updateCurrentBox"]),
     isSandboxFolded(type) {
       return this.foldBoxes.indexOf(type) > -1;
     },
@@ -91,11 +90,17 @@ export default {
       this.toggleBoxFold(type);
     }
   },
+  mounted(){
+    new PerfectScrollbar(document.querySelector('.editor'), {
+      suppressScrollX: true,
+    });
+  }
 };
 </script>
 
 <style lang="scss">
-@import '@/css/index.scss';
+@import "@/css/index.scss";
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
 .editor {
   max-height: 100vh;
   overflow-y: auto;
@@ -116,7 +121,7 @@ export default {
         overflow: hidden;
         position: relative;
         &::after {
-          content: '';
+          content: "";
           width: 100%;
           height: 100%;
           background: $c-bg;
@@ -173,8 +178,8 @@ export default {
     filter: brightness(0.6);
     transition: 0.3s all ease-out;
     cursor: pointer;
-    border-radius: 8px 8px 0 0 ;
-    &--active{
+    border-radius: 8px 8px 0 0;
+    &--active {
       filter: brightness(1);
       background: rgba($c-highlight, 0.05);
       & .editor-tabName {
@@ -186,20 +191,26 @@ export default {
     }
     &Name {
       transition: 0.3s all ease-out;
-      color: rgba(#F6F4F2, 0.6);
+      color: rgba(#f6f4f2, 0.6);
       font-size: 18px;
     }
     &Transformer {
       font-size: 12px;
-      color: rgba(#F6F4F2, 0.6);
+      color: rgba(#f6f4f2, 0.6);
     }
   }
-  &-sandbox{
+  &-sandbox {
     &--waterfall {
       margin: 0 10px;
       height: calc(100vh - 85px);
-      transition: .3s all ease-out;
+      transition: 0.3s all ease-out;
     }
+  }
+}
+
+@media (max-width: 900px) {
+  .editor {
+    max-height: calc(100vh - 62px);
   }
 }
 </style>

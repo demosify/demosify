@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import PerfectScrollbar from 'perfect-scrollbar';
 import { mapState, mapMutations } from "vuex";
 export default {
   name: "sidebar",
@@ -68,21 +69,28 @@ export default {
       return this.$route.name;
     },
   },
+  mounted(){
+    new PerfectScrollbar(document.querySelector('.sidebar-menu'), {
+      suppressScrollX: true,
+    });
+  }
 };
 </script>
 
 <style lang="scss">
 @import "@/css/index.scss";
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
 $foldedDealy: 100ms;
 .sidebar {
   font-family: $link-font-family;
-  height: 100%;
-  overflow-y: auto;
   position: relative;
   &-menu {
     list-style: none;
     margin: 0;
     padding: 10px 0 0 0;
+    max-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
     &Item {
       font-size: 14px;
       padding: 5px 0 5px 20px;
@@ -90,7 +98,6 @@ $foldedDealy: 100ms;
       font-weight: 300;
       transition: 0.3s all ease;
       cursor: pointer;
-      display: block;
       text-decoration: none;
       &:hover {
         color: $c-font;
@@ -172,10 +179,9 @@ $foldedDealy: 100ms;
     padding: 10px 0;
     background: lighten($c-bg, 5);
     transition: 0.3s all ease-out;
-    height: calc(100% - 60px);
+    height: calc(100vh - 60px);
     box-sizing: border-box;
     transform-origin: left center;
-
     &--folded {
       opacity: 0;
       transform: translateX(-100%);

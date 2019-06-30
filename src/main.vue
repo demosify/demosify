@@ -54,6 +54,7 @@ export default {
   background-color: $c-gap;
   display: grid;
   grid-gap: 1px;
+  overflow: hidden;
   grid-template: 60px 1fr / 250px repeat(2, 1fr);
   &.fakeBody--max {
     grid-template: 60px 1fr / 0px repeat(2, 1fr);
@@ -158,6 +159,9 @@ export default {
   .vessel {
     grid-column: 1 / -1;
     grid-row: 2 / -1;
+  }
+  .handler{
+    display: none;
   }
 }
 </style>

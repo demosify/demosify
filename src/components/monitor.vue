@@ -156,4 +156,9 @@
     background: $c-bg;
   }
 }
+@media (max-width: 900px) {
+  .monitor{
+    max-height: calc(100vh - 62px);
+  }
+}
 </style>
