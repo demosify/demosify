@@ -20,6 +20,13 @@ if(typeof output === 'string') {
   output = {dir: output};
 }
 
+let themeFilePath = path.resolve(__dirname, './src/css/default_theme.scss');
+
+if(config.themeFile) {
+  themeFilePath = path.resolve(rootPath, config.themeFile);
+}
+
+
 console.warn(`Source directory: ${source}.`);
 console.warn(`Output directory: ${output.dir}.`);
 console.warn(`PublicUrl: ${output.publicUrl || '/'}.`);
@@ -44,6 +51,7 @@ module.exports = {
           'demos': path.join(rootPath, source),
           '.demoList.json': path.join(rootPath, source, '.demoList.json'),
           'manifest': path.join(rootPath, '.demosrc'),
+          'themeFile': themeFilePath,
         }
       }
     })

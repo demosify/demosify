@@ -10,12 +10,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "poi --serve",
-    "watch": "node --experimental-modules fileWatcher.mjs",
-    "start": "concurrently \"node --experimental-modules fileWatcher.mjs\" \"poi --serve\""
-  },
-  "devDependencies": {
-
+    "dev": "poi --serve"
   },
   "dependencies": {
     "@vue/eslint-config-prettier": "^4.0.1",

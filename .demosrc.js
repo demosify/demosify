@@ -24,4 +24,6 @@ module.exports = {
   },
   // tab waterfall
   editorViewMode: 'tab',
+  // 这里你可以填写自己的theme主题用以覆盖原有的主题，具体详见文档
+  // themeFile: './theme.scss',
 }
