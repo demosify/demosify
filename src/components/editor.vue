@@ -19,6 +19,7 @@
           :is-folded="isSandboxFolded(type)"
           :value="content.code"
           :language="content.transformer"
+          :editorHook="content.editorHook"
           @input="codeUpdate(type, arguments)">
         </sandbox>
       </div>
@@ -46,6 +47,7 @@
         class="editor-sandbox--waterfall"
         :value="content.code"
         :language="content.transformer"
+        :editorHook="content.editorHook"
         @input="codeUpdate(type, arguments)">
       >
       </sandbox>
