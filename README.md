@@ -1,7 +1,23 @@
-export default {
-  name: 'SPRITEJS',
-  version: 'v2',
-  homePage: 'https://spritejs.org',
+# DEMOSIFY
+
+## Usage
+
+```bash
+npm install @spritejs/demosify-test --save-dev
+```
+
+Add `.demorc.js`:
+
+```js
+module.exports = {
+  devServer: {
+    port: 3000,
+  },
+  source: 'demos', // default is demos
+  output: 'docs', // default is dist
+  name: 'Your project name',
+  version: 'Your project version',
+  homePage: 'You project homepage url',
   logo: '',
   // 可选主题: active4d, allHallowsEve, amy, blackboard, brillianceBlack,
   // brillianceDull, chromeDevtools, cloudsMidnight, clouds, cobalt,
@@ -14,9 +30,29 @@ export default {
   // monoindustrial,
   boxTheme: 'monokai',
   globalPackages: {
-    js: ['https://unpkg.com/spritejs/dist/spritejs.min.js'],
-    css: [],
+    js: [/* js lib */],
+    css: [/* css lib */],
   },
   // tab waterfall
   editorViewMode: 'tab',
 }
+```
+
+Create source directory and add `.demoList.json`:
+
+```json
+["quick start"]
+```
+
+Create your demo directory and files.
+
+Edit your package.json
+
+```json
+scripts: {
+  "start": "demosify --serve",
+  "build:demo": "demosify"
+}
+```
+
+Done.

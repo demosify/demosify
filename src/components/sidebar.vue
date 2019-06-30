@@ -77,13 +77,12 @@ $foldedDealy: 100ms;
 .sidebar {
   font-family: $link-font-family;
   height: 100%;
-  overflow: scroll;
+  overflow-y: auto;
   position: relative;
   &-menu {
     list-style: none;
     margin: 0;
     padding: 10px 0 0 0;
-    overflow: scroll;
     &Item {
       font-size: 14px;
       padding: 5px 0 5px 20px;

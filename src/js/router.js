@@ -1,4 +1,4 @@
-import demoList from '@/.demoList.json';
+import demoList from '.demoList.json';
 import Vue from 'vue/dist/vue.esm';
 import VueRouter from 'vue-router';
 import bus from '@/js/eventbus.js';
