@@ -14,16 +14,20 @@ if(config.devServer && config.devServer.port) {
   port = config.devServer.port;
 }
 let source = config.source || 'demos';
-let output = config.output || 'dist';
+let output = config.output || {dir: 'dist'};
 
-console.warn(`Source directory: ${source}.`)
-console.warn(`Output directory: ${output}.`)
+if(typeof output === 'string') {
+  output = {dir: output};
+}
+
+console.warn(`Source directory: ${source}.`);
+console.warn(`Output directory: ${output.dir}.`);
+console.warn(`PublicUrl: ${output.publicUrl || '/'}.`);
 
 module.exports = {
   entry: path.join(__dirname, 'index.js'),
-  output: {
-    dir: output,
-  },
+  output,
+  publicFolder: path.join(rootPath, config.publicFolder || 'public'),
   devServer:{
     port,
   },

@@ -4,7 +4,7 @@
     <template v-if="config.editorViewMode === 'waterfall'">
       <div class="editor-box"
         v-for="(content, type) in boxes"
-        :key="type"
+        :key="type+content.key"
         v-if="content.visible">
         <header class="editor-boxName"
           :class="{
@@ -42,7 +42,7 @@
       </ul>
       <sandbox
         v-for="(content, type) in boxes"
-        :key="type"
+        :key="type+content.key"
         v-show="currentBox === type"
         class="editor-sandbox--waterfall"
         :value="content.code"

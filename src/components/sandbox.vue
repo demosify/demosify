@@ -26,6 +26,10 @@ export default {
     isFolded: {
       type: Boolean,
       default: false,
+    },
+    editorHook: {
+      type: Function,
+      default: null,
     }
   },
   watch: {
@@ -61,7 +65,7 @@ export default {
       if(this.editorHook) this.editorHook(monaco, this.value, this.language);
       // 加载全部主题
       loadTheme(monaco);
-      this.monacoEditor = monaco.editor.create(this.$refs.monaco, {
+      this.monacoEditor = monaco.editor.create(this.$refs.monaco, Object.assign({
         language: this.language,
         automaticLayout: true,
         theme: this.config.boxTheme,
@@ -70,7 +74,7 @@ export default {
         },
         smoothScrolling: true,
         scrollBeyondLastLine: false
-      });
+      }, this.config.editorOptions));
       this.monacoEditor.onDidChangeModelContent(() => {
         this.editorLineCount = this.monacoEditor.getModel().getLineCount();
       });

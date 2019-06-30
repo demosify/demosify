@@ -69,6 +69,10 @@ const mutations = {
   CLEAR_BOXES(state) {
     state.boxes = {};
   },
+  UPDATE_KEY(state, {type, key}) {
+    if(!state.boxes[type]) state.boxes[type] = {};
+    state.boxes[type].key = key;        
+  },
   UPDATE_CODE(state, {type, code}) {
     if(!state.boxes[type]) state.boxes[type] = {};
     state.boxes[type].code = code;
@@ -131,6 +135,9 @@ const actions =  {
   clearBoxes({commit}) {
     commit('CLEAR_BOXES');
   },
+  updateKey({commit}, pl) {
+    commit('UPDATE_KEY', pl);
+  },
   updateCode({commit}, pl) {
     commit('UPDATE_CODE', pl);
   },
@@ -164,13 +171,17 @@ const actions =  {
   async setBoxes({dispatch}, demo) {
     progress.start();
 
+    let demoID;
     if(!demoBoxes[demo]) {
       router.push({path : '/404'});
       progress.done();
       return;
     }
     if(typeof demo === 'string') {
+      demoID = demo;
       demo = await demoBoxes[demo]();
+    } else {
+      demoID = 'demo-' + Math.random().toString(16).slice(2, 14);
     }
     
 
@@ -183,6 +194,7 @@ const actions =  {
     Object.entries(boxes).forEach(([type, {code, transformer, visible, transform, editorHook}]) => {
       transform = transform || function(code) {return code};
       ac.push(
+        dispatch('updateKey', {type, key: demoID}),
         dispatch('updateCode', { type, code: code.default }),
         dispatch('updateTransformer', { type, transformer }),
         dispatch('updateTransform', { type, transform }),
