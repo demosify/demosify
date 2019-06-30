@@ -27,6 +27,7 @@ console.warn(`PublicUrl: ${output.publicUrl || '/'}.`);
 module.exports = {
   entry: path.join(__dirname, 'index.js'),
   output,
+  publicFolder: path.join(rootPath, config.publicFolder || 'public'),
   devServer:{
     port,
   },
