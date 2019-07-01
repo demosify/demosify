@@ -8,13 +8,19 @@ if(!fs.existsSync(configFile)) {
   throw new Error('No .demosrc.js file found in project.');
 }
 
-const config = require(configFile);
+let config = require(configFile);
+
+if(typeof config === 'function') {
+  config = config(process.env.NODE_ENV);
+}
+
 let port = 10086;
 if(config.devServer && config.devServer.port) {
   port = config.devServer.port;
 }
 let source = config.source || 'demos';
 let output = config.output || {dir: 'dist'};
+let demoList = config.demoList || '.demoList.json';
 
 if(typeof output === 'string') {
   output = {dir: output};
@@ -38,6 +44,9 @@ module.exports = {
   devServer:{
     port,
   },
+  envs: {
+    NODE_ENV: process.env.NODE_ENV,
+  },
   chainWebpack(config) {
     config.merge({
       plugin: {
@@ -49,7 +58,7 @@ module.exports = {
         alias: {
           '@': path.join(__dirname, 'src'),
           'demos': path.join(rootPath, source),
-          '.demoList.json': path.join(rootPath, source, '.demoList.json'),
+          '.demoList.json': path.join(rootPath, source, demoList),
           'manifest': path.join(rootPath, '.demosrc'),
           'themeFile': themeFilePath,
         }

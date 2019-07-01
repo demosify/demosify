@@ -1,4 +1,4 @@
-import demoList from '.demoList.json';
+import _demoList from '.demoList.json';
 import Vue from 'vue/dist/vue.esm';
 import VueRouter from 'vue-router';
 import bus from '@/js/eventbus.js';
@@ -7,6 +7,11 @@ import VesselPage from '@/pages/vessel.vue';
 import NotFoundPage from '@/pages/notFound.vue'
 
 Vue.use(VueRouter);
+
+const demoList = _demoList.map((demo) => {
+  if(typeof demo !== 'string') return demo.src;
+  return demo;
+});
 
 const demoRoutes = demoList.map(demoName => ({
   name: demoName,

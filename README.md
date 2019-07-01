@@ -13,7 +13,6 @@ module.exports = {
   devServer: {
     port: 3000,
   },
-  source: 'demos', // default is demos
   output: 'docs', // default is dist
   name: 'Your project name',
   version: 'Your project version',

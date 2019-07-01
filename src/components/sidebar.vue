@@ -20,14 +20,14 @@
     >
       <router-link
         v-for="demo in links"
-        :key="demo"
+        :key="demo.src"
         class="sidebar-menuItem"
         :class="{
           'sidebar-menuItem--active': currentDemo === demo,
         }"
-        :to="`/${demo}`"
+        :to="demo.src"
       >
-        {{ demo }}
+        {{ demo.label }}
       </router-link>
     </div>
   </nav>

@@ -4,6 +4,7 @@ module.exports = {
   },
   source: 'demos',
   output: 'docs',
+  demoList: '.demoList.json',
   name: 'SPRITEJS',
   version: 'v2',
   homePage: 'https://spritejs.org',

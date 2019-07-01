@@ -6,7 +6,12 @@ import demoList from '.demoList.json';
 import router from '@/js/router.js';
 import bus from '@/js/eventbus.js';
 
-const config = Object.assign({
+let config = userConfig;
+if(typeof config === 'function') {
+  config = config(process.env.NODE_ENV);
+}
+
+config = Object.assign({
   name: 'DEMOSIFY',
   version: 'v1',
   homePage: 'https://github.com/betseyliu/demo-ground',
@@ -27,7 +32,7 @@ const config = Object.assign({
   },
   // tab waterfall
   editorViewMode: 'tab',
-}, userConfig);
+}, config);
 
 import progress from 'nprogress';
 progress.configure({
@@ -48,11 +53,18 @@ function importAllDemo(r) {
 }
 importAllDemo(require.context('demos', true, /config.js$/));
 
+const links = demoList.map((link) => {
+  if(typeof link === 'string') {
+    return {label: link, src: `/${link}`};
+  }
+  return link;
+});
+
 const state = {
   config,
   boxes: {},
   foldBoxes: [],
-  links: demoList,
+  links,
   iframeStatus: null,
   transforming: false,
   isSidebarShown: true,
