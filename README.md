@@ -3,7 +3,7 @@
 ## Usage
 
 ```bash
-npm install @spritejs/demosify-test --save-dev
+npm install @demosify/core --save-dev
 ```
 
 Add `.demorc.js`:
