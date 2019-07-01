@@ -1,6 +1,6 @@
 {
   "name": "@demosify/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A demo playground, supporting js, css, html, glsl",
   "main": "bin/cli.js",
   "author": "betseyliu",
@@ -35,9 +35,10 @@
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "vue-template-compiler": "^2.6.10",
+    "perfect-scrollbar": "^1.4.0",
     "vuex": "^3.1.1"
   },
   "devDependencies": {
-    "perfect-scrollbar": "^1.4.0"
+
   }
 }
