@@ -60,6 +60,12 @@ export default {
   mounted() {
     this.initMonaco();
   },
+  destroyed() {
+    if(this.monacoEditor) {
+      this.monacoEditor.getModel().dispose();
+      this.monacoEditor.dispose();
+    }
+  },
   methods: {
     initMonaco() {
       if(this.editorHook) this.editorHook(monaco, this.value, this.language);
