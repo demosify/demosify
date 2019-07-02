@@ -40,7 +40,7 @@ console.warn(`PublicUrl: ${output.publicUrl || '/'}.`);
 module.exports = {
   entry: path.join(__dirname, 'index.js'),
   output,
-  publicFolder: path.join(rootPath, config.publicFolder || 'public'),
+  publicFolder: path.join(rootPath, config.staticFolder || config.publicFolder || 'static'),
   devServer:{
     port,
   },
@@ -53,6 +53,9 @@ module.exports = {
         monaco: {
           plugin: MonacoWebpackPlugin,
         }
+      },
+      node: {
+        fs: 'empty'
       },
       resolve: {
         alias: {

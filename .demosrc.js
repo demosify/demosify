@@ -3,7 +3,11 @@ module.exports = {
     port: 3000,
   },
   source: 'demos',
-  output: 'docs',
+  output: {
+    dir: 'docs',
+    publicUrl: '/',
+  },
+  staticFolder: 'static',
   demoList: '.demoList.json',
   name: 'SPRITEJS',
   version: 'v2',

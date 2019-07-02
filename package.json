@@ -1,6 +1,6 @@
 {
   "name": "@demosify/core",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A demo playground, supporting js, css, html, glsl",
   "main": "bin/cli.js",
   "author": "betseyliu",
