@@ -4,8 +4,9 @@
     <template v-if="config.editorViewMode === 'waterfall'">
       <div
         class="editor-box"
-        v-for="(content, type) in boxes.filter(b => b.visible)"
+        v-for="(content, type) in boxes"
         :key="type + content.key"
+        v-if="content.visible"
       >
         <header
           class="editor-boxName"
@@ -34,9 +35,10 @@
           :class="{
             'editor-tab--active': currentBox === type
           }"
-          v-for="(content, type) in boxes.filter(b => b.visible)"
+          v-for="(content, type) in boxes"
           :key="type"
           @click="updateCurrentBox(type)"
+          v-if="content.visible"
         >
           <span class="editor-tabName">{{ type.toUpperCase() }}</span>
           <span v-show="currentBox === type" class="editor-tabTransformer">

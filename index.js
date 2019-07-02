@@ -14,6 +14,5 @@ if (process.env.NODE_ENV == 'development') {
 new Vue({
   render: h => h(Main),
   store,
-  router,
+  router
 }).$mount('#app');
-
