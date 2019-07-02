@@ -1,10 +1,6 @@
 <template>
   <section class="sandbox">
-    <div
-      ref="monaco"
-      class="sandbox-monaco"
-      :style="monacoStyle"
-    ></div>
+    <div ref="monaco" class="sandbox-monaco" :style="monacoStyle"></div>
   </section>
 </template>
 
@@ -12,81 +8,85 @@
 import * as monaco from 'monaco-editor';
 // 主题
 import loadTheme from './sandboxTheme.js';
-import {mapState} from 'vuex';
+import { mapState } from 'vuex';
 export default {
   props: {
     language: {
       require: true,
-      type: String,
+      type: String
     },
     value: {
       type: String,
-      default: '',
+      default: ''
     },
     isFolded: {
       type: Boolean,
-      default: false,
+      default: false
     },
     editorHook: {
       type: Function,
-      default: null,
+      default: null
     }
   },
   watch: {
     value(val) {
-      if(val) this.monacoEditor.setValue(val);
+      if (val) this.monacoEditor.setValue(val);
     }
   },
   computed: {
-    ...mapState([
-      'config',
-    ]),
+    ...mapState(['config']),
     monacoStyle() {
-      if(this.config.editorViewMode === 'waterfall') {
+      if (this.config.editorViewMode === 'waterfall') {
         return {
           height: this.isFolded ? 0 : `${this.editorLineCount * 18}px`
-        }
+        };
       }
-      return {}
+      return {};
     }
   },
   data() {
     return {
       showPartial: true,
       monacoEditor: null,
-      editorLineCount: 1,
+      editorLineCount: 1
     };
   },
   mounted() {
     this.initMonaco();
   },
   destroyed() {
-    if(this.monacoEditor) {
+    if (this.monacoEditor) {
       this.monacoEditor.getModel().dispose();
       this.monacoEditor.dispose();
     }
   },
   methods: {
     initMonaco() {
-      if(this.editorHook) this.editorHook(monaco, this.value, this.language);
+      if (this.editorHook) this.editorHook(monaco, this.value, this.language);
       // 加载全部主题
       loadTheme(monaco);
-      this.monacoEditor = monaco.editor.create(this.$refs.monaco, Object.assign({
-        language: this.language,
-        automaticLayout: true,
-        theme: this.config.boxTheme,
-        minimap: {
-          enabled: false,
-        },
-        smoothScrolling: true,
-        scrollBeyondLastLine: false
-      }, this.config.editorOptions));
+      this.monacoEditor = monaco.editor.create(
+        this.$refs.monaco,
+        Object.assign(
+          {
+            language: this.language,
+            automaticLayout: true,
+            theme: this.config.boxTheme,
+            minimap: {
+              enabled: false
+            },
+            smoothScrolling: true,
+            scrollBeyondLastLine: false
+          },
+          this.config.editorOptions
+        )
+      );
       this.monacoEditor.onDidChangeModelContent(() => {
         this.editorLineCount = this.monacoEditor.getModel().getLineCount();
       });
-      
+
       this.monacoEditor.setValue(this.value);
-      
+
       this.bindContentChangeListener();
     },
     bindContentChangeListener() {
@@ -95,8 +95,8 @@ export default {
         const value = this.monacoEditor.getValue();
         this.$emit('input', value);
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

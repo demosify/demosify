@@ -5,7 +5,7 @@
       @click="isShowingMore = !isShowingMore"
       :class="{
         'sidebar-showMore--folded': isShowingMoreFolded,
-        'sidebar-showMore--crossed': isShowingMoreCrossed,
+        'sidebar-showMore--crossed': isShowingMoreCrossed
       }"
     >
       <div class="sidebar-showMoreItem sidebar-showMoreItem--top"></div>
@@ -15,7 +15,7 @@
     <div
       class="sidebar-menu"
       :class="{
-        'sidebar-menu--folded': !isShowingMore,
+        'sidebar-menu--folded': !isShowingMore
       }"
     >
       <router-link
@@ -23,7 +23,7 @@
         :key="demo.src"
         class="sidebar-menuItem"
         :class="{
-          'sidebar-menuItem--active': currentDemo === demo,
+          'sidebar-menuItem--active': currentDemo === demo
         }"
         :to="demo.src"
       >
@@ -35,9 +35,9 @@
 
 <script>
 import PerfectScrollbar from 'perfect-scrollbar';
-import { mapState, mapMutations } from "vuex";
+import { mapState } from 'vuex';
 export default {
-  name: "sidebar",
+  name: 'sidebar',
   data() {
     return {
       isShowingMore: false,
@@ -65,21 +65,21 @@ export default {
   computed: {
     ...mapState(['links']),
     currentDemo() {
-      this.isShowingMore = false;
+      this.isShowingMore = false; // eslint-disable-line vue/no-side-effects-in-computed-properties
       return this.$route.name;
-    },
+    }
   },
-  mounted(){
+  mounted() {
     new PerfectScrollbar(document.querySelector('.sidebar-menu'), {
-      suppressScrollX: true,
+      suppressScrollX: true
     });
   }
 };
 </script>
 
 <style lang="scss">
-@import "@/css/index.scss";
-@import "~perfect-scrollbar/css/perfect-scrollbar.css";
+@import '@/css/index.scss';
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
 $foldedDealy: 100ms;
 .sidebar {
   font-family: $link-font-family;
@@ -108,7 +108,7 @@ $foldedDealy: 100ms;
         color: $c-highlight;
         position: relative;
         &::before {
-          content: "";
+          content: '';
           width: 2px;
           height: 60%;
           background: $c-highlight;

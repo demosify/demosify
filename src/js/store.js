@@ -1,45 +1,45 @@
 import Vue from 'vue/dist/vue.esm';
 import Vuex from 'vuex';
 import userConfig from 'manifest';
-import clonedeep from 'lodash.clonedeep';
 import demoList from '.demoList.json';
 import router from '@/js/router.js';
 import bus from '@/js/eventbus.js';
 
 let config = userConfig;
-if(typeof config === 'function') {
+if (typeof config === 'function') {
   config = config(process.env.NODE_ENV);
 }
 
-config = Object.assign({
-  name: 'DEMOSIFY',
-  version: 'v1',
-  homePage: 'https://github.com/betseyliu/demo-ground',
-  logo: '',
-  // 可选主题: active4d, allHallowsEve, amy, blackboard, brillianceBlack,
-  // brillianceDull, chromeDevtools, cloudsMidnight, clouds, cobalt,
-  // dawn, dreamweaver, eiffel, espressoLibre, github, idle, katzenmilch,
-  // kuroirTheme, lazy, magicwbAmiga, merbivoreSoft, merbivore, monokai,
-  // pastelsOnDark, slushAndPoppies, solarizedDark, solarizedLight,
-  // spacecadet, sunburst, textmateMacClassic, tomorrowNightBlue,
-  // tomorrowNightBright, tomorrowNightEighties, tomorrowNight, tomorrow,
-  // twilight, vibrantInk, zenburnesque, iplastic, idlefingers, krtheme,
-  // monoindustrial,
-  boxTheme: 'monokai',
-  globalPackages: {
-    js: [],
-    css: [],
+config = Object.assign(
+  {
+    name: 'DEMOSIFY',
+    version: 'v1',
+    homePage: 'https://github.com/betseyliu/demo-ground',
+    logo: '',
+    // 可选主题: active4d, allHallowsEve, amy, blackboard, brillianceBlack,
+    // brillianceDull, chromeDevtools, cloudsMidnight, clouds, cobalt,
+    // dawn, dreamweaver, eiffel, espressoLibre, github, idle, katzenmilch,
+    // kuroirTheme, lazy, magicwbAmiga, merbivoreSoft, merbivore, monokai,
+    // pastelsOnDark, slushAndPoppies, solarizedDark, solarizedLight,
+    // spacecadet, sunburst, textmateMacClassic, tomorrowNightBlue,
+    // tomorrowNightBright, tomorrowNightEighties, tomorrowNight, tomorrow,
+    // twilight, vibrantInk, zenburnesque, iplastic, idlefingers, krtheme,
+    // monoindustrial,
+    boxTheme: 'monokai',
+    globalPackages: {
+      js: [],
+      css: []
+    },
+    // tab waterfall
+    editorViewMode: 'tab'
   },
-  // tab waterfall
-  editorViewMode: 'tab',
-}, config);
+  config
+);
 
 import progress from 'nprogress';
 progress.configure({
-  showSpinner: false,
+  showSpinner: false
 });
-
-const path = require('path');
 
 Vue.use(Vuex);
 
@@ -49,13 +49,13 @@ function importAllDemo(r) {
   r.keys().forEach(key => {
     const name = /^\.\/(.+)\//.exec(key)[1];
     demoBoxes[name] = r(key).default;
-  })
+  });
 }
 importAllDemo(require.context('demos', true, /config.js$/));
 
-const links = demoList.map((link) => {
-  if(typeof link === 'string') {
-    return {label: link, src: `/${link}`};
+const links = demoList.map(link => {
+  if (typeof link === 'string') {
+    return { label: link, src: `/${link}` };
   }
   return link;
 });
@@ -73,55 +73,55 @@ const state = {
   currentBox: undefined,
   dependencies: {
     js: [],
-    css: [],
-  },
+    css: []
+  }
 };
 
 const mutations = {
   CLEAR_BOXES(state) {
     state.boxes = {};
   },
-  UPDATE_KEY(state, {type, key}) {
-    if(!state.boxes[type]) state.boxes[type] = {};
-    state.boxes[type].key = key;        
+  UPDATE_KEY(state, { type, key }) {
+    if (!state.boxes[type]) state.boxes[type] = {};
+    state.boxes[type].key = key;
   },
-  UPDATE_CODE(state, {type, code}) {
-    if(!state.boxes[type]) state.boxes[type] = {};
+  UPDATE_CODE(state, { type, code }) {
+    if (!state.boxes[type]) state.boxes[type] = {};
     state.boxes[type].code = code;
-    if(state.autoRun) bus.$emit('run');
+    if (state.autoRun) bus.$emit('run');
   },
-  UPDATE_TRANSFORM(state, {type, transform}) {
-    if(!state.boxes[type]) state.boxes[type] = {};
-    state.boxes[type].transform = transform;    
+  UPDATE_TRANSFORM(state, { type, transform }) {
+    if (!state.boxes[type]) state.boxes[type] = {};
+    state.boxes[type].transform = transform;
   },
-  UPDATE_TRANSFORMER(state, {type, transformer}) {
-    if(!state.boxes[type]) state.boxes[type] = {};
+  UPDATE_TRANSFORMER(state, { type, transformer }) {
+    if (!state.boxes[type]) state.boxes[type] = {};
     state.boxes[type].transformer = transformer;
   },
-  UPDATE_EDITOR_HOOK(state, {type, editorHook}) {
-    if(!state.boxes[type]) state.boxes[type] = {};
+  UPDATE_EDITOR_HOOK(state, { type, editorHook }) {
+    if (!state.boxes[type]) state.boxes[type] = {};
     state.boxes[type].editorHook = editorHook;
   },
   UPDATE_FOLD_BOXES(state, foldBoxes) {
     state.foldBoxes = foldBoxes;
   },
-  UPDATE_VISIBLE(state, {type, visible}) {
-    if(!state.boxes[type]) state.boxes[type] = {};
+  UPDATE_VISIBLE(state, { type, visible }) {
+    if (!state.boxes[type]) state.boxes[type] = {};
     state.boxes[type].visible = visible;
   },
   TOGGLE_BOX_FOLD(state, boxName) {
     const boxIndex = state.foldBoxes.indexOf(boxName);
-    if(boxIndex > -1) {
+    if (boxIndex > -1) {
       state.foldBoxes.splice(boxIndex, 1);
     } else {
       state.foldBoxes.push(boxName);
     }
   },
   SET_IFRAME_STATUS(state, status) {
-    state.iframeStatus = status
+    state.iframeStatus = status;
   },
   SET_TRANSFORM(state, status) {
-    state.transforming = status
+    state.transforming = status;
   },
   TOGGLE_AUTO_RUN(state) {
     state.autoRun = !state.autoRun;
@@ -132,7 +132,7 @@ const mutations = {
   ADD_LOG(state, log) {
     state.logs.push(log);
   },
-  UPDATE_DEPENDENCIES(state, dependencies = {js: [], css: []}) {
+  UPDATE_DEPENDENCIES(state, dependencies = { js: [], css: [] }) {
     state.dependencies = dependencies;
   },
   TOGGLE_SIDEBAR(state) {
@@ -140,120 +140,129 @@ const mutations = {
   },
   UPDATE_CURRENT_BOX(state, box) {
     state.currentBox = box;
-  },
+  }
 };
 
-const actions =  {
-  clearBoxes({commit}) {
+const actions = {
+  clearBoxes({ commit }) {
     commit('CLEAR_BOXES');
   },
-  updateKey({commit}, pl) {
+  updateKey({ commit }, pl) {
     commit('UPDATE_KEY', pl);
   },
-  updateCode({commit}, pl) {
+  updateCode({ commit }, pl) {
     commit('UPDATE_CODE', pl);
   },
-  updateTransformer({commit}, pl) {
+  updateTransformer({ commit }, pl) {
     commit('UPDATE_TRANSFORMER', pl);
   },
-  updateTransform({commit}, pl) {
+  updateTransform({ commit }, pl) {
     commit('UPDATE_TRANSFORM', pl);
   },
-  updateEditorHook({commit}, pl) {
+  updateEditorHook({ commit }, pl) {
     commit('UPDATE_EDITOR_HOOK', pl);
   },
-  updateFoldBoxes({commit}, pl) {
+  updateFoldBoxes({ commit }, pl) {
     commit('UPDATE_FOLD_BOXES', pl);
   },
-  updateVisible({commit}, pl) {
-    commit('UPDATE_VISIBLE', pl)
+  updateVisible({ commit }, pl) {
+    commit('UPDATE_VISIBLE', pl);
   },
-  toggleBoxFold({commit}, pl) {
+  toggleBoxFold({ commit }, pl) {
     commit('TOGGLE_BOX_FOLD', pl);
   },
-  toogleAutoRun({commit}) {
+  toogleAutoRun({ commit }) {
     commit('TOGGLE_AUTO_RUN');
   },
-  updateDependencies({commit}, pl) {
+  updateDependencies({ commit }, pl) {
     commit('UPDATE_DEPENDENCIES', pl);
   },
-  updateCurrentBox({commit}, pl) {
+  updateCurrentBox({ commit }, pl) {
     commit('UPDATE_CURRENT_BOX', pl);
   },
-  async setBoxes({dispatch}, demo) {
+  async setBoxes({ dispatch }, demo) {
     progress.start();
 
     let demoID;
-    if(!demoBoxes[demo]) {
-      router.push({path : '/404'});
+    if (!demoBoxes[demo]) {
+      router.push({ path: '/404' });
       progress.done();
       return;
     }
-    if(typeof demo === 'string') {
+    if (typeof demo === 'string') {
       demoID = demo;
       demo = await demoBoxes[demo]();
     } else {
-      demoID = 'demo-' + Math.random().toString(16).slice(2, 14);
+      demoID =
+        'demo-' +
+        Math.random()
+          .toString(16)
+          .slice(2, 14);
     }
-    
 
-    const{foldBoxes, visibleBoxes, packages, ...boxes} = demo;
+    const { foldBoxes, visibleBoxes, packages, ...boxes } = demo;
 
     const ac = [];
 
     dispatch('clearBoxes');
 
-    Object.entries(boxes).forEach(([type, {code, transformer, visible, transform, editorHook}]) => {
-      transform = transform || function(code) {return code};
-      ac.push(
-        dispatch('updateKey', {type, key: demoID}),
-        dispatch('updateCode', { type, code: code.default }),
-        dispatch('updateTransformer', { type, transformer }),
-        dispatch('updateTransform', { type, transform }),
-        dispatch('updateVisible', {type, visible: Boolean(visible)}),
-        dispatch('updateEditorHook', {type, editorHook}),
-      );
-    })
-  
+    Object.entries(boxes).forEach(
+      ([type, { code, transformer, visible, transform, editorHook }]) => {
+        transform =
+          transform ||
+          function(code) {
+            return code;
+          };
+        ac.push(
+          dispatch('updateKey', { type, key: demoID }),
+          dispatch('updateCode', { type, code: code.default }),
+          dispatch('updateTransformer', { type, transformer }),
+          dispatch('updateTransform', { type, transform }),
+          dispatch('updateVisible', { type, visible: Boolean(visible) }),
+          dispatch('updateEditorHook', { type, editorHook })
+        );
+      }
+    );
 
     const dependencies = {
-      js: [
-        ...(config.globalPackages.js || []) ,
-        ...(packages.js || []),
-      ],
-      css: [
-        ...(config.globalPackages.css || []) ,
-        ...(packages.css || []),
-      ],
+      js: [...(config.globalPackages.js || []), ...(packages.js || [])],
+      css: [...(config.globalPackages.css || []), ...(packages.css || [])]
     };
 
     ac.push(dispatch('updateFoldBoxes', foldBoxes || []));
     ac.push(dispatch('updateDependencies', dependencies));
-    ac.push(dispatch('updateCurrentBox', Object.entries(boxes).find(([key, value]) => value.visible)[0]|| undefined));
+    ac.push(
+      dispatch(
+        'updateCurrentBox',
+        Object.entries(boxes).find(([key, value]) => value.visible)[0] ||
+          undefined
+      )
+    );
     await Promise.all(ac);
     progress.done();
   },
   setIframeStatus({ commit }, status) {
-    commit('SET_IFRAME_STATUS', status)
+    commit('SET_IFRAME_STATUS', status);
   },
   transform({ commit }, status) {
-    commit('SET_TRANSFORM', status)
+    commit('SET_TRANSFORM', status);
   },
-  clearLogs({commit}) {
+  clearLogs({ commit }) {
     commit('CLEAR_LOGS');
   },
-  addLog({commit}, pl) {
-    commit('ADD_LOG', pl)
-  },
-}
+  addLog({ commit }, pl) {
+    commit('ADD_LOG', pl);
+  }
+};
 
 const store = new Vuex.Store({
   state,
   mutations,
-  actions,
+  actions
 });
 
-bus.$on('setBoxes', (demo) => {store.dispatch('setBoxes', demo)})
-
+bus.$on('setBoxes', demo => {
+  store.dispatch('setBoxes', demo);
+});
 
 export default store;

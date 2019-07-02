@@ -1,75 +1,77 @@
-(function () {
-  window.onerror = function (message) {
-    window.parent.postMessage({ type: 'iframe-error', message }, '*')
-  }
+(function() {
+  window.onerror = function(message) {
+    window.parent.postMessage({ type: 'iframe-error', message }, '*');
+  };
   window.addEventListener('unhandledrejection', err => {
     window.parent.postMessage(
       { type: 'iframe-error', message: err.reason.stack },
       '*'
-    )
-  })
-
+    );
+  });
 
   /**
- * Stringify.
- * Inspect native browser objects and functions.
- */
-  const stringify = (function () {
-    const sortci = function (a, b) {
-      return a.toLowerCase() < b.toLowerCase() ? -1 : 1
-    }
+   * Stringify.
+   * Inspect native browser objects and functions.
+   */
+  const stringify = (function() {
+    const sortci = function(a, b) {
+      return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
+    };
 
-    const htmlEntities = function (str) {
-      return String(str)
-        // .replace(/&/g, '&amp;')
-        // .replace(/</g, '&lt;')
-        // .replace(/>/g, '&gt;')
-        // .replace(/"/g, '&quot;')
-    }
+    const htmlEntities = function(str) {
+      return String(str);
+      // .replace(/&/g, '&amp;')
+      // .replace(/</g, '&lt;')
+      // .replace(/>/g, '&gt;')
+      // .replace(/"/g, '&quot;')
+    };
 
     /**
-   * Recursively stringify an object. Keeps track of which objects it has
-   * visited to avoid hitting circular references, and a buffer for indentation.
-   * Goes 2 levels deep.
-   */
+     * Recursively stringify an object. Keeps track of which objects it has
+     * visited to avoid hitting circular references, and a buffer for indentation.
+     * Goes 2 levels deep.
+     */
     return function stringify(o, visited, buffer) {
       // eslint-disable-line complexity
-      let i
-      let vi
-      let type = ''
-      const parts = []
+      let i;
+      let vi;
+      let type = '';
+      const parts = [];
       // const circular = false
-      buffer = buffer || ''
-      visited = visited || []
+      buffer = buffer || '';
+      visited = visited || [];
 
       // Get out fast with primitives that don't like toString
       if (o === null) {
-        return 'null'
+        return 'null';
       }
       if (typeof o === 'undefined') {
-        return 'undefined'
+        return 'undefined';
       }
 
       // Determine the type
       try {
-        type = {}.toString.call(o)
+        type = {}.toString.call(o);
       } catch (err) {
         // only happens when typeof is protected (...randomly)
-        type = '[object Object]'
+        type = '[object Object]';
       }
 
       // Handle the primitive types
       if (type === '[object Number]') {
-        return String(o)
+        return String(o);
       }
       if (type === '[object Boolean]') {
-        return o ? 'true' : 'false'
+        return o ? 'true' : 'false';
       }
       if (type === '[object Function]') {
-        return o.toString().split('\n  ').join('\n' + buffer)
+        return o
+          .toString()
+          .split('\n  ')
+          .join('\n' + buffer);
       }
       if (type === '[object String]') {
-        return '"' + htmlEntities(o.replace(/"/g, '\\"')) + '"'
+        return '"' + htmlEntities(o.replace(/"/g, '\\"')) + '"';
       }
 
       // Check for circular references
@@ -80,45 +82,49 @@
           return (
             '[circular ' +
             type.slice(1) +
-            ('outerHTML' in o ?
-              ' :\n' +
-                htmlEntities(o.outerHTML).split('\n').join('\n' + buffer) :
-              '')
-          )
+            ('outerHTML' in o
+              ? ' :\n' +
+                htmlEntities(o.outerHTML)
+                  .split('\n')
+                  .join('\n' + buffer)
+              : '')
+          );
         }
       }
 
       // Remember that we visited this object
-      visited.push(o)
+      visited.push(o);
 
       // Stringify each member of the array
       if (type === '[object Array]') {
         for (i = 0; i < o.length; i++) {
-          parts.push(stringify(o[i], visited))
+          parts.push(stringify(o[i], visited));
         }
-        return '[' + parts.join(', ') + ']'
+        return '[' + parts.join(', ') + ']';
       }
 
       // Fake array – very tricksy, get out quickly
       if (type.match(/Array/)) {
-        return type
+        return type;
       }
 
-      const typeStr = type + ' '
-      const newBuffer = buffer + '  '
+      const typeStr = type + ' ';
+      const newBuffer = buffer + '  ';
 
       // Dive down if we're less than 2 levels deep
       if (buffer.length / 2 < 2) {
-        const names = []
+        const names = [];
         // Some objects don't like 'in', so just skip them
         try {
           for (i in o) {
             // eslint-disable-line guard-for-in
-            names.push(i)
+            names.push(i);
           }
-        } catch (err) {}
+        } catch (err) {
+          /* empty */
+        }
 
-        names.sort(sortci)
+        names.sort(sortci);
         for (i = 0; i < names.length; i++) {
           try {
             parts.push(
@@ -126,46 +132,48 @@
                 names[i] +
                 ': ' +
                 stringify(o[names[i]], visited, newBuffer)
-            )
-          } catch (err) {}
+            );
+          } catch (err) {
+            /* empty */
+          }
         }
       }
 
       // If nothing was gathered, return empty object
-      if (parts.length === 0) return typeStr + '{ ... }'
+      if (parts.length === 0) return typeStr + '{ ... }';
 
       // Return the indented object with new lines
-      return typeStr + '{\n' + parts.join(',\n') + '\n' + buffer + '}'
-    }
-  })()
+      return typeStr + '{\n' + parts.join(',\n') + '\n' + buffer + '}';
+    };
+  })();
   /** =========================================================================
    * Console
    * Proxy console.logs out to the parent window
    * ========================================================================== */
 
-  const proxyConsole = (function () {
-    const ProxyConsole = function () {}
+  const proxyConsole = (function() {
+    const ProxyConsole = function() {};
 
     /**
      * Stringify all of the console objects from an array for proxying
      */
-    const stringifyArgs = function (args) {
-      const newArgs = []
+    const stringifyArgs = function(args) {
+      const newArgs = [];
       // TODO this was forEach but when the array is [undefined] it wouldn't
       // iterate over them
-      let i = 0
-      const length = args.length
-      let arg
+      let i = 0;
+      const length = args.length;
+      let arg;
       for (; i < length; i++) {
-        arg = args[i]
+        arg = args[i];
         if (typeof arg === 'undefined') {
-          newArgs.push('undefined')
+          newArgs.push('undefined');
         } else {
-          newArgs.push(stringify(arg))
+          newArgs.push(stringify(arg));
         }
       }
-      return newArgs
-    }
+      return newArgs;
+    };
 
     // Create each of these methods on the proxy, and postMessage up to JS Bin
     // when one is called.
@@ -193,17 +201,17 @@
       'timeEnd',
       'timeStamp',
       'groupCollapsed'
-    ])
+    ]);
 
     methods.forEach(method => {
       // Create console method
-      const originalMethod = console[method]
-      const originalClear = console.clear
-      ProxyConsole.prototype[method] = function () {
+      const originalMethod = console[method];
+      const originalClear = console.clear;
+      ProxyConsole.prototype[method] = function() {
         // Replace args that can't be sent through postMessage
-        const originalArgs = [].slice.call(arguments)
-        const args = stringifyArgs(originalArgs)
-        
+        const originalArgs = [].slice.call(arguments);
+        const args = stringifyArgs(originalArgs);
+
         // Post up with method and the arguments
         window.parent.postMessage(
           {
@@ -212,7 +220,7 @@
             args: method === '_raw' ? args.slice(1) : args
           },
           '*'
-        )
+        );
 
         // If the browner supports it, use the browser console but ignore _raw,
         // as _raw should only go to the proxy console.
@@ -220,19 +228,19 @@
         // log and we let it fallback to jsconsole for the panel and to nothing
         // for the browser console
         if (!originalMethod) {
-          method = 'log'
+          method = 'log';
         }
 
         if (method !== '_raw') {
           if (method !== 'clear' || (method === 'clear' && originalClear)) {
-            originalMethod.apply(ProxyConsole, originalArgs)
+            originalMethod.apply(ProxyConsole, originalArgs);
           }
         }
-      }
-    })
+      };
+    });
 
-    return new ProxyConsole()
-  })()
+    return new ProxyConsole();
+  })();
 
-  window.console = proxyConsole
-})() // eslint-disable-line semi
+  window.console = proxyConsole;
+})(); // eslint-disable-line semi

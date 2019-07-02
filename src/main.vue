@@ -1,26 +1,25 @@
 <template>
-  <div id="fakeBody"
-   :class="{'fakeBody--max': !isSidebarShown}"
-  >
-    <a class="header"
-      :href="config.homePage || '#'"
-      target="_blank">
-      <span class="header-logo"
-        :style="{ backgroundImage: `url(${config.logo})` }">{{ config.logo ? '' : config.name }}</span>
-      <span v-if="config.version"
-        class="header-version">{{
-        config.version
-        }}</span>
+  <div id="fakeBody" :class="{ 'fakeBody--max': !isSidebarShown }">
+    <a class="header" :href="config.homePage || '#'" target="_blank">
+      <span
+        class="header-logo"
+        :style="{ backgroundImage: `url(${config.logo})` }"
+      >
+        {{ config.logo ? '' : config.name }}
+      </span>
+      <span v-if="config.version" class="header-version">
+        {{ config.version }}
+      </span>
     </a>
     <sidebar class="sidebar"></sidebar>
-    <router-view
-      class="vessel"
-    ></router-view>
-    <div class="handler"
+    <router-view class="vessel"></router-view>
+    <div
+      class="handler"
       :class="{
         'handler--hidden': !isSidebarShown
       }"
-      @click="TOGGLE_SIDEBAR"></div>
+      @click="TOGGLE_SIDEBAR"
+    ></div>
   </div>
 </template>
 
@@ -30,17 +29,17 @@ import Sidebar from '@/components/sidebar.vue';
 export default {
   name: 'fakeBody',
   components: {
-    Sidebar,
+    Sidebar
   },
   mounted() {
     window.test = this;
   },
   computed: {
-    ...mapState(['config', 'isSidebarShown']),
+    ...mapState(['config', 'isSidebarShown'])
   },
   methods: {
     ...mapActions(['setBoxes']),
-    ...mapMutations(['TOGGLE_SIDEBAR']),
+    ...mapMutations(['TOGGLE_SIDEBAR'])
   }
 };
 </script>
@@ -98,7 +97,7 @@ export default {
   grid-row: 2 / -1;
   background-color: $c-bg;
 }
-.handler{
+.handler {
   position: absolute;
   width: 12px;
   height: 40px;
@@ -111,7 +110,7 @@ export default {
   opacity: 0.5;
   cursor: pointer;
   &--hidden {
-    left: 0
+    left: 0;
   }
   &:hover {
     opacity: 1;
@@ -121,7 +120,7 @@ export default {
   }
   &::after,
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     width: 1px;
     height: 30px;
@@ -136,15 +135,15 @@ export default {
 .vessel {
   grid-column: 2 / -1;
   grid-row: 1 / -1;
-  transition: .3s all ease-out;
+  transition: 0.3s all ease-out;
 }
 
 @media (max-width: 900px) {
   #fakeBody {
     grid-template: 60px 1fr / repeat(12, 1fr);
     min-width: 400px;
-    &--max{
-      grid-template: 60px 1fr / repeat(12, 1fr); 
+    &--max {
+      grid-template: 60px 1fr / repeat(12, 1fr);
     }
   }
   .header {
@@ -160,7 +159,7 @@ export default {
     grid-column: 1 / -1;
     grid-row: 2 / -1;
   }
-  .handler{
+  .handler {
     display: none;
   }
 }

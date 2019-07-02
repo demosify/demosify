@@ -1,7 +1,6 @@
-import bus from '@/js/eventbus.js';
 class Iframe {
-  constructor({el, sandboxAttrs = []}) {
-    if(!el) throw new Error('Expect "el" to mount iframe to!');
+  constructor({ el, sandboxAttrs = [] }) {
+    if (!el) throw new Error('Expect "el" to mount iframe to!');
     this.$el = el;
     this.sandboxAttrs = sandboxAttrs;
   }
@@ -16,18 +15,17 @@ class Iframe {
     return iframe;
   }
 
-  setContent({head = "", body = ""}) {
-    const content = `<!DOCTYPE html><html><head>${head}</head><body>${body}</body></html>`
+  setContent({ head = '', body = '' }) {
+    const content = `<!DOCTYPE html><html><head>${head}</head><body>${body}</body></html>`;
     const iframe = this.createIframe();
     this.$el.parentNode.replaceChild(iframe, this.$el);
     iframe.onload = function() {
       this.contentWindow.document.open();
       this.contentWindow.document.write(content);
       this.contentWindow.document.close();
-    }
+    };
     this.$el = iframe;
   }
-
 }
 
 export default (...args) => new Iframe(...args);

@@ -1,24 +1,38 @@
 <template>
   <div class="console">
     <div class="console-header">
-      <h3 
-        @dblclick="isConsoleFolded = !isConsoleFolded" 
-        class="console-title">console 
+      <h3 @dblclick="isConsoleFolded = !isConsoleFolded" class="console-title">
+        console
         <transition name="fade">
           <span class="console-new" v-show="hasLog"></span>
         </transition>
       </h3>
       <p class="console-ctrl">
-        <svg @click="run" t="1561513991991" class="icon console-runBtn" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2187" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <path d="M512 64C264.64 64 64 264.576 64 512c0 247.36 200.64 448 448 448 247.488 0 448-200.64 448-448C960 264.576 759.488 64 512 64zM384 704 384 320l320 192L384 704z" p-id="2188">
-          </path>
+        <svg
+          @click="run"
+          t="1561513991991"
+          class="icon console-runBtn"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="2187"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <path
+            d="M512 64C264.64 64 64 264.576 64 512c0 247.36 200.64 448 448 448 247.488 0 448-200.64 448-448C960 264.576 759.488 64 512 64zM384 704 384 320l320 192L384 704z"
+            p-id="2188"
+          ></path>
         </svg>
-        <input type="checkbox" :checked="autoRun" @change="toogleAutoRun">autoRun
+        <input
+          type="checkbox"
+          :checked="autoRun"
+          @change="toogleAutoRun"
+        />autoRun
       </p>
     </div>
     <transition name="slide">
       <div v-show="!isConsoleFolded" class="console-content">
-        <p 
+        <p
           class="console-message"
           :class="{
             'console-message--error': log.type
@@ -26,11 +40,13 @@
           v-for="(log, index) in logs"
           :key="index"
         >
-          <span 
+          <span
             class="console-messageType"
             :class="`console-messageType--${getFlag(log.type)}`"
-          >{{getFlag(log.type)}}</span>
-          {{log.message}}
+          >
+            {{ getFlag(log.type) }}
+          </span>
+          {{ log.message }}
         </p>
       </div>
     </transition>
@@ -38,46 +54,42 @@
 </template>
 
 <script>
-  import progress from 'nprogress'
-  import { mapActions, mapState } from 'vuex';
-  import bus from '@/js/eventbus.js';
-  export default {
-    name: 'console',
-    data(){
-      return {
-        isConsoleFolded: true,
-      }
-    },
-    computed: {
-      ...mapState([
-        'autoRun',
-        'logs',
-      ]),
-      hasLog() {
-        return this.logs.length;
-      }
-    },
-    methods: {
-      ...mapActions(['toogleAutoRun']),
-      run() {
-        bus.$emit('run');
-      },
-      getFlag(method) {
-        switch (method) {
-          case 'log':
-          case 'info':
-          case 'debug':
-            return 'info';
-          case 'error':
-            return 'error';
-          case 'warn':
-            return 'warn';
-          default:
-            return 'nothing';
-        }
-      },
+import { mapActions, mapState } from 'vuex';
+import bus from '@/js/eventbus.js';
+export default {
+  name: 'console',
+  data() {
+    return {
+      isConsoleFolded: true
+    };
+  },
+  computed: {
+    ...mapState(['autoRun', 'logs']),
+    hasLog() {
+      return this.logs.length;
     }
-  };
+  },
+  methods: {
+    ...mapActions(['toogleAutoRun']),
+    run() {
+      bus.$emit('run');
+    },
+    getFlag(method) {
+      switch (method) {
+        case 'log':
+        case 'info':
+        case 'debug':
+          return 'info';
+        case 'error':
+          return 'error';
+        case 'warn':
+          return 'warn';
+        default:
+          return 'nothing';
+      }
+    }
+  }
+};
 </script>
 
 <style lang="scss">
@@ -125,10 +137,10 @@
     padding: 2px;
     cursor: pointer;
     transition: 0.5 all ease-out;
-    &:hover{
+    &:hover {
       filter: brightness(1.1);
     }
-    &:active{
+    &:active {
       filter: brightness(0.8);
     }
   }
@@ -138,14 +150,14 @@
     transition: 0.3s all ease-out;
     background: $c-console-bg;
     margin-bottom: 20px;
-    transition: all .5s;
+    transition: all 0.5s;
     overflow: scroll;
   }
   &-message {
     font-size: 14px;
     margin: 0;
     line-height: 1.5;
-    &--error{
+    &--error {
       background: rgba($c-console-error, 0.2);
     }
     &:nth-of-type(2n + 1) {
@@ -164,7 +176,7 @@
       &--info {
         background: $c-console-info;
       }
-      &--error{
+      &--error {
         background: $c-console-error;
       }
       &--warn {
@@ -172,18 +184,22 @@
       }
     }
   }
-  
 }
 
-.slide-enter-active, .slide-leave-active, .fade-enter-active, .fade-leave-active {
-  transition: all .5s;
+.slide-enter-active,
+.slide-leave-active,
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s;
 }
-.slide-enter, .slide-leave-to {
+.slide-enter,
+.slide-leave-to {
   height: 0;
   margin-bottom: 0;
 }
 
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

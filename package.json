@@ -1,6 +1,6 @@
 {
   "name": "@demosify/core",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A demo playground, supporting js, css, html, glsl",
   "main": "bin/cli.js",
   "author": "betseyliu",
@@ -10,35 +10,29 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "poi --serve"
+    "dev": "poi --serve",
+    "lint": "eslint src --fix"
   },
   "dependencies": {
     "@vue/eslint-config-prettier": "^4.0.1",
     "babel-eslint": "^10.0.2",
-    "babel-preset-babili": "^0.1.4",
     "buble": "^0.19.7",
     "buble-loader": "^0.5.1",
-    "chokidar": "^3.0.1",
-    "concurrently": "^4.1.0",
-    "eslint": "^6.0.0",
-    "eslint-plugin-vue": "^5.2.2",
-    "lodash.clonedeep": "^4.5.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.3",
     "monaco-editor": "^0.17.1",
     "monaco-editor-webpack-plugin": "^1.7.0",
     "monaco-themes": "^0.2.5",
-    "node-sass": "^4.12.0",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
+    "perfect-scrollbar": "^1.4.0",
     "poi": "^12.6.10",
     "raw-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "vue-template-compiler": "^2.6.10",
-    "perfect-scrollbar": "^1.4.0",
     "vuex": "^3.1.1"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }

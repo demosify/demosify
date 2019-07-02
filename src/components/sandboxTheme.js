@@ -82,7 +82,7 @@ const themeList = {
   iplastic,
   idlefingers,
   krtheme,
-  monoindustrial,
+  monoindustrial
 };
 
 function loadTheme(monaco) {

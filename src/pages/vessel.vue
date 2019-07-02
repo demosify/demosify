@@ -13,7 +13,7 @@ export default {
   components: {
     Editor,
     Monitor
-  },
+  }
 };
 </script>
 

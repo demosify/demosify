@@ -4,19 +4,18 @@
     <template v-if="config.editorViewMode === 'waterfall'">
       <div
         class="editor-box"
-        v-for="(content, type) in boxes"
-        :key="type+content.key"
-        v-if="content.visible"
+        v-for="(content, type) in boxes.filter(b => b.visible)"
+        :key="type + content.key"
       >
         <header
           class="editor-boxName"
           :class="{
-            'editor-boxName--folded': isSandboxFolded(type),
+            'editor-boxName--folded': isSandboxFolded(type)
           }"
           @dblclick="toggleFold(type)"
         >
           <span class="editor-boxType">{{ type.toUpperCase() }}</span>
-          <span class="editor-boxTransformer">{{ content.transformer}}</span>
+          <span class="editor-boxTransformer">{{ content.transformer }}</span>
         </header>
         <sandbox
           class="editor-sandbox"
@@ -35,48 +34,50 @@
           :class="{
             'editor-tab--active': currentBox === type
           }"
-          v-for="(content, type) in boxes"
+          v-for="(content, type) in boxes.filter(b => b.visible)"
           :key="type"
           @click="updateCurrentBox(type)"
-          v-if="content.visible"
         >
-          <span class="editor-tabName">{{type.toUpperCase()}}</span>
-          <span v-show="currentBox === type" class="editor-tabTransformer">{{content.transformer}}</span>
+          <span class="editor-tabName">{{ type.toUpperCase() }}</span>
+          <span v-show="currentBox === type" class="editor-tabTransformer">
+            {{ content.transformer }}
+          </span>
         </li>
       </ul>
       <sandbox
         v-for="(content, type) in boxes"
-        :key="type+content.key"
+        :key="type + content.key"
         v-show="currentBox === type"
         class="editor-sandbox--waterfall"
         :value="content.code"
         :language="content.transformer"
         :editorHook="content.editorHook"
         @input="codeUpdate(type, arguments)"
-      >></sandbox>
+      >
+        &lt;
+      </sandbox>
     </template>
   </div>
 </template>
 
 <script>
-import PerfectScrollbar from "perfect-scrollbar";
-import Sandbox from "./sandbox.vue";
-import { mapState, mapActions } from "vuex";
+import PerfectScrollbar from 'perfect-scrollbar';
+import Sandbox from './sandbox.vue';
+import { mapState, mapActions } from 'vuex';
 export default {
-  mounted() {},
   computed: {
     ...mapState([
-      "foldBoxes",
-      "visibleBoxes",
-      "foldBoxes",
-      "boxes",
-      "config",
-      "currentBox"
+      'foldBoxes',
+      'visibleBoxes',
+      'foldBoxes',
+      'boxes',
+      'config',
+      'currentBox'
     ])
   },
   components: { Sandbox },
   methods: {
-    ...mapActions(["toggleBoxFold", "updateCode", "updateCurrentBox"]),
+    ...mapActions(['toggleBoxFold', 'updateCode', 'updateCurrentBox']),
     isSandboxFolded(type) {
       return this.foldBoxes.indexOf(type) > -1;
     },
@@ -90,17 +91,17 @@ export default {
       this.toggleBoxFold(type);
     }
   },
-  mounted(){
+  mounted() {
     new PerfectScrollbar(document.querySelector('.editor'), {
-      suppressScrollX: true,
+      suppressScrollX: true
     });
   }
 };
 </script>
 
 <style lang="scss">
-@import "@/css/index.scss";
-@import "~perfect-scrollbar/css/perfect-scrollbar.css";
+@import '@/css/index.scss';
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
 .editor {
   max-height: 100vh;
   overflow-y: auto;
@@ -121,7 +122,7 @@ export default {
         overflow: hidden;
         position: relative;
         &::after {
-          content: "";
+          content: '';
           width: 100%;
           height: 100%;
           background: $c-bg;
