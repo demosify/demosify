@@ -18,7 +18,6 @@ let port = 10086;
 if (config.devServer && config.devServer.port) {
   port = config.devServer.port;
 }
-let source = config.source || 'demos';
 let output = config.output || { dir: 'dist' };
 let demoList = config.demoList || '.demoList.json';
 
@@ -32,7 +31,6 @@ if (config.themeFile) {
   themeFilePath = path.resolve(rootPath, config.themeFile);
 }
 
-console.warn(`Source directory: ${source}.`);
 console.warn(`Output directory: ${output.dir}.`);
 console.warn(`PublicUrl: ${output.publicUrl || '/'}.`);
 
@@ -62,8 +60,9 @@ module.exports = {
       resolve: {
         alias: {
           '@': path.join(__dirname, 'src'),
-          demos: path.join(rootPath, source),
-          '.demoList.json': path.join(rootPath, source, demoList),
+          '~': path.join(rootPath, 'demos'),
+          demos: path.join(rootPath, 'demos'),
+          '.demoList.json': path.join(rootPath, 'demos', demoList),
           manifest: path.join(rootPath, '.demosrc'),
           themeFile: themeFilePath
         }

@@ -9,7 +9,8 @@ import NotFoundPage from '@/pages/notFound.vue';
 Vue.use(VueRouter);
 
 const demoList = _demoList.map(demo => {
-  if (typeof demo !== 'string') return demo.src;
+  if (typeof demo !== 'string') demo = demo.src;
+  demo = demo.replace(/\//g, '_');
   return demo;
 });
 

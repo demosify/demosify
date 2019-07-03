@@ -47,16 +47,20 @@ const demoBoxes = {};
 
 function importAllDemo(r) {
   r.keys().forEach(key => {
-    const name = /^\.\/(.+)\//.exec(key)[1];
-    demoBoxes[name] = r(key).default;
+    const matched = /^\.\/((?:.+\/)*.+)\//.exec(key);
+    if (matched) {
+      const name = matched[1].replace(/\//g, '_');
+      demoBoxes[name] = r(key).default;
+    }
   });
 }
 importAllDemo(require.context('demos', true, /config.js$/));
 
 const links = demoList.map(link => {
   if (typeof link === 'string') {
-    return { label: link, src: `/${link}` };
+    link = { label: link, src: `/${link}` };
   }
+  link.src = link.src.replace(/\//g, '_');
   return link;
 });
 
