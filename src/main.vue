@@ -163,4 +163,13 @@ export default {
     display: none;
   }
 }
+
+@media (max-width: 480px) {
+  .vessel {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .vessel .editor {
+    display: none;
+  }
+}
 </style>

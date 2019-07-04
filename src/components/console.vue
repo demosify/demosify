@@ -1,7 +1,11 @@
 <template>
   <div class="console">
     <div class="console-header">
-      <h3 @dblclick="isConsoleFolded = !isConsoleFolded" class="console-title">
+      <h3
+        @dblclick="isConsoleFolded = !isConsoleFolded"
+        @touchend="isConsoleFolded = !isConsoleFolded"
+        class="console-title"
+      >
         console
         <transition name="fade">
           <span class="console-new" v-show="hasLog"></span>
