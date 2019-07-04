@@ -88,7 +88,7 @@ $foldedDealy: 100ms;
     list-style: none;
     margin: 0;
     padding: 10px 0 0 0;
-    max-height: calc(100vh - 60px);
+    max-height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
     &Item {
@@ -179,7 +179,7 @@ $foldedDealy: 100ms;
     padding: 10px 0;
     background: lighten($c-bg, 5);
     transition: 0.3s all ease-out;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 80px);
     box-sizing: border-box;
     transform-origin: left center;
     &--folded {
