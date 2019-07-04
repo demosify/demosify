@@ -19,11 +19,11 @@ class Iframe {
     const content = `<!DOCTYPE html><html><head>${head}</head><body>${body}</body></html>`;
     const iframe = this.createIframe();
     this.$el.parentNode.replaceChild(iframe, this.$el);
-    iframe.onload = function() {
-      this.contentWindow.document.open();
-      this.contentWindow.document.write(content);
-      this.contentWindow.document.close();
-    };
+
+    iframe.contentWindow.document.open();
+    iframe.contentWindow.document.write(content);
+    iframe.contentWindow.document.close();
+
     this.$el = iframe;
   }
 }

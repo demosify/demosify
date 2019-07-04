@@ -47,6 +47,10 @@ module.exports = {
   envs: {
     NODE_ENV: process.env.NODE_ENV
   },
+  babel: {
+    babelrc: config.babelrc !== false,
+    transpileModules: ['@demosify/core']
+  },
   chainWebpack(config) {
     config.merge({
       plugin: {

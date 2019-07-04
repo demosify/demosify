@@ -27,7 +27,7 @@
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "perfect-scrollbar": "^1.4.0",
-    "poi": "^12.6.10",
+    "poi": "^12.7.0",
     "raw-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.6.10",

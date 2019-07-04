@@ -17,7 +17,7 @@ import proxyConsole from '!raw-loader!babel-loader!@/js/proxy-console';
 import Console from './console.vue';
 
 const sandboxAttributes = [
-  'allow-modals',
+  // 'allow-modals',
   'allow-forms',
   'allow-pointer-lock',
   'allow-popups',
