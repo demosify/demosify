@@ -151,7 +151,7 @@ export default {
     background: $c-console-bg;
     margin-bottom: 20px;
     transition: all 0.5s;
-    overflow: scroll;
+    overflow-y: auto;
   }
   &-message {
     font-size: 14px;
