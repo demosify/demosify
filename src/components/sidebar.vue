@@ -23,7 +23,7 @@
         :key="demo.src"
         class="sidebar-menuItem"
         :class="{
-          'sidebar-menuItem--active': currentDemo === demo
+          'sidebar-menuItem--active': currentDemo === demo.label.replace(/\//g, '_')
         }"
         :to="demo.src"
       >
