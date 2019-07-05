@@ -71,7 +71,7 @@ const state = {
   links,
   iframeStatus: null,
   transforming: false,
-  isSidebarShown: true,
+  isSidebarShown: window === top,
   autoRun: true,
   logs: [],
   currentBox: undefined,
