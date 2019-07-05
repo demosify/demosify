@@ -48,7 +48,7 @@ module.exports = {
     NODE_ENV: process.env.NODE_ENV
   },
   babel: {
-    babelrc: config.babelrc !== false,
+    babelrc: !!config.babelrc,
     transpileModules: ['@demosify/core']
   },
   chainWebpack(config) {

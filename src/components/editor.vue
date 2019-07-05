@@ -4,9 +4,8 @@
     <template v-if="config.editorViewMode === 'waterfall'">
       <div
         class="editor-box"
-        v-for="(content, type) in boxes"
+        v-for="[type, content] in showBoxes"
         :key="type + content.key"
-        v-if="content.visible"
       >
         <header
           class="editor-boxName"
@@ -35,10 +34,9 @@
           :class="{
             'editor-tab--active': currentBox === type
           }"
-          v-for="(content, type) in boxes"
+          v-for="[type, content] in showBoxes"
           :key="type"
           @click="updateCurrentBox(type)"
-          v-if="content.visible"
         >
           <span class="editor-tabName">{{ type.toUpperCase() }}</span>
           <span v-show="currentBox === type" class="editor-tabTransformer">
@@ -47,7 +45,7 @@
         </li>
       </ul>
       <sandbox
-        v-for="(content, type) in boxes"
+        v-for="[type, content] in showBoxes"
         :key="type + content.key"
         v-show="currentBox === type"
         class="editor-sandbox--waterfall"
@@ -65,17 +63,23 @@
 <script>
 import PerfectScrollbar from 'perfect-scrollbar';
 import Sandbox from './sandbox.vue';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 export default {
   computed: {
     ...mapState([
       'foldBoxes',
       'visibleBoxes',
       'foldBoxes',
-      'boxes',
       'config',
       'currentBox'
-    ])
+    ]),
+    ...mapState({
+      showBoxes(state) {
+        return Object.entries(state.boxes).filter(([type, value]) => {
+          return value.visible;
+        });
+      }
+    })
   },
   components: { Sandbox },
   methods: {
