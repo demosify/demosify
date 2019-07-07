@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="598px" height="101px" viewBox="0 0 598 101" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FCD50A" offset="0%"></stop>
+            <stop stop-color="#F9BD09" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-6" transform="translate(-25.000000, -49.000000)">
+            <g id="Group-5">
+                <rect id="Rectangle-6" x="0" y="0" width="200" height="200"></rect>
+                <g id="Group-4" transform="translate(25.000000, 49.000000)">
+                    <rect id="Rectangle" fill="#AD7923" x="0" y="7.81547619" width="151" height="93.1845238" rx="25"></rect>
+                    <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="151" height="93.1845238" rx="24"></rect>
+                    <rect id="Rectangle-3" fill="#EBAF4A" x="38.052" y="28.8571429" width="74.896" height="35.4702381"></rect>
+                    <ellipse id="Oval-3" fill="#D9A532" cx="9.362" cy="9.91964286" rx="2.718" ry="2.70535714"></ellipse>
+                    <ellipse id="Oval-3" fill="#D9A532" cx="9.362" cy="82.0625" rx="2.718" ry="2.70535714"></ellipse>
+                    <ellipse id="Oval-3" fill="#D9A532" cx="141.638" cy="82.0625" rx="2.718" ry="2.70535714"></ellipse>
+                    <ellipse id="Oval-3" fill="#D9A532" cx="141.638" cy="9.91964286" rx="2.718" ry="2.70535714"></ellipse>
+                    <ellipse id="Oval" fill="#573A0A" cx="35.938" cy="46.5922619" rx="17.818" ry="17.735119"></ellipse>
+                    <ellipse id="Oval" fill="#573A0A" cx="115.062" cy="46.5922619" rx="17.818" ry="17.735119"></ellipse>
+                    <ellipse id="Oval-2" fill="#F2EBDC" cx="115.062" cy="46.5922619" rx="7.55" ry="7.51488095"></ellipse>
+                    <ellipse id="Oval-2" fill="#F2EBDC" cx="35.938" cy="46.5922619" rx="7.55" ry="7.51488095"></ellipse>
+                    <polygon id="Rectangle-2" fill="#D49328" points="40.4644578 78.1547619 114.159542 78.1547619 116.572 93.1845238 38.052 93.1845238"></polygon>
+                    <path d="M45.602,83.264881 L107.212961,83.264881" id="Line" stroke="#C28929" stroke-linecap="square"></path>
+                    <path d="M45.602,86.8720238 L107.212961,86.8720238" id="Line" stroke="#C28929" stroke-linecap="square"></path>
+                    <path d="M45.602,90.4791667 L107.212961,90.4791667" id="Line" stroke="#C28929" stroke-linecap="square"></path>
+                    <rect id="Rectangle-4" fill="#7F5510" x="58.588" y="40.2797619" width="33.22" height="15.0297619"></rect>
+                    <g id="Group-2" transform="translate(61.608000, 43.285714)" stroke-linecap="square" stroke-width="1.33333333">
+                        <g id="Group">
+                            <path d="M1.812,0.400793651 L1.812,9.25461478" id="Line" stroke="#61410C"></path>
+                            <path d="M1.208,0.400793651 L1.208,9.25461478" id="Line" stroke="#9C6A16"></path>
+                        </g>
+                        <g id="Group" transform="translate(4.832000, 0.000000)">
+                            <path d="M1.812,0.400793651 L1.812,9.25461478" id="Line" stroke="#61410C"></path>
+                            <path d="M1.208,0.400793651 L1.208,9.25461478" id="Line" stroke="#9C6A16"></path>
+                        </g>
+                        <g id="Group" transform="translate(9.664000, 0.000000)">
+                            <path d="M1.812,0.400793651 L1.812,9.25461478" id="Line" stroke="#61410C"></path>
+                            <path d="M1.208,0.400793651 L1.208,9.25461478" id="Line" stroke="#9C6A16"></path>
+                        </g>
+                        <g id="Group" transform="translate(14.496000, 0.000000)">
+                            <path d="M1.812,0.400793651 L1.812,9.25461478" id="Line" stroke="#61410C"></path>
+                            <path d="M1.208,0.400793651 L1.208,9.25461478" id="Line" stroke="#9C6A16"></path>
+                        </g>
+                        <g id="Group" transform="translate(19.328000, 0.000000)">
+                            <path d="M1.812,0.400793651 L1.812,9.25461478" id="Line" stroke="#61410C"></path>
+                            <path d="M1.208,0.400793651 L1.208,9.25461478" id="Line" stroke="#9C6A16"></path>
+                        </g>
+                        <g id="Group" transform="translate(24.160000, 0.000000)">
+                            <path d="M1.812,0.400793651 L1.812,9.25461478" id="Line" stroke="#61410C"></path>
+                            <path d="M1.208,0.400793651 L1.208,9.25461478" id="Line" stroke="#9C6A16"></path>
+                        </g>
+                    </g>
+                    <g id="Group-3" transform="translate(26.576000, 37.273810)" fill="#573A0A">
+                        <rect id="Rectangle-5" x="8.456" y="0" width="1.812" height="4.20833333"></rect>
+                        <rect id="Rectangle-5" x="8.456" y="14.4285714" width="1.812" height="4.20833333"></rect>
+                        <polygon id="Rectangle-5" transform="translate(16.610000, 9.919643) rotate(90.000000) translate(-16.610000, -9.919643) " points="15.7082143 7.80564286 17.5117857 7.80564286 17.5117857 12.0336429 15.7082143 12.0336429"></polygon>
+                        <polygon id="Rectangle-5" transform="translate(2.114000, 9.919643) rotate(90.000000) translate(-2.114000, -9.919643) " points="1.21221429 7.80564286 3.01578571 7.80564286 3.01578571 12.0336429 1.21221429 12.0336429"></polygon>
+                        <polygon id="Rectangle-5" transform="translate(3.926000, 4.508929) rotate(135.000000) translate(-3.926000, -4.508929) " points="3.01719048 2.3977381 4.82497619 2.40195238 4.83480952 6.62011905 3.02702381 6.61590476"></polygon>
+                        <polygon id="Rectangle-5" transform="translate(14.194000, 14.729167) rotate(135.000000) translate(-14.194000, -14.729167) " points="13.2851905 12.6179762 15.0929762 12.6221905 15.1028095 16.8403571 13.2950238 16.8361429"></polygon>
+                        <polygon id="Rectangle-5" transform="translate(4.530000, 14.729167) rotate(45.000000) translate(-4.530000, -14.729167) " points="3.63102381 12.6221905 5.43880952 12.6179762 5.42897619 16.8361429 3.62119048 16.8403571"></polygon>
+                        <polygon id="Rectangle-5" transform="translate(14.798000, 4.508929) rotate(45.000000) translate(-14.798000, -4.508929) " points="13.8990238 2.40195238 15.7068095 2.3977381 15.6969762 6.61590476 13.8891905 6.62011905"></polygon>
+                    </g>
+                    <g id="Group-3" transform="translate(105.700000, 37.273810)" fill="#573A0A">
+                        <rect id="Rectangle-5" x="8.456" y="0" width="1.812" height="4.20833333"></rect>
+                        <rect id="Rectangle-5" x="8.456" y="14.4285714" width="1.812" height="4.20833333"></rect>
+                        <polygon id="Rectangle-5" transform="translate(16.610000, 9.919643) rotate(90.000000) translate(-16.610000, -9.919643) " points="15.7082143 7.80564286 17.5117857 7.80564286 17.5117857 12.0336429 15.7082143 12.0336429"></polygon>
+                        <polygon id="Rectangle-5" transform="translate(2.114000, 9.919643) rotate(90.000000) translate(-2.114000, -9.919643) " points="1.21221429 7.80564286 3.01578571 7.80564286 3.01578571 12.0336429 1.21221429 12.0336429"></polygon>
+                        <polygon id="Rectangle-5" transform="translate(3.926000, 4.508929) rotate(135.000000) translate(-3.926000, -4.508929) " points="3.01719048 2.3977381 4.82497619 2.40195238 4.83480952 6.62011905 3.02702381 6.61590476"></polygon>
+                        <polygon id="Rectangle-5" transform="translate(14.194000, 14.729167) rotate(135.000000) translate(-14.194000, -14.729167) " points="13.2851905 12.6179762 15.0929762 12.6221905 15.1028095 16.8403571 13.2950238 16.8361429"></polygon>
+                        <polygon id="Rectangle-5" transform="translate(4.530000, 14.729167) rotate(45.000000) translate(-4.530000, -14.729167) " points="3.63102381 12.6221905 5.43880952 12.6179762 5.42897619 16.8361429 3.62119048 16.8403571"></polygon>
+                        <polygon id="Rectangle-5" transform="translate(14.798000, 4.508929) rotate(45.000000) translate(-14.798000, -4.508929) " points="13.8990238 2.40195238 15.7068095 2.3977381 15.6969762 6.61590476 13.8891905 6.62011905"></polygon>
+                    </g>
+                </g>
+            </g>
+            <text id="DEMOSIFY" font-family="Krungthep" font-size="80" font-weight="bold">
+                <tspan x="210" y="131" fill="#573A0A">DEMO</tspan>
+                <tspan x="443.3125" y="131" fill="#AD7923">SIFY</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

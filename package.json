@@ -11,7 +11,8 @@
   "private": false,
   "scripts": {
     "dev": "poi --serve",
-    "lint": "eslint src --fix"
+    "lint": "eslint src --fix",
+    "handbook": "docsify serve ./handbook"
   },
   "dependencies": {
     "@vue/eslint-config-prettier": "^4.0.1",
@@ -36,6 +37,7 @@
     "vuex": "^3.1.1"
   },
   "devDependencies": {
+    "docsify": "^4.9.4",
     "merge": "^1.2.1"
   }
 }
