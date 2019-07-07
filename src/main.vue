@@ -1,25 +1,25 @@
 <template>
-  <div id="fakeBody" :class="{ 'fakeBody--max': !isSidebarShown }">
-    <a class="header" :href="config.homePage || '#'" target="_blank">
-      <span
-        class="header-logo"
-        :style="{ backgroundImage: `url(${config.logo})` }"
-      >
+  <div id="fakeBody"
+    :class="{ 'fakeBody--max': !isSidebarShown }">
+    <div class="header">
+      <a class="header-logo"
+         :href="config.homePage || '#'"
+         target="_blank"
+        :style="{ backgroundImage: `url(${config.logo})` }">
         {{ config.logo ? '' : config.name }}
-      </span>
-      <span v-if="config.version" class="header-version">
+      </a>
+      <span v-if="config.version"
+        class="header-version">
         {{ config.version }}
       </span>
-    </a>
+    </div>
     <sidebar class="sidebar"></sidebar>
     <router-view class="vessel"></router-view>
-    <div
-      class="handler"
+    <div class="handler"
       :class="{
         'handler--hidden': !isSidebarShown
       }"
-      @click="TOGGLE_SIDEBAR"
-    ></div>
+      @click="TOGGLE_SIDEBAR"></div>
   </div>
 </template>
 
@@ -69,10 +69,6 @@ export default {
   transition: 0.6s all ease-out;
   text-decoration: none;
   background-color: $c-bg;
-
-  & span {
-    line-height: 60px;
-  }
   &-logo {
     font-family: $logo-font-family;
     flex-grow: 1;
@@ -81,11 +77,14 @@ export default {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: left center;
+    line-height: 60px;
+    text-decoration: none;
   }
   &-version {
     width: 4em;
     text-align: right;
     pointer-events: none;
+    line-height: 60px;
   }
   &:hover {
     filter: brightness(1.2);
@@ -105,8 +104,6 @@ export default {
   left: 240px;
   top: 50%;
   transform: translateY(-50%);
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
   opacity: 0.5;
   cursor: pointer;
   &--hidden {
@@ -141,35 +138,39 @@ export default {
 @media (max-width: 900px) {
   #fakeBody {
     grid-template: 60px 1fr / repeat(12, 1fr);
-    min-width: 400px;
-    &--max {
-      grid-template: 60px 1fr / repeat(12, 1fr);
+    &.fakeBody--max {
+      grid-template: 60px 1fr /  repeat(2, 1fr);
+      & .sidebar, .header {
+        display: none;
+      }
+      & .vessel {
+        grid-column: 1 / -1;
+        grid-row: 1 / -1;
+      }
     }
-  }
-  .header {
-    grid-column: 2 / -1;
-    grid-row: 1 / 2;
-  }
-  .sidebar {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-    min-width: 60px;
-  }
-  .vessel {
-    grid-column: 1 / -1;
-    grid-row: 2 / -1;
-  }
-  .handler {
-    display: none;
+    & .sidebar {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+    & .header {
+      grid-column: 2 / -1;
+      grid-row: 1 / 2;
+    }
+    & .vessel {
+      grid-column: 1 / -1;
+      grid-row: 2 / -1;
+    }
+    & .handler {
+      left: 50%;
+      top: 48px;
+      transform: translateY(-50%) rotate(90deg);
+      transform-origin: left center;
+      &--hidden {
+        top: 0px;
+      }
+    }
   }
 }
 
-@media (max-width: 480px) {
-  .vessel {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .vessel .editor {
-    display: none;
-  }
-}
+
 </style>

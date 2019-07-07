@@ -1,6 +1,5 @@
 module.exports = function(env) {
-  const spritejs = env === 'development' ? '/spritejs.js'
-    : 'https://unpkg.com/spritejs/dist/spritejs.min.js';
+  const spritejs = 'https://unpkg.com/spritejs/dist/spritejs.min.js';
   return {
     devServer: {
       port: 9090,

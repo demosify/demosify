@@ -102,6 +102,7 @@ export default {
   margin-top: 10px;
   border-top: 1px solid rgba($c-highlight, 0.2);
   font-family: $font-family;
+  min-height: 48px;
   &-header {
     display: flex;
     justify-content: space-between;

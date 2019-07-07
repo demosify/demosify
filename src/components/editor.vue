@@ -1,5 +1,10 @@
 <template>
-  <div class="editor">
+  <div
+    class="editor"
+    :class="{
+      'editor--shrink': isSidebarShown
+    }"
+  >
     <!-- 瀑布流模式 -->
     <template v-if="config.editorViewMode === 'waterfall'">
       <div
@@ -48,7 +53,7 @@
         v-for="[type, content] in showBoxes"
         :key="type + content.key"
         v-show="currentBox === type"
-        class="editor-sandbox--waterfall"
+        class="editor-sandbox--tab"
         :value="content.code"
         :language="content.transformer"
         :editorHook="content.editorHook"
@@ -71,7 +76,8 @@ export default {
       'visibleBoxes',
       'foldBoxes',
       'config',
-      'currentBox'
+      'currentBox',
+      'isSidebarShown'
     ]),
     ...mapState({
       showBoxes(state) {
@@ -109,7 +115,7 @@ export default {
 @import '@/css/index.scss';
 @import '~perfect-scrollbar/css/perfect-scrollbar.css';
 .editor {
-  max-height: 100vh;
+  height: 100%;
   overflow-y: auto;
   &-box {
     font-family: $link-font-family;
@@ -207,17 +213,20 @@ export default {
     }
   }
   &-sandbox {
-    &--waterfall {
+    &--tab {
       margin: 0 10px;
-      height: calc(100vh - 85px);
       transition: 0.3s all ease-out;
+      height: calc(100% - 72px);
     }
   }
 }
 
 @media (max-width: 900px) {
   .editor {
-    max-height: calc(100vh - 62px);
+    &--shrink {
+      height: calc(100vh - 60px);
+    }
   }
 }
+
 </style>

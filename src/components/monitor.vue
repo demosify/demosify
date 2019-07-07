@@ -133,7 +133,8 @@ export default {
 <style lang="scss">
 @import '@/css/index.scss';
 .monitor {
-  max-height: 100vh;
+  max-height: 100%;
+  box-sizing: border-box;
   padding: 20px 20px 0 20px;
   display: flex;
   flex-direction: column;
@@ -144,9 +145,5 @@ export default {
     background: $c-bg;
   }
 }
-@media (max-width: 900px) {
-  .monitor {
-    max-height: calc(100vh - 62px);
-  }
-}
+
 </style>

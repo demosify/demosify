@@ -70,8 +70,9 @@ const state = {
   foldBoxes: [],
   links,
   iframeStatus: null,
+  isSidebarShown: true,
   transforming: false,
-  isSidebarShown: window === top,
+  inIframe: window !== top,
   autoRun: true,
   logs: [],
   currentBox: undefined,
@@ -80,6 +81,10 @@ const state = {
     css: []
   }
 };
+
+if(state.inIframe) {
+  state.isSidebarShown = false;
+}
 
 const mutations = {
   CLEAR_BOXES(state) {
