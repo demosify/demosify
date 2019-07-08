@@ -49,8 +49,7 @@ function importAllDemo(r) {
   r.keys().forEach(key => {
     const matched = /^\.\/((?:.+\/)*.+)\//.exec(key);
     if (matched) {
-      const name = matched[1].replace(/\//g, '_');
-      demoBoxes[name] = r(key).default;
+      demoBoxes[matched[1]] = r(key).default;
     }
   });
 }
@@ -60,7 +59,6 @@ const links = demoList.map(link => {
   if (typeof link === 'string') {
     link = { label: link, src: `/${link}` };
   }
-  link.src = link.src.replace(/\//g, '_');
   return link;
 });
 
