@@ -1,8 +1,10 @@
 :root {
   --theme-color: #FFC730;
 }
-body {
+
+html, body{
   background: #201e1e;
+  font-size: 12px;
 }
 .sidebar,.sidebar-toggle {
   background: #252424;
@@ -18,4 +20,14 @@ body {
 .github-corner svg {
   height: 60px;
   width: 60px;
+}
+.sidebar-toggle {
+  width: auto;
+}
+
+.markdown-section h1 {
+  font-size: 1.8rem;
+}
+.markdown-section p.tip, .markdown-section tr:nth-child(2n) {
+  background: #2b2601;
 }
