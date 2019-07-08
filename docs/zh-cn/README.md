@@ -2,6 +2,12 @@
 
 在项目中创建一个 Playground 来运行你的 Demos。
 
+👉🏻 [在线示例](https://demosify.github.io/demosify-demo/)
+
+👉🏻 [spritejs demo](https://spritejs.org/demo)
+
+👉🏻 [glsl-doodle demo](http://doodle.webgl.group/demo)
+
 ## 快速使用
 
 1. 安装 @demosify/core

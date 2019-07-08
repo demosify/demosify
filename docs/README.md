@@ -2,6 +2,12 @@
 
 Create a playground to show the demos of your project.
 
+👉🏻 [online demo](https://demosify.github.io/demosify-demo/)
+
+👉🏻 [spritejs demo](https://spritejs.org/demo)
+
+👉🏻 [glsl-doodle demo](http://doodle.webgl.group/demo)
+
 ## Quick start
 
 1. install @demosify/core
