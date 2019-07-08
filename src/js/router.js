@@ -20,7 +20,6 @@ const demoRoutes = demoList.map(demoName => ({
   component: VesselPage
 }));
 
-
 const defaultRoute = {
   path: '/',
   redirect: { name: demoList[0] }

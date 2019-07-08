@@ -82,7 +82,7 @@ const state = {
   }
 };
 
-if(state.inIframe) {
+if (state.inIframe) {
   state.isSidebarShown = false;
 }
 
