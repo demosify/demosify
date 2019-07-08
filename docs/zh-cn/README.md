@@ -105,3 +105,13 @@ body {
 ```
 
 三个文件内容会被自动加载到 Playground 中。
+
+## 发布
+
+运行 
+
+```bash
+npm run demo:prod
+```
+
+代码默认被发布到项目下的 `dist` 目录中。
