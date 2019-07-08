@@ -7,9 +7,9 @@
 ```js
 export default async () => {
   const [jsCode, htmlCode, cssCode] = await Promise.all([
-    import(/* webpackChunkName: "demo-demo1" */ '!raw-loader!./index.html'),
-    import(/* webpackChunkName: "demo-demo1" */ '!raw-loader!./index.js'),
-    import(/* webpackChunkName: "demo-demo1" */ '!raw-loader!./style.css'),
+    import('!raw-loader!./index.html'),
+    import('!raw-loader!./index.js'),
+    import('!raw-loader!./style.css'),
   ]);
 
   return {

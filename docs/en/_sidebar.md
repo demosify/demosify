@@ -1,16 +1,16 @@
 * Basics
-  * [Installation](/en/installation)
-  * [Getting Started](/en/getting_started)
+  * [Installation](/en/basic#installation)
+  * [Getting Started](/en/basic#getting-started)
   * Configurations
-    * [.demosrc](/en/doc/demosrc)
-    * [.demoList](/en/doc/demolist)
-    * [demo config](/en/doc/demo_config)
-  * [Deploy](/en/deploy)
+    * [.demosrc](/en/basic#demosrc)
+    * [.demoList](/en/basic#demolist)
+    * [demo config](/en/basic#configjs)
+  * [Deploy](/en/basic#deploy)
 
-* Boxes' Hooks
-  * [Use Transform](/en/transform)
-  * [Editor Hooks](/en/hooks)
+* Boxes
+  * [Use Transform](/en/boxes#transform)
+  * [Editor Hook](/en/boxes#editorhook)
 
 * Themes
-  * [User themes](/en/themes)
+  * [User themes](/en/theme)
 

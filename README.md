@@ -1,57 +1,114 @@
 # DEMOSIFY
 
-## Usage
+Create a playground to run demos of your project.
+
+## Quick start
+
+1. install @demosify/core
 
 ```bash
 npm install @demosify/core --save-dev
 ```
 
-Add `.demorc.js`:
+2. Create `.demosrc.js` file in your project root.
 
 ```js
 module.exports = {
-  devServer: {
-    port: 3000,
-  },
-  output: 'docs', // default is dist
-  name: 'Your project name',
-  version: 'Your project version',
-  homePage: 'You project homepage url',
-  logo: '',
-  // 可选主题: active4d, allHallowsEve, amy, blackboard, brillianceBlack,
-  // brillianceDull, chromeDevtools, cloudsMidnight, clouds, cobalt,
-  // dawn, dreamweaver, eiffel, espressoLibre, github, idle, katzenmilch,
-  // kuroirTheme, lazy, magicwbAmiga, merbivoreSoft, merbivore, monokai,
-  // pastelsOnDark, slushAndPoppies, solarizedDark, solarizedLight,
-  // spacecadet, sunburst, textmateMacClassic, tomorrowNightBlue,
-  // tomorrowNightBright, tomorrowNightEighties, tomorrowNight, tomorrow,
-  // twilight, vibrantInk, zenburnesque, iplastic, idlefingers, krtheme,
-  // monoindustrial,
-  boxTheme: 'monokai',
-  globalPackages: {
-    js: [/* js lib */],
-    css: [/* css lib */],
-  },
-  // tab waterfall
-  editorViewMode: 'tab',
+  name: 'YOUR PROJECT NAME',
 }
 ```
 
-Create source directory and add `.demoList.json`:
+3. Create `demos` directory in your project root. Add your demos in `demos` directory.
 
-```json
-["quick start"]
+```bash
+mkdir demos
+mkdir demos/demo1
 ```
 
-Create your demo directory and files.
+4. Create a `config.js` file in each of your demos, e.g. `demos/demo1`.
 
-Edit your package.json
+```js
+// config.js
+const javascript = `console.log('this is a demo')`;
 
-```json
-scripts: {
-  "start": "demosify --serve",
-  "build:demo": "demosify"
+export default {
+  javascript,
 }
 ```
 
-Done.
+5. Create a `.demoList.json` file in your `demos` directory. Specify all your demos show in sidebar. 
+
+```json
+[
+  "demo1",
+  ...
+]
+```
+
+6. Add NPM scripts in your `package.json`:
+
+```json
+  "scripts": {
+    "demo:dev": "demosify --serve",
+    "demo:prod": "demosify --prod"
+  }
+```
+
+7. Run `npm run demo:dev`, visit `http://localhost:3000`. You will see the playground. ✌🏻
+
+## Load sample files
+
+You can load sample files though config.js.
+
+```js
+export default async () => {
+  const [javascript, html, css] = await Promise.all([
+    import('!raw-loader!./index.js'),
+    import('!raw-loader!./index.html'),
+    import('!raw-loader!./style.css'),
+  ]);
+
+  return {
+    javascript,
+    html,
+    css,
+  }
+}
+```
+
+Add `index.js`, `index.html` and `style.css` files in your demo directory.
+
+```js
+console.log('This is a demo.');
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DEMO</title>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+</html>
+```
+
+```css
+/* demo stylesheet */
+
+body {
+  background-color: red;
+}
+```
+
+These files will be loaded to your playground.
+
+## Deploy
+
+Run `npm run demo:prod`.
+
+All the demos will be deploy to production into `dist` directory of your project.
