@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "poi --serve",
     "lint": "eslint src --fix",
-    "handbook": "docsify serve ./handbook"
+    "doc": "docsify serve ./docs"
   },
   "dependencies": {
     "@vue/eslint-config-prettier": "^4.0.1",
