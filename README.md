@@ -2,7 +2,7 @@
 
 # DEMOSIFY
 
-Create a playground to run demos of your project.
+Create a playground to show the demos of your project.
 
 ## Quick start
 
