@@ -57,7 +57,7 @@ importAllDemo(require.context('demos', true, /config.js$/));
 
 const links = demoList.map(link => {
   if (typeof link === 'string') {
-    link = { label: link, src: `/${link}` };
+    link = { label: link, src: link };
   }
   return link;
 });
