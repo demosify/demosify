@@ -14,7 +14,7 @@ if (typeof config === 'function') {
   config = config(process.env.NODE_ENV);
 }
 
-let port = 10086;
+let port = 3000;
 if (config.devServer && config.devServer.port) {
   port = config.devServer.port;
 }

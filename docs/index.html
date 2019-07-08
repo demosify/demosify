@@ -22,6 +22,10 @@
       repo: 'demosify/demosify',
       logo: '/demosify-logo.svg',
       alias: {
+        '/zh-cn/.*/_sidebar.md': '/zh-cn/_sidebar.md',
+        '/zh-cn/.*/_navbar.md': '/zh-cn/_navbar.md',
+        '/en/.*/_sidebar.md': '/en/_sidebar.md',
+        '/en/.*/_navbar.md': '/en/_navbar.md',
         '/_sidebar.md': language === 'zh-CN' ? '/zh-cn/_sidebar.md' : '/en/_sidebar.md',
       },
     }

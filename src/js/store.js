@@ -198,7 +198,11 @@ const actions = {
     }
     if (typeof demo === 'string') {
       demoID = demo;
-      demo = await demoBoxes[demo]();
+      if (typeof demoBoxes[demo] === 'function') {
+        demo = await demoBoxes[demo]();
+      } else {
+        demo = await demoBoxes[demo];
+      }
     } else {
       demoID =
         'demo-' +
@@ -207,11 +211,32 @@ const actions = {
           .slice(2, 14);
     }
 
-    const { foldBoxes, visibleBoxes, packages, ...boxes } = demo;
+    let { foldBoxes, packages, ...boxes } = demo;
 
     const ac = [];
 
     dispatch('clearBoxes');
+
+    packages = packages || { js: [], css: [] };
+
+    ['html', 'css', 'javascript'].forEach(type => {
+      if (!boxes[type] || typeof boxes[type] === 'string') {
+        boxes[type] = {
+          code: { default: boxes[type] || '' },
+          transformer: type,
+          visible: boxes[type] != null
+        };
+      } else if (
+        boxes[type].default &&
+        typeof boxes[type].default === 'string'
+      ) {
+        boxes[type] = {
+          code: boxes[type],
+          transformer: type,
+          visible: true
+        };
+      }
+    });
 
     Object.entries(boxes).forEach(
       ([type, { code, transformer, visible, transform, editorHook }]) => {

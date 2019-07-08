@@ -73,7 +73,6 @@ export default {
   computed: {
     ...mapState([
       'foldBoxes',
-      'visibleBoxes',
       'foldBoxes',
       'config',
       'currentBox',
@@ -92,9 +91,6 @@ export default {
     ...mapActions(['toggleBoxFold', 'updateCode', 'updateCurrentBox']),
     isSandboxFolded(type) {
       return this.foldBoxes.indexOf(type) > -1;
-    },
-    isSanboxVisibile(type) {
-      return this.visibleBoxes.indexOf(type) > -1;
     },
     codeUpdate(type, [code]) {
       this.updateCode({ type, code });
