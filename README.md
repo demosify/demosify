@@ -1,5 +1,4 @@
-[web site](https://www.demosify.com)
-[online demo](https://demosify.github.io/demosify-demo/)
+👉🏻 [web site](https://www.demosify.com) | 👉🏻 [online demo](https://demosify.github.io/demosify-demo/)
 
 # DEMOSIFY
 
