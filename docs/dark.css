@@ -1,12 +1,15 @@
 :root {
-  --theme-color: #FFC730;
+  --theme-color: #ffc730;
 }
 
-html, body{
+html,
+body {
   background: #201e1e;
   font-size: 12px;
 }
-.sidebar,.sidebar-toggle {
+
+.sidebar,
+.sidebar-toggle {
   background: #252424;
 }
 
@@ -14,13 +17,16 @@ html, body{
   text-align: left;
   padding-left: 14px;
 }
+
 .app-name img {
   max-width: 70%;
 }
+
 .github-corner svg {
   height: 60px;
   width: 60px;
 }
+
 .sidebar-toggle {
   width: auto;
 }
@@ -28,6 +34,126 @@ html, body{
 .markdown-section h1 {
   font-size: 1.8rem;
 }
-.markdown-section p.tip, .markdown-section tr:nth-child(2n) {
+
+.markdown-section p.tip,
+.markdown-section tr:nth-child(2n) {
   background: #2b2601;
+}
+
+.app-nav {
+  color: white;
+}
+
+.cover {
+  background: linear-gradient(135deg, #2b2601 50%, #ffc730 0);
+  position: relative;
+}
+
+.cover-main p:first-child {
+  position: absolute;
+  top: 30px;
+  left: 14px;
+  transform: scale(0.335);
+  transform-origin: top left;
+}
+
+.cover-main {
+  color: white;
+}
+
+
+@media screen and (max-width: 768px) {
+  .app-nav {
+    margin-top: 50px;
+    margin-right: 10px;
+  }
+
+  section.cover h1 {
+    margin: 10px;
+  }
+
+  .cover-main p:nth-child(2) {
+    height: 30%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .banner {
+    position: static;
+  }
+
+  .anchor span {
+    color: white;
+  }
+}
+
+
+
+@media screen and (min-width: 768px) {
+  .app-nav {
+    margin-top: 40px;
+  }
+
+  section.cover h1,
+  section.cover ul {
+    text-align: left;
+    margin-left: 8%;
+    font-weight: 200;
+  }
+
+  .banner {
+    width: 100%;
+    height: 40%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transform: translate(15%, 50%);
+  }
+
+  .anchor span {
+    color: white;
+    font-size: 20px;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  /*竖屏 css*/
+  .cover {
+    background: linear-gradient(103deg, #2b2601 50%, #ffc730 0);
+  }
+
+  .cover-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .cover-main p {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .banner {
+    transform: translate(0, 0) scale(0.8);
+  }
+
+  .anchor span {
+    color: white;
+  }
+
+  section.cover ul {
+    text-align: center;
+    color: white;
+    margin-left: auto;
+  }
 }

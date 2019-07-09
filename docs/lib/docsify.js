@@ -371,7 +371,7 @@ function cover() {
     "hsl(" + (Math.floor(Math.random() * 255) + SL) + ") 100%)";
 
   return (
-    "<section class=\"cover show\" style=\"background: " + bgc + "\">" +
+    "<section class=\"cover show\">" +
     '<div class="cover-main"><!--cover--></div>' +
     '<div class="mask"></div>' +
     '</section>'
