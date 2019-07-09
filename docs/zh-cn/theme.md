@@ -19,6 +19,7 @@ Demosify 允许用户自定义主题，在 `.demosrc.js` 中通过 themeFile 属
 ```
 
 可覆盖的值有： 
+
 |变量名|释义|
 |---|---|
 |$font-family|字体|
