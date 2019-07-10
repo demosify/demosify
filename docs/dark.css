@@ -74,7 +74,7 @@ body {
 
   .cover-main p:nth-child(2) {
     height: 30%;
-    width: 50%;
+    width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,7 +89,7 @@ body {
 }
 
 
-
+/* 大屏幕 */
 @media screen and (min-width: 768px) {
   .app-nav {
     margin-top: 40px;
@@ -100,6 +100,9 @@ body {
     text-align: left;
     margin-left: 8%;
     font-weight: 200;
+  }
+  section.cover ul {
+    font-size: 20px;
   }
 
   .banner {
@@ -118,7 +121,7 @@ body {
 
   .anchor span {
     color: white;
-    font-size: 20px;
+    font-size: 25px;
   }
 }
 
