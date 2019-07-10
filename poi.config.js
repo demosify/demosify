@@ -8,7 +8,13 @@ if (!fs.existsSync(configFile)) {
   throw new Error('No .demosrc.js file found in project.');
 }
 
-let config = require(configFile);
+let configCode = fs.readFileSync(configFile, 'utf-8');
+const babel = require('@babel/core');
+configCode = babel.transformSync(configCode, { presets: ['env'] }).code;
+
+const requireFromString = require('require-from-string');
+
+let config = requireFromString(configCode).default;
 
 if (typeof config === 'function') {
   config = config(process.env.NODE_ENV);

@@ -1,6 +1,6 @@
 {
   "name": "@demosify/core",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Create a playground to show demos of your projects.",
   "main": "bin/cli.js",
   "author": "betseyliu",
@@ -31,6 +31,7 @@
     "perfect-scrollbar": "^1.4.0",
     "poi": "^12.7.0",
     "raw-loader": "^3.0.0",
+    "require-from-string": "^2.0.2",
     "sass-loader": "^7.1.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",

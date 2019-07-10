@@ -22,7 +22,7 @@ export default async () => {
     },
     foldBoxes: ['html'],
     packages: {
-      js: [],
+      js: ['https://unpkg.com/spritejs/dist/spritejs.min.js'],
       css: []
     }
   };

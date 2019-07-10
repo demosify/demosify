@@ -1,5 +1,4 @@
-module.exports = function(env) {
-  const spritejs = 'https://unpkg.com/spritejs/dist/spritejs.min.js';
+export default function(env) {
   return {
     devServer: {
       port: 3000,
@@ -26,13 +25,10 @@ module.exports = function(env) {
     // monoindustrial,
     boxTheme: 'monokai',
     globalPackages: {
-      js: [ 
-        '//lib.baomitu.com/babel-polyfill/7.0.0-beta.44/polyfill.min.js', 
-        spritejs
-      ],
+      js: [],
       css: [],
     },
     // tab waterfall
     editorViewMode: 'tab',
   };
-};
+}
