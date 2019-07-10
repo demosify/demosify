@@ -42,7 +42,7 @@ export default {
 
 5. Create a `.demoList.json` file in your `demos` directory. Specify all your demos show in sidebar. 
 
-```json
+```js
 [
   "demo1",
   // ...
