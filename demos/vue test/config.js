@@ -4,30 +4,28 @@ export default async () => {
   const [htmlCode, jsCode, cssCode] = await Promise.all([
     import('!raw-loader!./index.html'),
     import('!raw-loader!./script.js'),
-    import('!raw-loader!./style.css'),
+    import('!raw-loader!./style.css')
   ]);
 
   return {
     javascript: {
       code: jsCode,
       transformer: 'javascript',
-      visible: true,
+      visible: true
     },
     html: {
       code: htmlCode,
       transformer: 'html',
-      visible: true,
+      visible: true
     },
     css: {
       code: cssCode,
-      transformer: 'css',
+      transformer: 'css'
     },
     foldBoxes: ['html'],
     packages: {
-      js: [
-        'https://cdn.jsdelivr.net/npm/vue/dist/vue.js'
-      ],
-      css: [],
+      js: ['https://cdn.jsdelivr.net/npm/vue/dist/vue.js'],
+      css: []
     }
-  }
-}
+  };
+};

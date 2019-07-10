@@ -11,35 +11,57 @@ vec2 vec3 vec4 ivec2 ivec3 ivec4 bvec2 bvec3 bvec4
 mat2 mat3 mat4 
 sampler2D sampler3D samplerCube
 const attribute uniform varying`.split(/\s+/),
-  operators: ['=', '>', '<', '==', '<=', '>=', '!=', '<>', '+', '-', '*', '/',
-    '&&', '||', '++', '--'],
+  operators: [
+    '=',
+    '>',
+    '<',
+    '==',
+    '<=',
+    '>=',
+    '!=',
+    '<>',
+    '+',
+    '-',
+    '*',
+    '/',
+    '&&',
+    '||',
+    '++',
+    '--'
+  ],
   digits: /\d+(_+\d+)*/,
-  octaldigits: /[0-7]+(_+[0-7]+)*/,  binarydigits: /[0-1]+(_+[0-1]+)*/,
+  octaldigits: /[0-7]+(_+[0-7]+)*/,
+  binarydigits: /[0-1]+(_+[0-1]+)*/,
   hexdigits: /[[0-9a-fA-F]+(_+[0-9a-fA-F]+)*/,
   // The main tokenizer for our languages
   tokenizer: {
     root: [
       // identifiers and keywords
-      [/[a-z_$][\w$]*/, {
-        cases: {
-          '@typeKeywords': 'keyword',
-          '@keywords': 'keyword',
-          '@default': 'identifier'
+      [
+        /[a-z_$][\w$]*/,
+        {
+          cases: {
+            '@typeKeywords': 'keyword',
+            '@keywords': 'keyword',
+            '@default': 'identifier'
+          }
         }
-      }],
-      [/[A-Z][\w\$]*/, 'type.identifier'],  // to show class names nicely
+      ],
+      [/[A-Z][\w$]*/, 'type.identifier'], // to show class names nicely
       // whitespace
       { include: '@whitespace' },
       [/^\s*#\s*\w+/, 'keyword'],
       // delimiters and operators
-      [/[{}()\[\]]/, '@brackets'],
+      [/[{}()[\]]/, '@brackets'],
       // @ annotations.
       // As an example, we emit a debugging log message on these tokens.
       // Note: message are supressed during the first load -- change some lines to see them.
-      // eslint-disable-next-line no-useless-escape
-      [/@\s*[a-zA-Z_\$][\w\$]*/, { token: 'annotation', log: 'annotation token: $0' }],
+      [
+        /@\s*[a-zA-Z_$][\w$]*/,
+        { token: 'annotation', log: 'annotation token: $0' }
+      ],
       // numbers
-      [/\d*\.\d+([eE][\-+]?\d+)?/, 'number.float'],
+      [/\d*\.\d+([eE][-+]?\d+)?/, 'number.float'],
       [/0[xX][0-9a-fA-F]+/, 'number.hex'],
       [/\d+/, 'number'],
       // delimiter: after number because of .\d floats
@@ -50,13 +72,14 @@ const attribute uniform varying`.split(/\s+/),
       [/"/, { token: 'string.quote', bracket: '@open', next: '@string' }],
       // characters
       [/'[^\\']'/, 'string'],
-      [/'/, 'string.invalid']    ],
+      [/'/, 'string.invalid']
+    ],
     comment: [
-      [/[^\/*]+/, 'comment'],
+      [/[^/*]+/, 'comment'],
       [/\/\*/, 'comment', '@push'],
-    // nested comment
+      // nested comment
       ['\\*/', 'comment', '@pop'],
-      [/[\/*]/, 'comment']
+      [/[/*]/, 'comment']
     ],
     string: [
       [/[^\\"]+/, 'string'],
@@ -66,7 +89,7 @@ const attribute uniform varying`.split(/\s+/),
     whitespace: [
       [/[ \t\r\n]+/, 'white'],
       [/\/\*/, 'comment', '@comment'],
-      [/\/\/.*$/, 'comment'],
-    ],
-  },
+      [/\/\/.*$/, 'comment']
+    ]
+  }
 };

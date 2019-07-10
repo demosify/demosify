@@ -9,7 +9,7 @@ module.exports = function(env) {
       publicUrl: env === 'development' ? '/' : '.',
     },
     themeFile: 'demos/theme.scss',
-    staticFolder: 'dist',
+    staticFolder: 'static',
     demoList: env === 'development' ? '.demoList.dev.json': '.demoList.prod.json',
     name: 'SPRITEJS',
     version: 'v2',

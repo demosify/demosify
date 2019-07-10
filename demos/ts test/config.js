@@ -4,7 +4,7 @@ export default async () => {
   const [htmlCode, jsCode, cssCode] = await Promise.all([
     import('!raw-loader!./index.html'),
     import('!raw-loader!./script.js'),
-    import('!raw-loader!./style.css'),
+    import('!raw-loader!./style.css')
   ]);
 
   return {
@@ -12,29 +12,27 @@ export default async () => {
       code: jsCode,
       transformer: 'typescript',
       transform(code) {
-        const _code = Babel.transform(code, { 
+        const _code = Babel.transform(code, {
           presets: ['es2015'],
-          plugins: ['transform-typescript'],
+          plugins: ['transform-typescript']
         }).code;
         return _code;
       },
-      visible: true,
+      visible: true
     },
     html: {
       code: htmlCode,
       transformer: 'html',
-      visible: true,
+      visible: true
     },
     css: {
       code: cssCode,
-      transformer: 'css',
+      transformer: 'css'
     },
     foldBoxes: ['html'],
     packages: {
-      js: [
-
-      ],
-      css: [],
+      js: [],
+      css: []
     }
-  }
-}
+  };
+};

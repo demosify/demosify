@@ -4,7 +4,7 @@ export default async () => {
   const [htmlCode, jsCode, cssCode] = await Promise.all([
     import('!raw-loader!../assets/glsl-index.html'),
     import('!raw-loader!./script.glsl'),
-    import('!raw-loader!../assets/glsl-style.css'),
+    import('!raw-loader!../assets/glsl-style.css')
   ]);
 
   return {
@@ -25,23 +25,21 @@ doodle.compile(\`${code}\`).then((program) => {
         // Register a tokens provider for the language
         monaco.languages.setMonarchTokensProvider('glsl', glsl);
       },
-      visible: true,
+      visible: true
     },
     html: {
       code: htmlCode,
       transformer: 'html',
-      visible: true,
+      visible: true
     },
     css: {
       code: cssCode,
-      transformer: 'css',
+      transformer: 'css'
     },
     foldBoxes: ['html'],
     packages: {
-      js: [
-        'https://s0.ssl.qhres.com/static/e48aa70cee113a64.js',
-      ],
-      css: [],
+      js: ['https://s0.ssl.qhres.com/static/e48aa70cee113a64.js'],
+      css: []
     }
-  }
-}
+  };
+};

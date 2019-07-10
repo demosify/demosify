@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "poi --serve",
     "lint": "eslint src --fix",
+    "lint:demos": "eslint demos --fix",
     "doc": "docsify serve ./docs"
   },
   "dependencies": {

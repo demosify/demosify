@@ -4,7 +4,7 @@ export default async () => {
   const [htmlCode, jsCode, cssCode] = await Promise.all([
     import('!raw-loader!./index.html'),
     import('!raw-loader!./script.js'),
-    import('!raw-loader!./style.css'),
+    import('!raw-loader!./style.css')
   ]);
 
   return {
@@ -12,19 +12,20 @@ export default async () => {
       code: jsCode,
       transformer: 'javascript',
       transform(code) {
-        const _code = Babel.transform(code, { presets: ['es2015', 'react'] }).code;
+        const _code = Babel.transform(code, { presets: ['es2015', 'react'] })
+          .code;
         return _code;
       },
-      visible: true,
+      visible: true
     },
     html: {
       code: htmlCode,
       transformer: 'html',
-      visible: true,
+      visible: true
     },
     css: {
       code: cssCode,
-      transformer: 'css',
+      transformer: 'css'
     },
     foldBoxes: ['html'],
     packages: {
@@ -32,7 +33,7 @@ export default async () => {
         'https://unpkg.com/react@16/umd/react.development.js',
         'https://unpkg.com/react-dom@16/umd/react-dom.development.js'
       ],
-      css: [],
+      css: []
     }
-  }
-}
+  };
+};
