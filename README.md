@@ -4,6 +4,8 @@
 
 Create a playground to show the demos of your project.
 
+![](docs/banner-s.jpg)
+
 ## Quick start
 
 1. install @demosify/core
@@ -43,7 +45,7 @@ export default {
 ```json
 [
   "demo1",
-  ...
+  // ...
 ]
 ```
 
