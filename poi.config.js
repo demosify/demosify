@@ -14,7 +14,8 @@ configCode = babel.transformSync(configCode, { presets: ['env'] }).code;
 
 const requireFromString = require('require-from-string');
 
-let config = requireFromString(configCode).default;
+let config = requireFromString(configCode);
+config = config.default || config;
 
 if (typeof config === 'function') {
   config = config(process.env.NODE_ENV);
