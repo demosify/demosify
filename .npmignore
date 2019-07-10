@@ -76,3 +76,7 @@ tslint.json
 
 # build
 lib/
+
+# npm ignore
+demos/
+docs/
