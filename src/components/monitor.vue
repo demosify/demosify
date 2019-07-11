@@ -145,5 +145,4 @@ export default {
     background: $c-bg;
   }
 }
-
 </style>
