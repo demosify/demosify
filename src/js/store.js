@@ -237,7 +237,7 @@ const actions = {
           boxes[type].code != null ? boxes[type].code.default || '' : '';
       }
       boxes[type].transformer = boxes[type].transformer || type;
-      boxes[type].visible = boxes[type].visible !== false;
+      boxes[type].visible = !!boxes[type].visible;
     });
 
     Object.entries(boxes).forEach(
