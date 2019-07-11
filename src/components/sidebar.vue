@@ -171,7 +171,7 @@ $foldedDealy: 100ms;
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: $c-small-screen) {
   .sidebar-showMore {
     display: block;
   }

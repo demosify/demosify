@@ -1,21 +1,32 @@
 <template>
-  <div class="vessel"
+  <div
+    class="vessel"
     ref="vessel"
     :class="{
-      'vessel--rotate': isBackface,
-    }">
+      'vessel--rotate': isBackface
+    }"
+  >
     <editor class="editor"></editor>
     <monitor class="monitor"></monitor>
-    <div class="flipButton" @click="isBackface = !isBackface" @touchmove.stop="onFlipBtnDrag" :style="{top: `${flipBtnTop}px`}">
-      <svg t="1562510307124"
+    <div
+      class="flipButton"
+      @click="isBackface = !isBackface"
+      @touchmove.stop="onFlipBtnDrag"
+      :style="{ top: `${flipBtnTop}px` }"
+    >
+      <svg
+        t="1562510307124"
         class="icon"
         viewBox="0 0 1024 1024"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         p-id="2037"
-        xmlns:xlink="http://www.w3.org/1999/xlink">
-        <path d="M213.333333 259.84v512l-55.04-55.466667a42.666667 42.666667 0 0 0-60.586666 60.586667l128 128a42.666667 42.666667 0 0 0 60.586666 0l128-128a42.666667 42.666667 0 0 0 0-60.586667 42.666667 42.666667 0 0 0-60.586666 0L298.666667 771.84v-512A66.56 66.56 0 0 1 363.946667 192H469.333333a42.666667 42.666667 0 0 0 0-85.333333H363.946667A151.893333 151.893333 0 0 0 213.333333 259.84zM609.706667 247.04a42.666667 42.666667 0 0 0 60.586666 60.586667L725.333333 252.16v512a66.56 66.56 0 0 1-65.28 67.84H554.666667a42.666667 42.666667 0 0 0 0 85.333333h105.386666A151.893333 151.893333 0 0 0 810.666667 764.16v-512l55.04 55.466667a42.666667 42.666667 0 0 0 60.586666 0 42.666667 42.666667 0 0 0 0-60.586667l-128-128a42.666667 42.666667 0 0 0-60.586666 0z"
-          p-id="2038"></path>
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <path
+          d="M213.333333 259.84v512l-55.04-55.466667a42.666667 42.666667 0 0 0-60.586666 60.586667l128 128a42.666667 42.666667 0 0 0 60.586666 0l128-128a42.666667 42.666667 0 0 0 0-60.586667 42.666667 42.666667 0 0 0-60.586666 0L298.666667 771.84v-512A66.56 66.56 0 0 1 363.946667 192H469.333333a42.666667 42.666667 0 0 0 0-85.333333H363.946667A151.893333 151.893333 0 0 0 213.333333 259.84zM609.706667 247.04a42.666667 42.666667 0 0 0 60.586666 60.586667L725.333333 252.16v512a66.56 66.56 0 0 1-65.28 67.84H554.666667a42.666667 42.666667 0 0 0 0 85.333333h105.386666A151.893333 151.893333 0 0 0 810.666667 764.16v-512l55.04 55.466667a42.666667 42.666667 0 0 0 60.586666 0 42.666667 42.666667 0 0 0 0-60.586667l-128-128a42.666667 42.666667 0 0 0-60.586666 0z"
+          p-id="2038"
+        ></path>
       </svg>
     </div>
   </div>
@@ -29,8 +40,8 @@ export default {
   data() {
     return {
       isBackface: false,
-      flipBtnTop: 200,
-    }
+      flipBtnTop: 200
+    };
   },
   components: {
     Editor,
@@ -40,8 +51,7 @@ export default {
     // 翻页按钮
     onFlipBtnDrag(e) {
       let top = e.targetTouches[0].clientY;
-      if(top < 0) { top = 0}
-      if(top > window.screen.height - 40) { top = window.screen.height - 40}
+      top = Math.min(window.screen.height - 40, Math.max(0, top));
       this.flipBtnTop = top;
     }
   }
@@ -65,11 +75,12 @@ export default {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: $c-small-screen) {
   .vessel {
     position: relative;
     display: block;
-    & .editor, .monitor {
+    & .editor,
+    .monitor {
       position: absolute;
       top: 0;
       left: 0;
@@ -110,17 +121,16 @@ export default {
       background: $c-flipbtn-bg;
       opacity: 0.4;
       transition: opacity 0.2s ease-out;
-      & svg{
+      & svg {
         width: 20px;
         height: 20px;
         margin-right: 5px;
         fill: $c-flipbtn-color;
       }
-      &:active{
+      &:active {
         opacity: 1;
       }
     }
   }
-
 }
 </style>

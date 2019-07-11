@@ -68,7 +68,7 @@
 <script>
 import PerfectScrollbar from 'perfect-scrollbar';
 import Sandbox from './sandbox.vue';
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 export default {
   computed: {
     ...mapState([
@@ -217,7 +217,7 @@ export default {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: $c-small-screen) {
   .editor {
     &--shrink {
       height: calc(100vh - 60px);

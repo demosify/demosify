@@ -1,25 +1,27 @@
 <template>
-  <div id="fakeBody"
-    :class="{ 'fakeBody--max': !isSidebarShown }">
+  <div id="fakeBody" :class="{ 'fakeBody--max': !isSidebarShown }">
     <div class="header">
-      <a class="header-logo"
-         :href="config.homePage || '#'"
-         target="_blank"
-        :style="{ backgroundImage: `url(${config.logo})` }">
+      <a
+        class="header-logo"
+        :href="config.homePage || '#'"
+        target="_blank"
+        :style="{ backgroundImage: `url(${config.logo})` }"
+      >
         {{ config.logo ? '' : config.name }}
       </a>
-      <span v-if="config.version"
-        class="header-version">
+      <span v-if="config.version" class="header-version">
         {{ config.version }}
       </span>
     </div>
     <sidebar class="sidebar"></sidebar>
     <router-view class="vessel"></router-view>
-    <div class="handler"
+    <div
+      class="handler"
       :class="{
         'handler--hidden': !isSidebarShown
       }"
-      @click="TOGGLE_SIDEBAR"></div>
+      @click="TOGGLE_SIDEBAR"
+    ></div>
   </div>
 </template>
 
@@ -135,12 +137,13 @@ export default {
   transition: 0.3s all ease-out;
 }
 
-@media (max-width: 900px) {
+@media (max-width: $c-small-screen) {
   #fakeBody {
     grid-template: 60px 1fr / repeat(12, 1fr);
     &.fakeBody--max {
-      grid-template: 60px 1fr /  repeat(2, 1fr);
-      & .sidebar, .header {
+      grid-template: 60px 1fr / repeat(2, 1fr);
+      & .sidebar,
+      .header {
         display: none;
       }
       & .vessel {
@@ -171,6 +174,4 @@ export default {
     }
   }
 }
-
-
 </style>
