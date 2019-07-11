@@ -19,7 +19,7 @@
       }"
     >
       <router-link
-        v-for="demo in links"
+        v-for="demo in showLinks"
         :key="demo.src"
         class="sidebar-menuItem"
         :class="{
@@ -64,6 +64,11 @@ export default {
   },
   computed: {
     ...mapState(['links']),
+    ...mapState({
+      showLinks(state) {
+        return state.links.filter(link => link.visible !== false);
+      }
+    }),
     currentDemo() {
       this.isShowingMore = false; // eslint-disable-line vue/no-side-effects-in-computed-properties
       return this.$route.name;

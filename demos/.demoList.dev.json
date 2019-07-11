@@ -9,7 +9,8 @@
   }, 
   {
     "label": "react",
-    "src": "react test"
+    "src": "react test",
+    "visible": false
   }
   , 
   {
