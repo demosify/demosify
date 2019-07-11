@@ -1,5 +1,13 @@
 [
   {
+    "label": "simple",
+    "src": "simple"
+  },
+  {
+    "label": "singlejs",
+    "src": "singlejs"
+  },
+  {
     "label": "spritejs",
     "src": "spritejs"
   }, 

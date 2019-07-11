@@ -222,8 +222,7 @@ const actions = {
     ['html', 'css', 'javascript'].forEach(type => {
       if (!boxes[type] || typeof boxes[type] === 'string') {
         boxes[type] = {
-          code: { default: boxes[type] || '' },
-          transformer: type,
+          code: boxes[type] || '',
           visible: boxes[type] != null
         };
       } else if (
@@ -231,11 +230,14 @@ const actions = {
         typeof boxes[type].default === 'string'
       ) {
         boxes[type] = {
-          code: boxes[type],
-          transformer: type,
-          visible: true
+          code: boxes[type].default
         };
+      } else if (typeof boxes[type].code !== 'string') {
+        boxes[type].code =
+          boxes[type].code != null ? boxes[type].code.default || '' : '';
       }
+      boxes[type].transformer = boxes[type].transformer || type;
+      boxes[type].visible = boxes[type].visible !== false;
     });
 
     Object.entries(boxes).forEach(
@@ -247,7 +249,7 @@ const actions = {
           };
         ac.push(
           dispatch('updateKey', { type, key: demoID }),
-          dispatch('updateCode', { type, code: code.default }),
+          dispatch('updateCode', { type, code }),
           dispatch('updateTransformer', { type, transformer }),
           dispatch('updateTransform', { type, transform }),
           dispatch('updateVisible', { type, visible: Boolean(visible) }),
