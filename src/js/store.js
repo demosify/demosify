@@ -230,7 +230,8 @@ const actions = {
         typeof boxes[type].default === 'string'
       ) {
         boxes[type] = {
-          code: boxes[type].default
+          code: boxes[type].default,
+          visible: true
         };
       } else if (typeof boxes[type].code !== 'string') {
         boxes[type].code =
