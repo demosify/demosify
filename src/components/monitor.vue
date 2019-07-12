@@ -90,7 +90,7 @@ export default {
     },
     async runtimeStyle() {
       const dependencies = this.dependencies.css
-        .map(dependence => `<link src="${dependence}"><\/link>`) //eslint-disable-line no-useless-escape
+        .map(dependence => `<link rel="stylesheet" href="${dependence}">`) //eslint-disable-line no-useless-escape
         .join('\n');
       return dependencies;
     },
