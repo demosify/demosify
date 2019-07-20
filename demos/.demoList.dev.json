@@ -28,5 +28,9 @@
   {
     "label": "Vue",
     "src": "vue test"
+  },
+  {
+    "label": "Json",
+    "src": "json test"
   }
 ]
