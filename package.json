@@ -1,6 +1,6 @@
 {
   "name": "@demosify/core",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "Create a playground to show demos of your projects.",
   "main": "bin/cli.js",
   "author": "betseyliu",
@@ -17,7 +17,10 @@
   },
   "dependencies": {
     "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-eslint": "^10.0.2",
     "babel-preset-env": "^1.7.0",
+    "buble": "^0.19.7",
+    "buble-loader": "^0.5.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.3",
     "monaco-editor": "^0.17.1",
