@@ -1,6 +1,6 @@
 {
   "name": "@demosify/core",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Create a playground to show demos of your projects.",
   "main": "bin/cli.js",
   "author": "betseyliu",
@@ -17,9 +17,9 @@
   },
   "dependencies": {
     "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@vue/eslint-config-prettier": "^4.0.1",
     "babel-eslint": "^10.0.2",
-    "babel-preset-env": "^1.7.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.3",
     "json-loader": "^0.5.7",

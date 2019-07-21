@@ -10,7 +10,8 @@ if (!fs.existsSync(configFile)) {
 
 let configCode = fs.readFileSync(configFile, 'utf-8');
 const babel = require('@babel/core');
-configCode = babel.transformSync(configCode, { presets: ['env'] }).code;
+configCode = babel.transformSync(configCode, { presets: ['@babel/preset-env'] })
+  .code;
 
 const requireFromString = require('require-from-string');
 
