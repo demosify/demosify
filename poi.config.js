@@ -80,6 +80,13 @@ module.exports = {
         }
       }
     });
+    config.module
+      .rule('json')
+      .test(/\.json$/)
+      .use('json')
+      .loader('json-loader')
+      .end();
+    config.module.rule('json').store.set('type', 'javascript/auto');
     config.output.filename('[name].bundle.js');
   }
 };

@@ -71,12 +71,13 @@ export default {
         await this.transform(true);
         const headStyle = await this.transformCSS();
         const html = await this.transformHTML();
+        const rawData = await this.transformRawData();
         const jsScript = await this.transformJS();
         const runtimeScript = await this.runtimeScript();
         const runtimeStyle = await this.runtimeStyle();
         this.iframe.setContent({
           head: headStyle + runtimeStyle,
-          body: html + runtimeScript + jsScript
+          body: html + runtimeScript + rawData + jsScript
         });
         progress.done();
       }, 1000);
@@ -116,6 +117,13 @@ export default {
         code = await transform.javascript(this.boxes.javascript);
       }
       return createElement('script')(code);
+    },
+    async transformRawData() {
+      let code = '';
+      if (this.boxes.rawdata) {
+        code = await transform.rawdata(this.boxes.rawdata);
+      }
+      return createElement('script')(code, { type: 'text/x-rawdata' });
     },
     listenIframe({ data = {} }) {
       if (data.type === 'demoground-console') {

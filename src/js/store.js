@@ -88,6 +88,10 @@ const mutations = {
   CLEAR_BOXES(state) {
     state.boxes = {};
   },
+  UPDATE_TAB(state, { type, tabName }) {
+    if (!state.boxes[type]) state.boxes[type] = {};
+    state.boxes[type].tabName = tabName;
+  },
   UPDATE_KEY(state, { type, key }) {
     if (!state.boxes[type]) state.boxes[type] = {};
     state.boxes[type].key = key;
@@ -154,6 +158,9 @@ const actions = {
   clearBoxes({ commit }) {
     commit('CLEAR_BOXES');
   },
+  updateTab({ commit }, pl) {
+    commit('UPDATE_TAB', pl);
+  },
   updateKey({ commit }, pl) {
     commit('UPDATE_KEY', pl);
   },
@@ -219,7 +226,7 @@ const actions = {
 
     packages = packages || { js: [], css: [] };
 
-    ['html', 'css', 'javascript'].forEach(type => {
+    ['html', 'css', 'javascript', 'rawdata'].forEach(type => {
       if (!boxes[type] || typeof boxes[type] === 'string') {
         boxes[type] = {
           code: boxes[type] || '',
@@ -242,13 +249,17 @@ const actions = {
     });
 
     Object.entries(boxes).forEach(
-      ([type, { code, transformer, visible, transform, editorHook }]) => {
+      ([
+        type,
+        { tabName, code, transformer, visible, transform, editorHook }
+      ]) => {
         transform =
           transform ||
           function(code) {
             return code;
           };
         ac.push(
+          dispatch('updateTab', { type, tabName }),
           dispatch('updateKey', { type, key: demoID }),
           dispatch('updateCode', { type, code }),
           dispatch('updateTransformer', { type, transformer }),

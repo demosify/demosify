@@ -14,9 +14,16 @@ export default async () => {
 
   return {
     javascript: {
+      tabName: 'JAVASCRIPT',  // 显示tabName，默认是类型的大写
       code: jsCode, // JavaScript 代码
       transformer: 'javascript',  // JavaScript transformer
       visible: true,  // 是否显示编辑器
+    },
+    // rawdata 会以 <script type="text/x-rawdata">${code}</script> 的形式插入文档
+    rawdata: {
+      code: rawdata, // 文本数据
+      transformer: 'rawdata',
+      visible: true, 
     },
     html: {
       code: htmlCode, // HTML 代码

@@ -43,7 +43,9 @@
           :key="type"
           @click="updateCurrentBox(type)"
         >
-          <span class="editor-tabName">{{ type.toUpperCase() }}</span>
+          <span class="editor-tabName">{{
+            content.tabName || type.toUpperCase()
+          }}</span>
           <span v-show="currentBox === type" class="editor-tabTransformer">
             {{ content.transformer }}
           </span>

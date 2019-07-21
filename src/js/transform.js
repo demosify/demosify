@@ -9,3 +9,7 @@ export async function css({ code, transform }) {
 export async function html({ code, transform }) {
   return transform ? transform(code) : code;
 }
+
+export async function rawdata({ code, transform }) {
+  return transform ? transform(code) : code;
+}

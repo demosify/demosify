@@ -14,9 +14,16 @@ export default async () => {
 
   return {
     javascript: {
+      tabName: 'JAVASCRIPT',  // Show tabName, default is type.toUpperCase()
       code: jsCode, // JavaScript code
       transformer: 'javascript',  // JavaScript transformer
       visible: true,  // show editor box or not
+    },
+    // If add this, demosify will insert <script type="text/x-rawdata">${code}</script> to document
+    rawdata: {
+      code: rawdata, // rawdata text
+      transformer: 'rawdata',
+      visible: true, 
     },
     html: {
       code: htmlCode, // HTML code

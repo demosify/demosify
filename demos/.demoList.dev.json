@@ -30,7 +30,7 @@
     "src": "vue test"
   },
   {
-    "label": "Json",
-    "src": "json test"
+    "label": "Rawdata",
+    "src": "rawdata test"
   }
 ]

@@ -19,5 +19,9 @@
   {
     "label": "Vue",
     "src": "vue test"
+  },
+  {
+    "label": "Rawdata",
+    "src": "rawdata test"
   }
 ]
