@@ -117,7 +117,14 @@ doodle.compile(\`${code}\`).then((program) => {
     });
     typescriptService.setCompilerOptions({
       experimentalDecorators: true,
-      noLib: true
+      target: monaco.languages.typescript.ScriptTarget.ES5,
+      allowNonTsExtensions: true,
+      moduleResolution:
+        monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+      module: monaco.languages.typescript.ModuleKind.CommonJS,
+      noEmit: true,
+      noLib: true,
+      typeRoots: ['node_modules/@types']
     });
     const model = monaco.editor.createModel(
       value,
