@@ -18,6 +18,24 @@ export default async () => {
         }).code;
         return _code;
       },
+      editorHook(monaco, value, language) {
+        const typescriptService =
+          monaco.languages.typescript.typescriptDefaults;
+        typescriptService.setDiagnosticsOptions({
+          noSemanticValidation: true,
+          noSyntaxValidation: false
+        });
+        typescriptService.setCompilerOptions({
+          experimentalDecorators: true,
+          noLib: true
+        });
+        const model = monaco.editor.createModel(
+          value,
+          language,
+          monaco.Uri.parse('file:///main.ts')
+        );
+        return model;
+      },
       visible: true
     },
     html: {

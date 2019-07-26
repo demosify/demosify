@@ -5,6 +5,9 @@ export default function(env) {
     },
     output: {
       dir: 'docs/demo',
+      html: {
+        title: '测试',
+      },
       publicUrl: env === 'development' ? '/' : '.',
     },
     themeFile: 'demos/theme.scss',

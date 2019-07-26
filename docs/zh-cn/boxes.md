@@ -101,3 +101,30 @@ doodle.compile(\`${code}\`).then((program) => {
 ```
 
 这样我们就可以支持 glsl （WebGL shader）语言的 demo 了。
+
+## editorHook with model
+
+在v0.4之后的版本中，我们可以在editorHook中返回一个model，这样editor会使用这个model来处理代码。
+
+```js
+...
+  editorHook(monaco, value, language) {
+    const typescriptService =
+      monaco.languages.typescript.typescriptDefaults;
+    typescriptService.setDiagnosticsOptions({
+      noSemanticValidation: true,
+      noSyntaxValidation: false
+    });
+    typescriptService.setCompilerOptions({
+      experimentalDecorators: true,
+      noLib: true
+    });
+    const model = monaco.editor.createModel(
+      value,
+      language,
+      monaco.Uri.parse('file:///main.ts')
+    );
+    return model;
+  },
+...
+```

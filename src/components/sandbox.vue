@@ -62,9 +62,14 @@ export default {
   },
   methods: {
     initMonaco() {
-      if (this.editorHook) this.editorHook(monaco, this.value, this.language);
+      let model;
+      if (this.editorHook) {
+        model = this.editorHook(monaco, this.value, this.language);
+      }
+
       // 加载全部主题
       loadTheme(monaco);
+
       this.monacoEditor = monaco.editor.create(
         this.$refs.monaco,
         Object.assign(
@@ -85,7 +90,11 @@ export default {
         this.editorLineCount = this.monacoEditor.getModel().getLineCount();
       });
 
-      this.monacoEditor.setValue(this.value);
+      if (model) {
+        this.monacoEditor.setModel(model);
+      } else {
+        this.monacoEditor.setValue(this.value);
+      }
 
       this.bindContentChangeListener();
     },
