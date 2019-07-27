@@ -8,6 +8,8 @@
 
 👉🏻 [glsl-doodle demo](http://doodle.webgl.group/demo)
 
+👉🏻 demosify微信交流群 <img class="demosify-wechat" src="https://p4.ssl.qhimg.com/t014fe3cffcb00b5f46.png"></img>
+
 ## 快速使用
 
 1. 安装 @demosify/core

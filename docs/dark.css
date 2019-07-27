@@ -160,3 +160,10 @@ body {
     margin-left: auto;
   }
 }
+
+.demosify-wechat {
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  margin-left: 15px;
+}

@@ -8,6 +8,8 @@ Create a playground to show the demos of your project.
 
 👉🏻 [glsl-doodle demo](http://doodle.webgl.group/demo)
 
+👉🏻 demosify wechat group <img class="demosify-wechat" src="https://p4.ssl.qhimg.com/t014fe3cffcb00b5f46.png"></img>
+
 ## Quick start
 
 1. install @demosify/core
