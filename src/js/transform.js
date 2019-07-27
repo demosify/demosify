@@ -1,15 +1,19 @@
-export function javascript({ code, transform }) {
-  return transform ? transform(code) : code;
+export async function javascript({ code, transform }) {
+  if (transform) code = await transform(code);
+  return code;
 }
 
-export function css({ code, transform }) {
-  return transform ? transform(code) : code;
+export async function css({ code, transform }) {
+  if (transform) code = await transform(code);
+  return code;
 }
 
-export function html({ code, transform }) {
-  return transform ? transform(code) : code;
+export async function html({ code, transform }) {
+  if (transform) code = await transform(code);
+  return code;
 }
 
-export function rawdata({ code, transform }) {
-  return transform ? transform(code) : code;
+export async function rawdata({ code, transform }) {
+  if (transform) code = await transform(code);
+  return code;
 }

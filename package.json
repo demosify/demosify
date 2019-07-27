@@ -1,6 +1,6 @@
 {
   "name": "@demosify/core",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Create a playground to show demos of your projects.",
   "main": "bin/cli.js",
   "author": "betseyliu",
