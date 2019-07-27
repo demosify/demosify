@@ -78,5 +78,3 @@ tslint.json
 lib/
 
 
-demos/
-.demosify.js

@@ -1,19 +1,16 @@
-export default function(env) {
-  const spritejs = env === 'development' ? '/spritejs.js'
-    : 'https://unpkg.com/spritejs/dist/spritejs.min.js';
+module.exports = function(env) {
   return {
     devServer: {
-      port: 9090,
+      port: 3000,
     },
     output: {
-      dir: 'docs/demo',
-      publicUrl: env === 'development' ? '/' : '.',
+      dir: 'docs',
+      publicUrl: '.',
     },
-    themeFile: 'demos/theme.scss',
-    staticFolder: 'dist',
+    staticFolder: 'static',
     demoList: env === 'development' ? '.demoList.dev.json': '.demoList.prod.json',
-    name: 'SPRITEJS',
-    version: 'v2',
+    name: 'DEMOSIFY',
+    version: 'v1',
     homePage: 'https://spritejs.org',
     logo: '',
     // 可选主题: active4d, allHallowsEve, amy, blackboard, brillianceBlack,
@@ -27,10 +24,7 @@ export default function(env) {
     // monoindustrial,
     boxTheme: 'monokai',
     globalPackages: {
-      js: [ 
-        '//lib.baomitu.com/babel-polyfill/7.0.0-beta.44/polyfill.min.js', 
-        spritejs
-      ],
+      js: ['https://unpkg.com/spritejs/dist/spritejs.min.js'],
       css: [],
     },
     // tab waterfall
