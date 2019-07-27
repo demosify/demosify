@@ -76,3 +76,7 @@ tslint.json
 
 # build
 lib/
+
+
+demos/
+.demosify.js

@@ -1,17 +1,16 @@
 export default function(env) {
+  const spritejs = env === 'development' ? '/spritejs.js'
+    : 'https://unpkg.com/spritejs/dist/spritejs.min.js';
   return {
     devServer: {
-      port: 3000,
+      port: 9090,
     },
     output: {
       dir: 'docs/demo',
-      html: {
-        title: '测试',
-      },
       publicUrl: env === 'development' ? '/' : '.',
     },
     themeFile: 'demos/theme.scss',
-    staticFolder: 'static',
+    staticFolder: 'dist',
     demoList: env === 'development' ? '.demoList.dev.json': '.demoList.prod.json',
     name: 'SPRITEJS',
     version: 'v2',
@@ -28,10 +27,13 @@ export default function(env) {
     // monoindustrial,
     boxTheme: 'monokai',
     globalPackages: {
-      js: [],
+      js: [ 
+        '//lib.baomitu.com/babel-polyfill/7.0.0-beta.44/polyfill.min.js', 
+        spritejs
+      ],
       css: [],
     },
     // tab waterfall
     editorViewMode: 'tab',
   };
-}
+};

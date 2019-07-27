@@ -18,7 +18,40 @@
         'sidebar-menu--folded': !isShowingMore
       }"
     >
-      <router-link
+      <div v-for="(links, group) in showLinks" :key="group">
+        <!-- 不在文件夹中 -->
+        <router-link
+          v-if="links.length === 1"
+          class="sidebar-menuItem"
+          :class="{
+            'sidebar-menuItem--active': currentDemo === links[0].label
+          }"
+          :to="`/${links[0].src}`"
+        >
+          {{ links[0].label }}
+        </router-link>
+        <div v-else class="sidebar-menu__folder">
+          <p class="sidebar-menu__folderTitle" @click="toogleVisible(group)">
+            {{ group }}
+          </p>
+          <div class="sidebar-menu__folderContent"
+            v-show="unfolded.indexOf(group) > -1"
+          >
+            <router-link
+              v-for="link in links"
+              :key="link.src"
+              class="sidebar-menuItem"
+              :class="{
+                'sidebar-menuItem--active': currentDemo === link.label
+              }"
+              :to="`/${link.src}`"
+            >
+              {{ link.label }}
+            </router-link>
+          </div>
+        </div>
+      </div>
+      <!-- <router-link
         v-for="demo in showLinks"
         :key="demo.src"
         class="sidebar-menuItem"
@@ -28,7 +61,7 @@
         :to="`/${demo.src}`"
       >
         {{ demo.label }}
-      </router-link>
+      </router-link> -->
     </div>
   </nav>
 </template>
@@ -43,7 +76,8 @@ export default {
       isShowingMore: false,
       showingMoreTimer: null,
       isShowingMoreFolded: false,
-      isShowingMoreCrossed: false
+      isShowingMoreCrossed: false,
+      unfolded: []
     };
   },
   watch: {
@@ -66,7 +100,14 @@ export default {
     ...mapState(['links']),
     ...mapState({
       showLinks(state) {
-        return state.links.filter(link => link.visible !== false);
+        const visibleLinks = state.links.filter(link => link.visible !== false);
+        const groups = {};
+        visibleLinks.forEach(link => {
+          const groupName = link.src.split('/')[0];
+          if (!groups[groupName]) groups[groupName] = [];
+          groups[groupName].push(link);
+        });
+        return groups;
       }
     }),
     currentDemo() {
@@ -78,6 +119,16 @@ export default {
     new PerfectScrollbar(document.querySelector('.sidebar-menu'), {
       suppressScrollX: true
     });
+  },
+  methods: {
+    toogleVisible(group) {
+      const index = this.unfolded.indexOf(group);
+      if (index > -1) {
+        this.unfolded.splice(index, 1);
+      } else {
+        this.unfolded.push(group);
+      }
+    }
   }
 };
 </script>
@@ -98,17 +149,19 @@ $foldedDealy: 100ms;
     flex-direction: column;
     &Item {
       font-size: 14px;
-      padding: 5px 0 5px 20px;
+      line-height: 1.8;
+      padding: 0 0 0 20px;
       color: rgba($c-font, 0.4);
       font-weight: 300;
       transition: 0.3s all ease;
       cursor: pointer;
       text-decoration: none;
+      display: block;
       &:hover {
         color: $c-font;
         transform: translateX(4px);
       }
-      &--active {
+      &.router-link-active {
         opacity: 1;
         color: $c-highlight;
         position: relative;
@@ -124,6 +177,42 @@ $foldedDealy: 100ms;
         &:hover {
           color: $c-highlight;
         }
+      }
+    }
+    &__folder {
+      &Title {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        line-height: 1.8;
+        padding: 0 0 0 20px;
+        color: rgba($c-font, 0.4);
+        font-weight: 300;
+        cursor: pointer;
+        transition: color 0.3s ease-out;
+        position: relative;
+        &:hover {
+          color: $c-font;
+          &:after {
+            border-color: $c-font transparent transparent transparent;
+          }
+        }
+        &:after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 6px 4px 0 4px;
+          border-color: rgba($c-font, 0.4) transparent transparent transparent;
+          top: 10px;
+          left: 8px;
+        }
+      }
+      &Content {
+        display: flex;
+        flex-direction: column;
+        background: darken($c-bg, 3%);
       }
     }
   }
