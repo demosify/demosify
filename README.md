@@ -116,3 +116,9 @@ These files will be loaded to your playground.
 Run `npm run demo:prod`.
 
 All the demos will be deploy to production into `dist` directory of your project.
+
+## Thanks to
+
+Special thanks to [Poi](https://github.com/egoist/poi).
+
+Demosify is inspired and powered by [Poi](https://poi.js.org/).

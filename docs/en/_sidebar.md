@@ -14,3 +14,5 @@
 * Themes
   * [User themes](/en/theme)
 
+* Thanks
+  * [Poi](https://poi.js.org/)

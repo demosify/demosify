@@ -14,3 +14,6 @@
 * 主题
   * [自定义主题](/zh-cn/theme)
 
+* 特别感谢
+  * [Poi](https://poi.js.org/)
+
