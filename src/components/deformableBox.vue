@@ -125,6 +125,7 @@ export default {
         this.handleResizeEnd,
         { once: true }
       );
+      document.getElementById('monitor-iframe').addEventListener('mouseover', this.handleResizeEnd); //eslint-disable-line
     },
     getElementLeft(el) {
       let actualLeft = el.offsetLeft;
