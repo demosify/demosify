@@ -77,6 +77,7 @@ module.exports = {
       dir: 'dist', // output dir, default is dist
       publicUrl: '/', // root url of your playground
     },
+    demosPath: 'demos', // the demos folder, default is ./demos
     themeFile: 'demos/theme.scss', // a custom theme file, support sass
     staticFolder: 'static', // the static resource file path
     demoList: '.demoList.json', // the demoList config file, default is .demoList.json
