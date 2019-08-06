@@ -3,10 +3,20 @@
     class="vessel"
     ref="vessel"
     :class="{
-      'vessel--rotate': isBackface
+      'vessel--rotate': isBackface,
+      'vessel--isPc': isPC
     }"
   >
-    <editor class="editor"></editor>
+    <deformable-box
+      v-if="isPC"
+      :resizable="['right']"
+      :initWidth="800"
+      :maxWidth="1100"
+      :minWidth="400"
+    >
+      <editor class="editor"></editor>
+    </deformable-box>
+    <editor v-else class="editor"></editor>
     <monitor class="monitor"></monitor>
     <div
       class="flipButton"
@@ -35,6 +45,7 @@
 <script>
 import Editor from '@/components/editor.vue';
 import Monitor from '@/components/monitor.vue';
+import DeformableBox from '@/components/deformableBox.vue';
 export default {
   name: 'vessel',
   data() {
@@ -45,7 +56,29 @@ export default {
   },
   components: {
     Editor,
-    Monitor
+    Monitor,
+    DeformableBox
+  },
+  computed: {
+    isPC() {
+      var userAgentInfo = navigator.userAgent;
+      var Agents = new Array(
+        'Android',
+        'iPhone',
+        'SymbianOS',
+        'Windows Phone',
+        'iPad',
+        'iPod'
+      );
+      var flag = true;
+      for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+          flag = false;
+          break;
+        }
+      }
+      return flag;
+    }
   },
   methods: {
     // 翻页按钮
@@ -72,6 +105,15 @@ export default {
   }
   & .flipButton {
     display: none;
+  }
+  &--isPc {
+    display: flex;
+    & .editor {
+      margin-right: 1px;
+    }
+    & .monitor {
+      flex-grow: 1;
+    }
   }
 }
 
