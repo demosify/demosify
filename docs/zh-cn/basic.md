@@ -151,7 +151,7 @@ Demosify 是支持多级目录的，所以 src 可以指定子目录：
 
 ```js
 export default async () => {
-  const [jsCode, htmlCode, cssCode] = await Promise.all([
+  const [htmlCode, jsCode, cssCode] = await Promise.all([
     import('!raw-loader!./index.html'),
     import('!raw-loader!./index.js'),
     import('!raw-loader!./style.css'),
