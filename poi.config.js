@@ -28,6 +28,7 @@ if (config.devServer && config.devServer.port) {
 }
 let output = config.output || { dir: 'dist' };
 let demoList = config.demoList || '.demoList.json';
+let demosPath = config.demosPath || 'demos';
 
 if (typeof output === 'string') {
   output = { dir: output };
@@ -73,9 +74,9 @@ module.exports = {
       resolve: {
         alias: {
           '@': path.join(__dirname, 'src'),
-          '~': path.join(rootPath, 'demos'),
-          demos: path.join(rootPath, 'demos'),
-          '.demoList.json': path.join(rootPath, 'demos', demoList),
+          '~': path.join(rootPath, demosPath),
+          demos: path.join(rootPath, demosPath),
+          '.demoList.json': path.join(rootPath, demosPath, demoList),
           manifest: path.join(rootPath, '.demosrc'),
           themeFile: themeFilePath
         }
