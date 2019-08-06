@@ -152,7 +152,7 @@ A usual `config.js` configuration file is as follows:
 
 ```js
 export default async () => {
-  const [jsCode, htmlCode, cssCode] = await Promise.all([
+  const [htmlCode, jsCode, cssCode] = await Promise.all([
     import('!raw-loader!./index.html'),
     import('!raw-loader!./index.js'),
     import('!raw-loader!./style.css'),
