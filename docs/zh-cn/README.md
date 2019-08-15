@@ -8,7 +8,7 @@
 
 👉🏻 [glsl-doodle demo](http://doodle.webgl.group/demo)
 
-👉🏻 demosify微信交流群 <img class="demosify-wechat" src="https://p4.ssl.qhimg.com/t014fe3cffcb00b5f46.png"></img>
+👉🏻 demosify微信交流群: 由于微信群二维码有效期限制，请先加##lieb_bingjing##为好友，之后会被邀请入群。
 
 ## 快速使用
 
