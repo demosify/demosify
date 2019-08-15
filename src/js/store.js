@@ -59,6 +59,10 @@ const links = demoList.map(link => {
   if (typeof link === 'string') {
     link = { label: link, src: link };
   }
+  // 组
+  if ('demos' in link) {
+    link.demos.map(l => ({ lable: l, src: l }));
+  }
   return link;
 });
 

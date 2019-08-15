@@ -100,19 +100,35 @@ export default {
     ...mapState(['links']),
     ...mapState({
       showLinks(state) {
-        const visibleLinks = state.links.filter(link => link.visible !== false);
         const groups = {};
-        visibleLinks.forEach(link => {
-          const groupName = link.src.split('/')[0];
-          if (!groups[groupName]) groups[groupName] = [];
-          groups[groupName].push(link);
+        state.links.forEach(link => {
+          // 定义的组
+          if ('demos' in link) {
+            if (!groups[link.group]) groups[link.group] = [];
+            groups[link.group] = [
+              ...groups[link.group],
+              ...link.demos.map(demo => ({
+                label: demo.label,
+                src: `${link.src}/${demo.src}`
+              }))
+            ];
+          } else {
+            const groupName = link.src.split('/')[0];
+            if (!groups[groupName]) groups[groupName] = [];
+            groups[groupName].push(link);
+          }
         });
         return groups;
       }
     }),
     currentDemo() {
       this.isShowingMore = false; // eslint-disable-line vue/no-side-effects-in-computed-properties
-      return this.$route.name;
+      const src = this.$route.name;
+      if (src) {
+        const group = src.split('/')[0];
+        this.toogleVisible(group);
+      }
+      return src;
     }
   },
   mounted() {
@@ -122,6 +138,7 @@ export default {
   },
   methods: {
     toogleVisible(group) {
+      console.log(group);
       const index = this.unfolded.indexOf(group);
       if (index > -1) {
         this.unfolded.splice(index, 1);
