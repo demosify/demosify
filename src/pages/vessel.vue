@@ -128,6 +128,7 @@ export default {
       left: 0;
       width: 100%;
       backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
       transition: 1s all ease;
       border: 1px solid $c-gap;
     }
