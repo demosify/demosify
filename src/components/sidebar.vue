@@ -138,7 +138,6 @@ export default {
   },
   methods: {
     toogleVisible(group) {
-      console.log(group);
       const index = this.unfolded.indexOf(group);
       if (index > -1) {
         this.unfolded.splice(index, 1);
