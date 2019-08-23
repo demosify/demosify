@@ -187,6 +187,7 @@ export default {
 </script>
 <style lang="scss">
 .c-deformableBox {
+  height: 100%;
   position: relative;
   & .ctrl {
     position: absolute;
