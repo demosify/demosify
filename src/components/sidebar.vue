@@ -34,7 +34,8 @@
           <p class="sidebar-menu__folderTitle" @click="toogleVisible(group)">
             {{ group }}
           </p>
-          <div class="sidebar-menu__folderContent"
+          <div
+            class="sidebar-menu__folderContent"
             v-show="unfolded.indexOf(group) > -1"
           >
             <router-link
@@ -123,18 +124,27 @@ export default {
     }),
     currentDemo() {
       this.isShowingMore = false; // eslint-disable-line vue/no-side-effects-in-computed-properties
+      return this.$route.name;
+    },
+    currentGroup() {
       const src = this.$route.name;
       if (src) {
         const group = src.split('/')[0];
-        this.toogleVisible(group);
+        return group;
       }
-      return src;
+      return null;
     }
   },
   mounted() {
     new PerfectScrollbar(document.querySelector('.sidebar-menu'), {
       suppressScrollX: true
     });
+    if (this.currentGroup) {
+      const index = this.unfolded.indexOf(this.currentGroup);
+      if (index == -1) {
+        this.unfolded.push(this.currentGroup);
+      }
+    }
   },
   methods: {
     toogleVisible(group) {
