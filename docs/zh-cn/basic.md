@@ -132,13 +132,34 @@ module.exports = {
 ]
 ```
 
-Demosify 是支持多级目录的，所以 src 可以指定子目录：
+Demosify 是支持多级目录的，
+
+使用 src 可以直接设置多级目录，分组名字默认为目录名字，
+
+如果想给分组单独命名可以使用demos，属性设置子页面，
+
+目前最多设置二级页面。
 
 ```json
 [
   { "label": "演示1", "src": "demo1" },
   { "label": "演示2", "src": "demo2" },
   { "label": "演示3", "src": "subdir/demo3" },
+  { "label": "演示4", "src": "subdir/demo4" },
+  { 
+    "label": "分组",
+    "src": "group",
+    "demos": [
+      {
+        "label": "子1",
+        "src": "child1"
+      },
+      {
+        "label": "子2",
+        "src": "child2"
+      }
+    ]
+  },
   ...  
 ]
 ```

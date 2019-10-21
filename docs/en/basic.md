@@ -127,20 +127,41 @@ You can alse specify a label, it will be shown in sidebar.
 
 ```json
 [
-  { "label": "演示1", "src": "demo1" },
-  { "label": "演示2", "src": "demo2" },
-  { "label": "演示3", "src": "demo3" },
+  { "label": "demoName1", "src": "demo1" },
+  { "label": "demoName2", "src": "demo2" },
+  { "label": "demoName3", "src": "demo3" },
   ...
 ]
 ```
 
-Demosify supports multilevel catalogue:
+Demosify supports multilevel catalogue,
+
+use src can set multilevel catalogue directly,
+
+if you wanna make alias for directly, you can use 'demo' property to set child demos,
+
+Now, you only can create second-level catelogue most.
 
 ```json
 [
-  { "label": "演示1", "src": "demo1" },
-  { "label": "演示2", "src": "demo2" },
-  { "label": "演示3", "src": "subdir/demo3" },
+  { "label": "demoName1", "src": "demo1" },
+  { "label": "demoName2", "src": "demo2" },
+  { "label": "demoName3", "src": "subdir/demo3" },
+  { "label": "demoName4", "src": "subdir/demo4" },
+  { 
+    "label": "groupName",
+    "src": "group",
+    "demos": [
+      {
+        "label": "childName1",
+        "src": "child1"
+      },
+      {
+        "label": "childName2",
+        "src": "child2"
+      }
+    ]
+  },
   ...  
 ]
 ```
