@@ -149,7 +149,7 @@ Now, you only can create second-level catelogue most.
   { "label": "demoName3", "src": "subdir/demo3" },
   { "label": "demoName4", "src": "subdir/demo4" },
   { 
-    "label": "groupName",
+    "group": "groupName",
     "src": "group",
     "demos": [
       {

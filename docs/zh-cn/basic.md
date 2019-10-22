@@ -147,7 +147,7 @@ Demosify 是支持多级目录的，
   { "label": "演示3", "src": "subdir/demo3" },
   { "label": "演示4", "src": "subdir/demo4" },
   { 
-    "label": "分组",
+    "group": "分组",
     "src": "group",
     "demos": [
       {
