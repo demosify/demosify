@@ -102,6 +102,7 @@ export default {
     ...mapState({
       showLinks(state) {
         const groups = {};
+        console.log(state.links);
         state.links.forEach(link => {
           // 定义的组
           if ('demos' in link) {

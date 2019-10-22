@@ -8,20 +8,25 @@
     "src": "glsl test"
   }, 
   {
-    "label": "react",
-    "src": "react test"
-  }
-  , 
-  {
     "label": "TypeScript",
     "src": "ts test"
   },
-  {
-    "label": "Vue",
-    "src": "vue test"
-  },
-  {
+  { 
     "label": "RawData",
     "src": "rawdata test"
+  },
+  {
+    "group": "framework",
+    "src": "framework",
+    "demos": [
+      {
+        "label": "Vue",
+        "src": "vue test"
+      },
+      {
+        "label": "React",
+        "src": "react test"
+      }
+    ]
   }
 ]
