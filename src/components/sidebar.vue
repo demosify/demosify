@@ -31,7 +31,7 @@
           {{ links[0].label }}
         </router-link>
         <div v-else class="sidebar-menu__folder">
-          <p class="sidebar-menu__folderTitle" @click="toogleVisible(group)">
+          <p class="sidebar-menu__folderTitle" v-bind:data-folded="unfolded.indexOf(group) < 0" @click="toogleVisible(group)">
             {{ group }}
           </p>
           <div
@@ -127,13 +127,18 @@ export default {
       this.isShowingMore = false; // eslint-disable-line vue/no-side-effects-in-computed-properties
       return this.$route.name;
     },
-    currentGroup() {
+    currentGroup(state) {
       const src = this.$route.name;
-      if (src) {
-        const group = src.split('/')[0];
-        return group;
+      let currentGroupName = null;
+      for(let groupName in state.showLinks) {
+        var links = state.showLinks[groupName];
+        links.forEach((link) => {
+          if (link.src === src) {
+            currentGroupName = groupName;
+          }
+        });
       }
-      return null;
+      return currentGroupName;
     }
   },
   mounted() {
@@ -235,6 +240,10 @@ $foldedDealy: 100ms;
           top: 10px;
           left: 8px;
         }
+      }
+
+      &Title[data-folded=true]:after {
+         transform: rotate(-90deg);
       }
       &Content {
         display: flex;
