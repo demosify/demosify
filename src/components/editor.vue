@@ -28,6 +28,7 @@
           :value="content.code"
           :language="content.transformer"
           :editorHook="content.editorHook"
+          :inputHook="content.inputHook"
           @input="codeUpdate(type, arguments)"
         ></sandbox>
       </div>
@@ -59,6 +60,7 @@
         :value="content.code"
         :language="content.transformer"
         :editorHook="content.editorHook"
+        :inputHook="content.inputHook"
         @input="codeUpdate(type, arguments)"
       >
         &lt;

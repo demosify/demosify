@@ -26,6 +26,10 @@ export default {
     editorHook: {
       type: Function,
       default: null
+    },
+    inputHook: {
+      type: Function,
+      default: null
     }
   },
   watch: {
@@ -102,7 +106,12 @@ export default {
       if (!this.monacoEditor) throw new Error('editor is not mounted');
       this.monacoEditor.onDidChangeModelContent(() => {
         const value = this.monacoEditor.getValue();
-        this.$emit('input', value);
+        if (this.inputHook) {
+          const res = this.inputHook(this.monacoEditor, value);
+          if (res !== false) this.$emit('input', value);
+        } else {
+          this.$emit('input', value);
+        }
       });
     }
   }
