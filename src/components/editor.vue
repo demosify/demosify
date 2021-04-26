@@ -143,7 +143,7 @@ export default {
           left: 0;
           border-radius: 50%;
           transform: translate(-25%, -25%);
-          transition: 0.5s all ease-out;
+          transition: 0.3s all ease-out;
         }
         &--partial {
           &::after {
