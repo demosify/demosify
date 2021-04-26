@@ -7,17 +7,20 @@
       'vessel--isPc': isPC
     }"
   >
+    <monitor class="monitor" :style="{order: config.editorLayout === 'reverse' ? 0: 1}"></monitor>
     <deformable-box
+      class="deformableContainer"
+      :style="{width: isMonitorHidden ? '0' : '800px'}"
       v-if="isPC"
-      :resizable="['right']"
+      :resizable="[config.editorLayout === 'reverse' ? 'left' : 'right']"
       :initWidth="800"
       :maxWidth="1100"
       :minWidth="400"
     >
+      <button :style="{left: config.editorLayout === 'reverse' ? '-20px' : 'auto', right: config.editorLayout === 'reverse' ? 'auto' : '-20px'}" class="hideButton" @click="isMonitorHidden = !isMonitorHidden">{{isMonitorHidden ? '展开' : '收起'}}</button>
       <editor class="editor"></editor>
     </deformable-box>
     <editor v-else class="editor"></editor>
-    <monitor class="monitor"></monitor>
     <div
       class="flipButton"
       @click="isBackface = !isBackface"
@@ -43,6 +46,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Editor from '@/components/editor.vue';
 import Monitor from '@/components/monitor.vue';
 import DeformableBox from '@/components/deformableBox.vue';
@@ -51,7 +55,8 @@ export default {
   data() {
     return {
       isBackface: false,
-      flipBtnTop: 200
+      flipBtnTop: 200,
+      isMonitorHidden: false,
     };
   },
   components: {
@@ -78,7 +83,8 @@ export default {
         }
       }
       return flag;
-    }
+    },
+    ...mapState(['config']),
   },
   methods: {
     // 翻页按钮
@@ -100,6 +106,24 @@ export default {
   & .editor {
     background: $c-bg;
   }
+  & .hideButton {
+    position: absolute;
+    top: 50%;
+    background: $c-highlight;
+    border: none;
+    color: $c-font-contrast;
+    font-size: 12px;
+    width: 18px;  
+    margin: 0 auto;  
+    line-height: 20px; 
+    border-radius: 4px;
+    padding: 4px 0;
+    transform: translateY(-50%);
+    opacity: 0.4;
+    &:hover{
+      opacity: 1;
+    }
+  } 
   & .monitor {
     background: $c-bg;
   }

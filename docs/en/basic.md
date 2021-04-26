@@ -104,7 +104,7 @@ module.exports = {
     },
     // tab waterfall
     editorViewMode: 'tab',  // The UI presentation of the code block, tab or waterfall
-  };
+    editorLayout: 'normal',  // allocation relationship between canvas and code sandbox, normal or reverse
 };
 ```
 

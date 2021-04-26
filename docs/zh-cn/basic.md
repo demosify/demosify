@@ -102,6 +102,7 @@ module.exports = {
     },
     // tab waterfall
     editorViewMode: 'tab',  // 配置代码块的UI展示方式，现在支持tab和waterfall两种展示方式
+    editorLayout: 'normal',  // 配置画布与代码的位置关系，支持normal和reverse两种配置
   };
 };
 ```

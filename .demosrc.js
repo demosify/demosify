@@ -29,5 +29,6 @@ module.exports = function(env) {
     },
     // tab waterfall
     editorViewMode: 'tab',
+    editorLayout: 'normal'
   };
 };
