@@ -68,7 +68,7 @@ export default {
   font-family: $link-font-family;
   grid-column: 1 / 2;
   grid-row: 1 / 2;
-  transition: 0.6s all ease-out;
+  transition: 0.3s all ease-out;
   text-decoration: none;
   background-color: $c-bg;
   &-logo {
