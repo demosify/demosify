@@ -9,10 +9,12 @@ $link-font-family: 'Raleway', $font-family, !default;
 $c-gap: black !default;
 $c-bg: #201e1e !default;
 $c-font: #F6F4F2 !default;
+$c-font-contrast:rgb(46, 46, 46) !default;
 $c-font-dark: rbga($c-font, 0.6) !default;
 $c-highlight: #FFC730 !default;
 $c-console-bg: #23241f !default;
 $c-console-bg-odd: #313131 !default;
+
 
 
 $c-console-info: #00AA90 !default; // 青绿 AOMIDORI
@@ -22,5 +24,4 @@ $c-console-error: #F75C2F !default; // 红绯 BENIHE
 
 $c-flipbtn-bg: rgba(black, 0.5) !default;
 $c-flipbtn-color: #aaa !default;
-
 $c-small-screen: 769px !default;
