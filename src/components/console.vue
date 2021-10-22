@@ -1,16 +1,6 @@
 <template>
   <div class="console">
     <div class="console-header">
-      <h3
-        @dblclick="isConsoleFolded = !isConsoleFolded"
-        @touchend="isConsoleFolded = !isConsoleFolded"
-        class="console-title"
-      >
-        console
-        <transition name="fade">
-          <span class="console-new" v-show="hasLog"></span>
-        </transition>
-      </h3>
       <p class="console-ctrl">
         <svg
           @click="run"
@@ -64,7 +54,7 @@ export default {
   name: 'console',
   data() {
     return {
-      isConsoleFolded: true
+      isConsoleFolded: false
     };
   },
   computed: {
@@ -100,21 +90,13 @@ export default {
 @import '@/css/index.scss';
 .console {
   margin-top: 10px;
-  border-top: 1px solid rgba($c-highlight, 0.2);
   font-family: $font-family;
   min-height: 48px;
+  height: 100%;
   &-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  &-title {
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 2em;
-    color: $c-highlight;
-    margin: 0;
-    user-select: none;
   }
   &-new {
     display: inline-block;
@@ -129,6 +111,7 @@ export default {
     font-size: 14px;
     display: flex;
     align-items: center;
+    margin: 4px 0;
     & input {
       margin-right: 5px;
     }
@@ -150,7 +133,7 @@ export default {
     }
   }
   &-content {
-    height: 200px;
+    height: 100%;
     width: 100%;
     transition: 0.3s all ease-out;
     background: $c-console-bg;

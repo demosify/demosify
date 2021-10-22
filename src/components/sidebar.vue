@@ -31,7 +31,11 @@
           {{ links[0].label }}
         </router-link>
         <div v-else class="sidebar-menu__folder">
-          <p class="sidebar-menu__folderTitle" v-bind:data-folded="unfolded.indexOf(group) < 0" @click="toogleVisible(group)">
+          <p
+            class="sidebar-menu__folderTitle"
+            v-bind:data-folded="unfolded.indexOf(group) < 0"
+            @click="toogleVisible(group)"
+          >
             {{ group }}
           </p>
           <div
@@ -52,17 +56,6 @@
           </div>
         </div>
       </div>
-      <!-- <router-link
-        v-for="demo in showLinks"
-        :key="demo.src"
-        class="sidebar-menuItem"
-        :class="{
-          'sidebar-menuItem--active': currentDemo === demo.label
-        }"
-        :to="`/${demo.src}`"
-      >
-        {{ demo.label }}
-      </router-link> -->
     </div>
   </nav>
 </template>
@@ -130,9 +123,9 @@ export default {
     currentGroup(state) {
       const src = this.$route.name;
       let currentGroupName = null;
-      for(let groupName in state.showLinks) {
+      for (let groupName in state.showLinks) {
         var links = state.showLinks[groupName];
-        links.forEach((link) => {
+        links.forEach(link => {
           if (link.src === src) {
             currentGroupName = groupName;
           }
@@ -242,8 +235,8 @@ $foldedDealy: 100ms;
         }
       }
 
-      &Title[data-folded=true]:after {
-         transform: rotate(-90deg);
+      &Title[data-folded='true']:after {
+        transform: rotate(-90deg);
       }
       &Content {
         display: flex;
