@@ -7,19 +7,31 @@
       'vessel--isPc': isPC
     }"
   >
-    <monitor class="monitor" :style="{order: config.editorLayout === 'reverse' ? 0: 1}"></monitor>
-    <deformable-box
-      class="deformableContainer"
-      :style="{width: isMonitorHidden ? '0' : '800px'}"
-      v-if="isPC"
-      :resizable="[config.editorLayout === 'reverse' ? 'left' : 'right']"
-      :initWidth="800"
-      :maxWidth="1100"
-      :minWidth="400"
-    >
-      <button :style="{left: config.editorLayout === 'reverse' ? '-20px' : 'auto', right: config.editorLayout === 'reverse' ? 'auto' : '-20px'}" class="hideButton" @click="isMonitorHidden = !isMonitorHidden">{{isMonitorHidden ? '展开' : '收起'}}</button>
-      <editor class="editor"></editor>
-    </deformable-box>
+    <monitor
+      class="monitor"
+      :style="{ order: config.editorLayout === 'reverse' ? 0 : 1 }"
+    ></monitor>
+    <div v-if="isPC" class="PCContainer">
+      <deformable-box
+        v-show="!isMonitorHidden"
+        :resizable="[config.editorLayout === 'reverse' ? 'left' : 'right']"
+        :initWidth="800"
+        :maxWidth="1100"
+        :minWidth="400"
+      >
+        <editor class="editor"></editor>
+      </deformable-box>
+      <button
+        :style="{
+          left: config.editorLayout === 'reverse' ? '-20px' : 'auto',
+          right: config.editorLayout === 'reverse' ? 'auto' : '-20px'
+        }"
+        class="hideButton"
+        @click="isMonitorHidden = !isMonitorHidden"
+      >
+        {{ isMonitorHidden ? '展开' : '收起' }}
+      </button>
+    </div>
     <editor v-else class="editor"></editor>
     <div
       class="flipButton"
@@ -56,7 +68,7 @@ export default {
     return {
       isBackface: false,
       flipBtnTop: 200,
-      isMonitorHidden: false,
+      isMonitorHidden: false
     };
   },
   components: {
@@ -84,7 +96,7 @@ export default {
       }
       return flag;
     },
-    ...mapState(['config']),
+    ...mapState(['config'])
   },
   methods: {
     // 翻页按钮
@@ -106,6 +118,9 @@ export default {
   & .editor {
     background: $c-bg;
   }
+  .PCContainer {
+    position: relative;
+  }
   & .hideButton {
     position: absolute;
     top: 50%;
@@ -113,17 +128,17 @@ export default {
     border: none;
     color: $c-font-contrast;
     font-size: 12px;
-    width: 18px;  
-    margin: 0 auto;  
-    line-height: 20px; 
+    width: 18px;
+    margin: 0 auto;
+    line-height: 20px;
     border-radius: 4px;
     padding: 4px 0;
     transform: translateY(-50%);
     opacity: 0.4;
-    &:hover{
+    &:hover {
       opacity: 1;
     }
-  } 
+  }
   & .monitor {
     background: $c-bg;
   }

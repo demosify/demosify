@@ -101,6 +101,7 @@ export default {
       if (this.canResizeDirection('top') || this.canResizeDirection('bottom')) {
         result.height = `${this.h}px`;
       }
+      console.log('result: ', result);
       return result;
     }
   },
@@ -146,7 +147,6 @@ export default {
       return actualTop;
     },
     handleResize(e) {
-      console.log('resizing');
       if (this.resizeDirections.indexOf('r') > -1) {
         const widthAfterMove =
           e.pageX - this.getElementLeft(this.$refs.content);

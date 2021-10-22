@@ -1,9 +1,24 @@
 <template>
-  <div class="monitor">
-    <div id="monitor-iframe">
+  <div>
+    <ul class="monitor-tabs">
+      <li
+        class="monitor-tab"
+        :class="{
+          'monitor-tab--active': currentTab === tab
+        }"
+        v-for="tab in tabs"
+        :key="tab"
+        @click="toogleCurrentTab(tab)"
+      >
+        <span>
+          {{ tab }}
+        </span>
+      </li>
+    </ul>
+    <div v-if="currentTab === 'Result'" id="monitor-iframe">
       <div class="monitor-iframe-holder" ref="iframe"></div>
     </div>
-    <console class="monitor-console"></console>
+    <console v-if="currentTab === 'Console'" class="monitor-console"></console>
   </div>
 </template>
 
@@ -36,12 +51,15 @@ const createElement = tag => (content = '', attrs = {}) => {
     `__QUOTE_LEFT__${tag} ${attrs}>${content}__QUOTE_LEFT__/${tag}>`
   );
 };
+const Tabs = ['Result', 'Console'];
 
 export default {
   data() {
     return {
       iframe: null,
-      runTimer: null
+      runTimer: null,
+      currentTab: 'Result',
+      tabs: ['Result', 'Console']
     };
   },
   components: { Console },
@@ -62,6 +80,9 @@ export default {
   },
   methods: {
     ...mapActions(['setIframeStatus', 'transform', 'clearLogs', 'addLog']),
+    toogleCurrentTab(tab) {
+      this.currentTab = tab;
+    },
     run() {
       progress.start();
       clearTimeout(this.runTimer);
@@ -130,7 +151,10 @@ export default {
         if (data.method === 'clear') {
           this.clearLogs();
         } else {
-          this.addLog({ type: data.method, message: data.args.join('\\n') });
+          this.addLog({
+            type: data.method,
+            message: data.args.join('\\n')
+          });
         }
       }
     }
@@ -143,7 +167,7 @@ export default {
 .monitor {
   max-height: 100%;
   box-sizing: border-box;
-  padding: 20px 20px 0 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   & #monitor-iframe {
@@ -151,6 +175,33 @@ export default {
     height: 100px;
     flex-grow: 1;
     background: $c-bg;
+  }
+  &-tabs {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid rgba($c-highlight, 0.2);
+    gap: 10px;
+  }
+  &-tab {
+    font-family: $link-font-family;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    filter: brightness(0.6);
+    transition: 0.3s all ease-out;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    box-sizing: border-box;
+    border-bottom: 4px solid transparent;
+    &--active {
+      filter: brightness(1);
+      background: rgba($c-highlight, 0.05);
+      border-bottom-color: $c-highlight;
+    }
   }
 }
 </style>

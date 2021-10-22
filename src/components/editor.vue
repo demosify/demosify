@@ -44,10 +44,10 @@
           :key="type"
           @click="updateCurrentBox(type)"
         >
-          <span class="editor-tabName">{{
+          <!-- <span class="editor-tabName">{{
             content.tabName || type.toUpperCase()
-          }}</span>
-          <span v-show="currentBox === type" class="editor-tabTransformer">
+          }}</span> -->
+          <span>
             {{ content.transformer }}
           </span>
         </li>
@@ -175,42 +175,33 @@ export default {
     display: flex;
     margin: 0;
     padding: 0;
-    margin: 20px 10px 10px 10px;
+    margin: 10px;
     border-bottom: 1px solid rgba($c-highlight, 0.2);
   }
   &-tab {
     font-family: $link-font-family;
     list-style: none;
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 30px;
-    padding-bottom: 10px;
+    padding: 10px 20px;
     filter: brightness(0.6);
     transition: 0.3s all ease-out;
     cursor: pointer;
     border-radius: 8px 8px 0 0;
+    box-sizing: border-box;
+    border-bottom: 4px solid transparent;
     &--active {
       filter: brightness(1);
       background: rgba($c-highlight, 0.05);
-      & .editor-tabName {
-        transform: translateY(-6px);
-        font-size: 22px;
-        color: $c-highlight;
-        text-shadow: 0 0 8px rgba($c-highlight, 0.5);
-      }
+      border-bottom-color: $c-highlight;
     }
-    &Name {
+    /* &Name {
       transition: 0.3s all ease-out;
       color: rgba(#f6f4f2, 0.6);
       font-size: 18px;
-    }
-    &Transformer {
-      font-size: 12px;
-      color: rgba(#f6f4f2, 0.6);
-    }
+    } */
   }
   &-sandbox {
     &--tab {
