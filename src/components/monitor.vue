@@ -15,10 +15,10 @@
         </span>
       </li>
     </ul>
-    <div v-if="currentTab === 'Result'" id="monitor-iframe">
+    <div v-show="currentTab === 'Result'" id="monitor-iframe">
       <div class="monitor-iframe-holder" ref="iframe"></div>
     </div>
-    <console v-if="currentTab === 'Console'" class="monitor-console"></console>
+    <console v-show="currentTab === 'Console'" class="monitor-console"></console>
   </div>
 </template>
 
