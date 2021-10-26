@@ -24,7 +24,7 @@ module.exports = function(env) {
     // monoindustrial,
     boxTheme: 'monokai',
     globalPackages: {
-      js: ['https://unpkg.com/spritejs/dist/spritejs.min.js'],
+      js: ['https://unpkg.com/spritejs@2/dist/spritejs.min.js'],
       css: [],
     },
     // tab waterfall

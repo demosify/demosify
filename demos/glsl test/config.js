@@ -39,7 +39,7 @@ doodle.compile(\`${code}\`).then((program) => {
     foldBoxes: ['html'],
     packages: {
       js: [
-        'https://s0.ssl.qhres.com/static/e48aa70cee113a64.js',
+        'https://s0.ssl.qhres2.com/static/e48aa70cee113a64.js',
       ],
       css: [],
     }
