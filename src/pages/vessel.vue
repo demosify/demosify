@@ -96,7 +96,7 @@ export default {
       }
       return flag;
     },
-    ...mapState(['config'])
+    ...mapState(['config', 'inIframe'])
   },
   methods: {
     // 翻页按钮
