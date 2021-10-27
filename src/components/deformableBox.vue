@@ -101,7 +101,7 @@ export default {
       if (this.canResizeDirection('top') || this.canResizeDirection('bottom')) {
         result.height = `${this.h}px`;
       }
-      console.log('result: ', result);
+      // console.log('result: ', result);
       return result;
     }
   },

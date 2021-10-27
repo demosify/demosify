@@ -77,4 +77,6 @@ tslint.json
 # build
 lib/
 
+*.code-workspace
+
 

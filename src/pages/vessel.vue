@@ -15,7 +15,7 @@
       <deformable-box
         v-show="!isMonitorHidden"
         :resizable="[config.editorLayout === 'reverse' ? 'left' : 'right']"
-        :initWidth="800"
+        :initWidth="inIframe ? 500 : 800"
         :maxWidth="1100"
         :minWidth="400"
       >
