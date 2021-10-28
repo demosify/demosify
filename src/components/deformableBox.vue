@@ -14,42 +14,42 @@
       <div
         class="ctrl ctrl-v ctrl-t"
         v-if="canResizeDirection('top')"
-        @mousedown.stop.left.prevent="handleResizeStart(['t'])"
+        @pointerdown.stop.left.prevent="handleResizeStart(['t'], $event)"
       ></div>
       <div
         class="ctrl ctrl-h ctrl-r"
         v-if="canResizeDirection('right')"
-        @mousedown.stop.left.prevent="handleResizeStart(['r'])"
+        @pointerdown.stop.left.prevent="handleResizeStart(['r'], $event)"
       ></div>
       <div
         class="ctrl ctrl-v ctrl-b"
         v-if="canResizeDirection('bottom')"
-        @mousedown.stop.left.prevent="handleResizeStart(['b'])"
+        @pointerdown.stop.left.prevent="handleResizeStart(['b'], $event)"
       ></div>
       <div
         class="ctrl ctrl-h ctrl-l"
         v-if="canResizeDirection('left')"
-        @mousedown.stop.left.prevent="handleResizeStart(['l'])"
+        @pointerdown.stop.left.prevent="handleResizeStart(['l'], $event)"
       ></div>
       <div
         class="ctrl ctrl-c ctrl-t ctrl-r"
         v-if="canResizeDirection('top') && canResizeDirection('right')"
-        @mousedown.stop.left.prevent="handleResizeStart(['t', 'r'])"
+        @pointerdown.stop.left.prevent="handleResizeStart(['t', 'r'], $event)"
       ></div>
       <div
         class="ctrl ctrl-c ctrl-t ctrl-l"
         v-if="canResizeDirection('top') && canResizeDirection('left')"
-        @mousedown.stop.left.prevent="handleResizeStart(['t', 'l'])"
+        @pointerdown.stop.left.prevent="handleResizeStart(['t', 'l'], $event)"
       ></div>
       <div
         class="ctrl ctrl-c ctrl-b ctrl-r"
         v-if="canResizeDirection('bottom') && canResizeDirection('right')"
-        @mousedown.stop.left.prevent="handleResizeStart(['b', 'r'])"
+        @pointerdown.stop.left.prevent="handleResizeStart(['b', 'r'], $event)"
       ></div>
       <div
         class="ctrl ctrl-c ctrl-b ctrl-l"
         v-if="canResizeDirection('left') && canResizeDirection('right')"
-        @mousedown.stop.left.prevent="handleResizeStart(['b', 'l'])"
+        @pointerdown.stop.left.prevent="handleResizeStart(['l', 'r'], $event)"
       ></div>
     </template>
     <slot></slot>
@@ -115,18 +115,23 @@ export default {
       if (typeof this.resizable === 'boolean') return this.resizable;
       return this.resizable.indexOf(direction) > -1;
     },
-    handleResizeStart(directionArray) {
+    handleResizeStart(directionArray, e) {
       this.resizeDirections = directionArray;
       this.resizing = true;
       this.$emit('resize-start');
-      document.documentElement.addEventListener('mousemove', this.handleResize);
+      document.documentElement.setPointerCapture(e.pointerId);
+      // console.log('captured', e.pointerId);
+      document.documentElement.addEventListener(
+        'pointermove',
+        this.handleResize
+      );
       // 当鼠标抬起的时候解除监听
       document.documentElement.addEventListener(
-        'mouseup',
+        'pointerup',
         this.handleResizeEnd,
         { once: true }
       );
-      document.getElementById('monitor-iframe').addEventListener('mouseover', this.handleResizeEnd); //eslint-disable-line
+      // document.getElementById('monitor-iframe').addEventListener('pointerover', this.handleResizeEnd); //eslint-disable-line
     },
     getElementLeft(el) {
       let actualLeft = el.offsetLeft;
@@ -147,10 +152,12 @@ export default {
       return actualTop;
     },
     handleResize(e) {
+      // console.log('move', this.resizeDirections);
       if (this.resizeDirections.indexOf('r') > -1) {
         const widthAfterMove =
           e.pageX - this.getElementLeft(this.$refs.content);
         this.w = Math.max(Math.min(widthAfterMove, this.maxWidth || Infinity), this.minWidth || 1); // eslint-disable-line
+        // console.log('aftermove', widthAfterMove, this.w);
       }
       if (this.resizeDirections.indexOf('l') > -1) {
         const widthAfterMove =
@@ -174,10 +181,12 @@ export default {
         height: this.h
       });
     },
-    handleResizeEnd() {
+    handleResizeEnd(e) {
+      document.documentElement.releasePointerCapture(e.pointerId);
+      // console.log('released', e.pointerId);
       this.resizeDirections = [];
       document.documentElement.removeEventListener(
-        'mousemove',
+        'pointermove',
         this.handleResize
       );
       this.$emit('resize-end');
