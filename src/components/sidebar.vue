@@ -26,7 +26,7 @@
         :data="showLinks"
         :props="defaultProps"
         default-expand-all
-        @node-click='treeClick'
+        @node-click="treeClick"
         :filter-node-method="filterNode"
         ref="tree"
       >
@@ -48,10 +48,10 @@ export default {
       isShowingMoreCrossed: false,
       unfolded: [],
       filterText: "",
-       defaultProps: {
-          children: 'demos',
-          label: 'label'
-        },
+      defaultProps: {
+        children: "demos",
+        label: "label",
+      },
     };
   },
   watch: {
@@ -77,25 +77,25 @@ export default {
     ...mapState(["links"]),
     ...mapState({
       showLinks(state) {
-
-        state.links.forEach(demo => {
-            if (demo.demos) {
-               demo.demos.forEach(child => {
-                if (child.demos) {
-                   child.demos.forEach(childs => {
-                    if (typeof childs !== 'string') {
-                      childs.path = '/' +  demo.src + '/' + child.src + '/' + childs.src;
-                    }
-                  });
-                }
-                else if (typeof child !== 'string') child.path = '/' + demo.src + '/' + child.src;
-              });
-            }
-            if (typeof demo !== 'string') demo.path = '/' + demo.src;
-            // return demo;
-          });
-         console.log("state. state.demoList===>",   state.links);
-        return  state.links;
+        state.links.forEach((demo) => {
+          if (demo.demos) {
+            demo.demos.forEach((child) => {
+              if (child.demos) {
+                child.demos.forEach((childs) => {
+                  if (typeof childs !== "string") {
+                    childs.path =
+                      "/" + demo.src + "/" + child.src + "/" + childs.src;
+                  }
+                });
+              } else if (typeof child !== "string")
+                child.path = "/" + demo.src + "/" + child.src;
+            });
+          }
+          if (typeof demo !== "string") demo.path = "/" + demo.src;
+          // return demo;
+        });
+        console.log("state. state.demoList===>", state.links);
+        return state.links;
       },
     }),
     currentDemo() {
@@ -132,11 +132,14 @@ export default {
       if (!value) return true;
       return data.label.indexOf(value) !== -1;
     },
-    treeClick(data, node, tmp){
-      console.log(data, node, tmp)
-      !data.group && this.$router.replace({path: data.path})
+    treeClick(data, node, tmp) {
+      console.log(data, node, tmp);
+      !data.group &&
+        this.$router.replace({ path: data.path }).catch((err) => {
+          console.log("输出报错", err);
+        });
       // this.$router.replace({path:'/framework/framework2/react test2'})
-    //  !data.group && this.$router.push({path:'/framework/react test'})
+      //  !data.group && this.$router.push({path:'/framework/react test'})
     },
     toogleVisible(group) {
       const index = this.unfolded.indexOf(group);
@@ -306,6 +309,3 @@ $foldedDealy: 100ms;
   }
 }
 </style>
-
-
-

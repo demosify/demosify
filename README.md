@@ -1,5 +1,9 @@
 基于: demosify 项目,稍微修改了一下,增加了三级目录.节点过滤
 
+fix: 重复路由点击报错(vue router ≥ v3.1 后 ，回调形式改成promise api了，返回的是promise，如果没有捕获到错误，控制台警告程序卡死)
+
+
+
 👉🏻 [website](https://www.demosify.com) | 👉🏻 [online demo](https://demosify.github.io/demosify-demo/)
 
 # DEMOSIFY

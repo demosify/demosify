@@ -7,7 +7,7 @@
         target="_blank"
         :style="{ backgroundImage: `url(${config.logo})` }"
       >
-        {{ config.logo ? '' : config.name }}
+        {{ config.logo ? "" : config.name }}
       </a>
       <span v-if="config.version" class="header-version">
         {{ config.version }}
@@ -18,7 +18,7 @@
     <div
       class="handler"
       :class="{
-        'handler--hidden': !isSidebarShown
+        'handler--hidden': !isSidebarShown,
       }"
       @click="TOGGLE_SIDEBAR"
     ></div>
@@ -26,28 +26,28 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
-import Sidebar from '@/components/sidebar.vue';
+import { mapState, mapActions, mapMutations } from "vuex";
+import Sidebar from "@/components/sidebar.vue";
 export default {
-  name: 'fakeBody',
+  name: "fakeBody",
   components: {
-    Sidebar
+    Sidebar,
   },
   mounted() {
     window.test = this;
   },
   computed: {
-    ...mapState(['config', 'isSidebarShown'])
+    ...mapState(["config", "isSidebarShown"]),
   },
   methods: {
-    ...mapActions(['setBoxes']),
-    ...mapMutations(['TOGGLE_SIDEBAR'])
-  }
+    ...mapActions(["setBoxes"]),
+    ...mapMutations(["TOGGLE_SIDEBAR"]),
+  },
 };
 </script>
 
 <style lang="scss">
-@import '~@/css/index.scss';
+@import "~@/css/index.scss";
 #fakeBody {
   position: relative;
   width: 100%;
@@ -98,12 +98,16 @@ export default {
   grid-row: 2 / -1;
   background-color: $c-bg;
 }
-.is-current{
-    color: $c-highlight;
-    background: $c-bg;
+.el-tree-node:focus > .el-tree-node__content {
+  background-color: #5daaf0; //背景色
 }
-.el-tree{
+.el-tree {
   background-color: $c-bg;
+}
+.el-tree-node__content {
+  &:hover {
+    background: #89c2f7;
+  }
 }
 .handler {
   position: absolute;
@@ -126,7 +130,7 @@ export default {
   }
   &::after,
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 1px;
     height: 30px;
