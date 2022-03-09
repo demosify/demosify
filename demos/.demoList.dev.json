@@ -2,21 +2,22 @@
   {
     "label": "spritejs",
     "src": "spritejs"
-  }, 
+  },
   {
     "label": "glsl",
     "src": "glsl test"
-  }, 
+  },
   {
     "label": "TypeScript",
     "src": "ts test"
   },
-  { 
+  {
     "label": "RawData",
     "src": "rawdata test"
   },
   {
-    "group": "framework",
+    "group":"framework",
+    "label": "framework",
     "src": "framework",
     "demos": [
       {
@@ -26,6 +27,21 @@
       {
         "label": "React",
         "src": "react test"
+      },
+      {
+        "group":"framework2",
+        "label": "framework2",
+        "src": "framework2",
+        "demos": [
+          {
+            "label": "Vue2",
+            "src": "vue test2"
+          },
+          {
+            "label": "React2",
+            "src": "react test2"
+          }
+        ]
       }
     ]
   }

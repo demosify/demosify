@@ -5,7 +5,7 @@
       @click="isShowingMore = !isShowingMore"
       :class="{
         'sidebar-showMore--folded': isShowingMoreFolded,
-        'sidebar-showMore--crossed': isShowingMoreCrossed
+        'sidebar-showMore--crossed': isShowingMoreCrossed,
       }"
     >
       <div class="sidebar-showMoreItem sidebar-showMoreItem--top"></div>
@@ -15,63 +15,43 @@
     <div
       class="sidebar-menu"
       :class="{
-        'sidebar-menu--folded': !isShowingMore
+        'sidebar-menu--folded': !isShowingMore,
       }"
     >
-      <div v-for="(links, group) in showLinks" :key="group">
-        <!-- 不在文件夹中 -->
-        <router-link
-          v-if="links.length === 1"
-          class="sidebar-menuItem"
-          :class="{
-            'sidebar-menuItem--active': currentDemo === links[0].label
-          }"
-          :to="`/${links[0].src}`"
-        >
-          {{ links[0].label }}
-        </router-link>
-        <div v-else class="sidebar-menu__folder">
-          <p
-            class="sidebar-menu__folderTitle"
-            v-bind:data-folded="unfolded.indexOf(group) < 0"
-            @click="toogleVisible(group)"
-          >
-            {{ group }}
-          </p>
-          <div
-            class="sidebar-menu__folderContent"
-            v-show="unfolded.indexOf(group) > -1"
-          >
-            <router-link
-              v-for="link in links"
-              :key="link.src"
-              class="sidebar-menuItem"
-              :class="{
-                'sidebar-menuItem--active': currentDemo === link.label
-              }"
-              :to="`/${link.src}`"
-            >
-              {{ link.label }}
-            </router-link>
-          </div>
-        </div>
-      </div>
+      <el-input placeholder="输入关键字进行过滤" v-model="filterText" clearable>
+      </el-input>
+
+      <el-tree
+        class="filter-tree"
+        :data="showLinks"
+        :props="defaultProps"
+        default-expand-all
+        @node-click='treeClick'
+        :filter-node-method="filterNode"
+        ref="tree"
+      >
+      </el-tree>
     </div>
   </nav>
 </template>
 
 <script>
-import PerfectScrollbar from 'perfect-scrollbar';
-import { mapState } from 'vuex';
+import PerfectScrollbar from "perfect-scrollbar";
+import { mapState } from "vuex";
 export default {
-  name: 'sidebar',
+  name: "sidebar",
   data() {
     return {
       isShowingMore: false,
       showingMoreTimer: null,
       isShowingMoreFolded: false,
       isShowingMoreCrossed: false,
-      unfolded: []
+      unfolded: [],
+      filterText: "",
+       defaultProps: {
+          children: 'demos',
+          label: 'label'
+        },
     };
   },
   watch: {
@@ -88,64 +68,76 @@ export default {
           this.isShowingMoreFolded = false;
         }, 300);
       }
-    }
+    },
+    filterText(val) {
+      this.$refs.tree.filter(val);
+    },
   },
   computed: {
-    ...mapState(['links']),
+    ...mapState(["links"]),
     ...mapState({
       showLinks(state) {
-        const groups = {};
-        // console.log(state.links);
-        state.links.forEach(link => {
-          // 定义的组
-          if ('demos' in link) {
-            if (!groups[link.group]) groups[link.group] = [];
-            groups[link.group] = [
-              ...groups[link.group],
-              ...link.demos.map(demo => ({
-                label: demo.label,
-                src: `${link.src}/${demo.src}`
-              }))
-            ];
-          } else {
-            const groupName = link.src.split('/')[0];
-            if (!groups[groupName]) groups[groupName] = [];
-            groups[groupName].push(link);
-          }
-        });
-        return groups;
-      }
+
+        state.links.forEach(demo => {
+            if (demo.demos) {
+               demo.demos.forEach(child => {
+                if (child.demos) {
+                   child.demos.forEach(childs => {
+                    if (typeof childs !== 'string') {
+                      childs.path = '/' +  demo.src + '/' + child.src + '/' + childs.src;
+                    }
+                  });
+                }
+                else if (typeof child !== 'string') child.path = '/' + demo.src + '/' + child.src;
+              });
+            }
+            if (typeof demo !== 'string') demo.path = '/' + demo.src;
+            // return demo;
+          });
+         console.log("state. state.demoList===>",   state.links);
+        return  state.links;
+      },
     }),
     currentDemo() {
       this.isShowingMore = false; // eslint-disable-line vue/no-side-effects-in-computed-properties
       return this.$route.name;
     },
-    currentGroup(state) {
-      const src = this.$route.name;
-      let currentGroupName = null;
-      for (let groupName in state.showLinks) {
-        var links = state.showLinks[groupName];
-        links.forEach(link => {
-          if (link.src === src) {
-            currentGroupName = groupName;
-          }
-        });
-      }
-      return currentGroupName;
-    }
+    // currentGroup(state) {
+    //   const src = this.$route.name;
+    //   let currentGroupName = null;
+    //   for (let groupName in state.showLinks) {
+    //     var links = state.showLinks[groupName];
+    //     links.forEach((link) => {
+    //       if (link.src === src) {
+    //         currentGroupName = groupName;
+    //       }
+    //     });
+    //   }
+    //   return currentGroupName;
+    // },
   },
   mounted() {
-    new PerfectScrollbar(document.querySelector('.sidebar-menu'), {
-      suppressScrollX: true
+    new PerfectScrollbar(document.querySelector(".sidebar-menu"), {
+      suppressScrollX: true,
     });
-    if (this.currentGroup) {
-      const index = this.unfolded.indexOf(this.currentGroup);
-      if (index == -1) {
-        this.unfolded.push(this.currentGroup);
-      }
-    }
+    // if (this.currentGroup) {
+    //   const index = this.unfolded.indexOf(this.currentGroup);
+    //   if (index == -1) {
+    //     this.unfolded.push(this.currentGroup);
+    //   }
+    // }
   },
   methods: {
+    filterNode(value, data) {
+      if (!value) return true;
+      return data.label.indexOf(value) !== -1;
+    },
+    treeClick(data, node, tmp){
+      console.log(data, node, tmp)
+      !data.group && this.$router.replace({path: data.path})
+      // this.$router.replace({path:'/framework/framework2/react test2'})
+    //  !data.group && this.$router.push({path:'/framework/react test'})
+    },
     toogleVisible(group) {
       const index = this.unfolded.indexOf(group);
       if (index > -1) {
@@ -153,14 +145,14 @@ export default {
       } else {
         this.unfolded.push(group);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-@import '@/css/index.scss';
-@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import "@/css/index.scss";
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
 $foldedDealy: 100ms;
 .sidebar {
   font-family: $link-font-family;
@@ -191,7 +183,7 @@ $foldedDealy: 100ms;
         color: $c-highlight;
         position: relative;
         &::before {
-          content: '';
+          content: "";
           width: 2px;
           height: 60%;
           background: $c-highlight;
@@ -223,7 +215,7 @@ $foldedDealy: 100ms;
           }
         }
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           width: 0;
           height: 0;
@@ -235,7 +227,7 @@ $foldedDealy: 100ms;
         }
       }
 
-      &Title[data-folded='true']:after {
+      &Title[data-folded="true"]:after {
         transform: rotate(-90deg);
       }
       &Content {
@@ -314,3 +306,6 @@ $foldedDealy: 100ms;
   }
 }
 </style>
+
+
+

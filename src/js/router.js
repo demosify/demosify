@@ -5,13 +5,28 @@ import bus from '@/js/eventbus.js';
 
 import VesselPage from '@/pages/vessel.vue';
 import NotFoundPage from '@/pages/notFound.vue';
+// 解决重复点击路由报错的BUG
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err)
+}
 
 Vue.use(VueRouter);
 
+
+
+// list(_demoList)
 let demoList = _demoList.map(demo => {
   if (demo.demos) {
     return demo.demos.map(child => {
-      if (typeof child !== 'string') child = demo.src + '/' + child.src;
+      console.log('child.demos', child.demos)
+      if (child.demos) {
+        return child.demos.map(childs => {
+          if (typeof childs !== 'string') childs = demo.src + '/' + child.src + '/' + childs.src;
+          return childs;
+        });
+      }
+      else if (typeof child !== 'string') child = demo.src + '/' + child.src;
       return child;
     });
   }
@@ -19,13 +34,15 @@ let demoList = _demoList.map(demo => {
   return demo;
 });
 
-demoList = demoList.flat();
+demoList = demoList.flat(Infinity);
+
 
 const demoRoutes = demoList.map(demoName => ({
   name: demoName,
   path: `/${demoName}`,
   component: VesselPage
 }));
+console.log('demoList之前处理完的==>', demoList, demoRoutes)
 
 const defaultRoute = {
   path: '/',
@@ -44,6 +61,7 @@ const unexistRouter = {
 
 const routes = [defaultRoute, ...demoRoutes, nfpRoute, unexistRouter];
 
+console.log('routes', routes);
 const router = new VueRouter({
   routes
 });

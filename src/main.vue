@@ -98,6 +98,13 @@ export default {
   grid-row: 2 / -1;
   background-color: $c-bg;
 }
+.is-current{
+    color: $c-highlight;
+    background: $c-bg;
+}
+.el-tree{
+  background-color: $c-bg;
+}
 .handler {
   position: absolute;
   width: 12px;

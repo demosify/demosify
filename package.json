@@ -1,6 +1,6 @@
 {
-  "name": "@demosify/core",
-  "version": "0.7.6",
+  "name": "wccode-demo",
+  "version": "0.0.2",
   "description": "Create a playground to show demos of your projects.",
   "main": "bin/cli.js",
   "author": "betseyliu",
@@ -20,6 +20,7 @@
     "@babel/preset-env": "^7.5.5",
     "@vue/eslint-config-prettier": "^4.0.1",
     "babel-eslint": "^10.0.2",
+    "element-ui": "^2.15.6",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.3",
     "json-loader": "^0.5.7",
@@ -37,7 +38,7 @@
     "sass-loader": "^7.1.0",
     "v8-compile-cache": "^2.0.3",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.6",
+    "vue-router": "^3.0.7",
     "vue-template-compiler": "^2.6.10",
     "vuex": "^3.1.1",
     "webpack": "^4.36.1"

@@ -1,3 +1,5 @@
+基于: demosify 项目,稍微修改了一下,增加了三级目录.节点过滤
+
 👉🏻 [website](https://www.demosify.com) | 👉🏻 [online demo](https://demosify.github.io/demosify-demo/)
 
 # DEMOSIFY
@@ -8,10 +10,10 @@ Create a playground to show the demos of your project.
 
 ## Quick start
 
-1. install @demosify/core
+1. install wccode-demo
 
 ```bash
-npm install @demosify/core --save-dev
+npm install wccode-demo --save-dev
 ```
 
 2. Create `.demosrc.js` file in your project root.
@@ -40,12 +42,51 @@ export default {
 }
 ```
 
-5. Create a `.demoList.json` file in your `demos` directory. Specify all your demos show in sidebar. 
+5. Create a `.demoList.json` file in your `demos` directory. Specify all your demos show in sidebar.
 
 ```js
 [
   "demo1",
   // ...
+]
+```
+ 多级,三级
+```js
+[
+  {
+    "label": "RawData",
+    "src": "rawdata test"
+  },
+  {
+    "group":"framework",
+    "label": "framework",
+    "src": "framework",
+    "demos": [
+      {
+        "label": "Vue",
+        "src": "vue test"
+      },
+      {
+        "label": "React",
+        "src": "react test"
+      },
+      {
+        "group":"framework2",
+        "label": "framework2",
+        "src": "framework2",
+        "demos": [
+          {
+            "label": "Vue2",
+            "src": "vue test2"
+          },
+          {
+            "label": "React2",
+            "src": "react test2"
+          }
+        ]
+      }
+    ]
+  }
 ]
 ```
 
@@ -58,7 +99,7 @@ export default {
   }
 ```
 
-7. Run `npm run demo:dev`, visit `http://localhost:3000`. You will see the playground. ✌🏻
+7. Run `npm run demo:dev`, visit `http://localhost:3030`. You will see the playground. ✌🏻
 
 ## Load sample files
 
