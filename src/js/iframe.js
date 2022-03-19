@@ -14,7 +14,7 @@ class Iframe {
     iframe.style.border = 0;
     return iframe;
   }
-
+  
   setContent({ head = '', body = '' }) {
     const content = `<!DOCTYPE html><html><head>${head}</head><body>${body}</body></html>`;
     const iframe = this.createIframe();
