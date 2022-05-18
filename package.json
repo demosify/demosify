@@ -1,6 +1,6 @@
 {
   "name": "wccode-demo",
-  "version": "0.0.5",
+  "version": "0.1.1",
   "description": "Create a playground to show demos of your projects.",
   "main": "bin/cli.js",
   "author": "betseyliu",
